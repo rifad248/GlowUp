@@ -357,7 +357,9 @@ gB(){return this._g('bcasts')||[]},
 gO(){return this._g('orders')||[]},sO(o){this._s('orders',o)},
 gS(){return this._g('sess')},sS(s){this._s('sess',s)},cS(){localStorage.removeItem('g_sess')},
 fP(p){return this.gU().find(u=>u.phone===p)},
-fPI(id){return this.gU().find(u=>u.id===id)},
+fPI(id){return this.gU().find(u=>u.id===id)}
+fP(p){return this.gU().find(u=>u.phone===p)}
+gS(){return this._g('sess')},cS(){localStorage.removeItem('g_sess')},
 cur(){const s=this.gS();return s?this.fP(s.phone):null},
 isA(){const s=this.gS();return s&&s.phone===AE},
 gUM(uid){return this.gM().filter(m=>m.userId===uid).sort((a,b)=>b.ts-a.ts)},
