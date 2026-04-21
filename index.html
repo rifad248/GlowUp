@@ -302,65 +302,66 @@ a{color:var(--accent);text-decoration:none}
 <div id="toast-box"></div>
 
 <script>
-const WN='919876543210',PRICE=99;
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function toast(msg,type='i'){const b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};const el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);setTimeout(()=>{el.classList.add('hide');setTimeout(()=>el.remove(),300)},3500)}
+var WN='919876543210',PRICE=99;
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function toast(msg,type){type=type||'i';var b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};var el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);setTimeout(function(){el.classList.add('hide');setTimeout(function(){el.remove()},300)},3500)}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
-function ls(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch{return null}}
+function ls(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch(e){return null}}
 function ss(k,v){localStorage.setItem('g_'+k,JSON.stringify(v))}
 
-const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+var nav=document.getElementById('nav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
 function closeMM(){document.getElementById('mobile-menu').classList.remove('open')}
 
 document.addEventListener('click',function(e){
-const sb=e.target.closest('[data-scroll]');if(sb){e.preventDefault();const t=document.getElementById(sb.dataset.scroll);if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-70,behavior:'smooth'})}closeMM();return}
+var sb=e.target.closest('[data-scroll]');if(sb){e.preventDefault();var t=document.getElementById(sb.dataset.scroll);if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-70,behavior:'smooth'})}closeMM();return}
 if(e.target.closest('[data-close-mm]')){closeMM();return}
 });
-document.getElementById('mobile-toggle').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('open'));
+document.getElementById('mobile-toggle').addEventListener('click',function(){document.getElementById('mobile-menu').classList.toggle('open')});
 
-const signinModal=document.getElementById('signin-modal');
+var signinModal=document.getElementById('signin-modal');
 function openSignin(){signinModal.style.display='flex'}function closeSignin(){signinModal.style.display='none'}
 document.getElementById('nav-signin-btn').addEventListener('click',openSignin);
-document.getElementById('mm-signin').addEventListener('click',()=>{closeMM();openSignin()});
+document.getElementById('mm-signin').addEventListener('click',function(){closeMM();openSignin()});
 document.getElementById('close-signin').addEventListener('click',closeSignin);
 signinModal.addEventListener('click',function(e){if(e.target===this)closeSignin()});
 document.getElementById('signin-to-pay').addEventListener('click',function(e){e.preventDefault();closeSignin();location.href='pay.html'});
 document.getElementById('signin-to-ref').addEventListener('click',function(e){e.preventDefault();closeSignin();location.href='referral.html'});
 
 document.getElementById('do-signin').addEventListener('click',function(){
-const p=document.getElementById('signin-phone').value.trim(),pass=document.getElementById('signin-pass').value;
+var p=document.getElementById('signin-phone').value.trim(),pass=document.getElementById('signin-pass').value;
 if(!p||!pass){toast('Fill in all fields.','e');return}
-const users=ls('users')||[];const user=users.find(u=>u.phone===p);
+var users=ls('users')||[];var user=null;
+for(var i=0;i<users.length;i++){if(users[i].phone===p){user=users[i];break}}
 if(!user){toast('No account found with this number.','e');return}
 if(user.password!==pass){toast('Incorrect password.','e');return}
 ss('sess',{phone:user.phone,ra:user.createdAt});toast('Welcome back, '+user.name+'. Redirecting...','s');closeSignin();
-setTimeout(()=>{window.location.href='dashboard.html'},800);
+setTimeout(function(){window.location.href='dashboard.html'},800);
 });
 document.getElementById('signin-pass').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('do-signin').click()});
 document.getElementById('signin-phone').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('signin-pass').focus()});
 
-const revealObs=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObs.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+var revealObs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');revealObs.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el)});
 
-const statNums=document.querySelectorAll('.stat-num[data-count]');let counted=false;
-const counterObs=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting&&!counted){counted=true;statNums.forEach(el=>{const target=parseFloat(el.dataset.count);const isD=el.dataset.decimal==='true';let c=0;const steps=60,inc=target/steps;const timer=setInterval(()=>{c+=inc;if(c>=target){c=target;clearInterval(timer)}el.textContent=isD?c.toFixed(1):Math.floor(c).toLocaleString()+(target>=1000?'+':'')},33)})}},{threshold:0.5});
-statNums.forEach(el=>counterObs.observe(el));
+var statNums=document.querySelectorAll('.stat-num[data-count]');var counted=false;
+var counterObs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting&&!counted){counted=true;statNums.forEach(function(el){var target=parseFloat(el.dataset.count);var isD=el.dataset.decimal==='true';var c=0;var steps=60;var inc=target/steps;var timer=setInterval(function(){c+=inc;if(c>=target){c=target;clearInterval(timer)}el.textContent=isD?c.toFixed(1):Math.floor(c).toLocaleString()+(target>=1000?'+':'')},33)})}},{threshold:0.5});
+statNums.forEach(function(el){counterObs.observe(el)});
 
-document.querySelectorAll('[data-faq]').forEach(btn=>{btn.addEventListener('click',function(){const item=this.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0'});if(!isOpen){item.classList.add('open');const a=item.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px'}})});
+document.querySelectorAll('[data-faq]').forEach(function(btn){btn.addEventListener('click',function(){var item=this.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0'});if(!isOpen){item.classList.add('open');var a=item.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px'}})});
 
-document.getElementById('wa-pay-btn').addEventListener('click',()=>{window.open('https://wa.me/'+WN+'?text='+encodeURIComponent("Hi! I want to get access to GLOWUP for ₹"+PRICE+". Here's my phone number: "),'_blank')});
+document.getElementById('wa-pay-btn').addEventListener('click',function(){window.open('https://wa.me/'+WN+'?text='+encodeURIComponent("Hi! I want to get access to GLOWUP for ₹"+PRICE+". Here's my phone number: "),'_blank')});
 
-(function(){const params=new URLSearchParams(location.search);const ref=params.get('ref');if(ref){ss('incoming_ref',ref);const banner=document.createElement('div');banner.style.cssText='position:fixed;bottom:0;left:0;right:0;background:rgba(201,168,76,.1);border-top:1px solid rgba(201,168,76,.2);padding:12px 20px;text-align:center;z-index:150;font-size:12px;color:var(--accent);backdrop-filter:blur(12px);';banner.innerHTML='<i class="fa-solid fa-user-plus" style="margin-right:6px;"></i>You were referred by a friend! <a href="pay.html" style="text-decoration:underline;font-weight:700;">Complete payment to unlock your dashboard.</a>';document.body.appendChild(banner);setTimeout(()=>{banner.style.transition='opacity .5s';banner.style.opacity='0';setTimeout(()=>banner.remove(),500)},10000)}})();
+(function(){var params=new URLSearchParams(location.search);var ref=params.get('ref');if(ref){ss('incoming_ref',ref);var banner=document.createElement('div');banner.style.cssText='position:fixed;bottom:0;left:0;right:0;background:rgba(201,168,76,.1);border-top:1px solid rgba(201,168,76,.2);padding:12px 20px;text-align:center;z-index:150;font-size:12px;color:var(--accent);backdrop-filter:blur(12px);';banner.innerHTML='<i class="fa-solid fa-user-plus" style="margin-right:6px;"></i>You were referred by a friend! <a href="pay.html" style="text-decoration:underline;font-weight:700;">Complete payment to unlock your dashboard.</a>';document.body.appendChild(banner);setTimeout(function(){banner.style.transition='opacity .5s';banner.style.opacity='0';setTimeout(function(){banner.remove()},500)},10000)}})();
 
-(function(){const existing=ls('my_ref_code');if(existing){document.getElementById('ref-phone').value=ls('my_ref_phone')||'';showRefLink(existing)}})();
+(function(){var existing=ls('my_ref_code');if(existing){document.getElementById('ref-phone').value=ls('my_ref_phone')||'';showRefLink(existing)}})();
 
-document.getElementById('gen-ref-btn').addEventListener('click',()=>{const phone=document.getElementById('ref-phone').value.trim();if(!phone||phone.length<10){toast('Enter a valid phone number.','e');return}const code=uid().slice(0,8);ss('my_ref_code',code);ss('my_ref_phone',phone);const pr=ls('pending_refs')||[];pr.push({phone,code,refs:0,createdAt:Date.now()});ss('pending_refs',pr);showRefLink(code);toast('Referral link generated!','s')});
+document.getElementById('gen-ref-btn').addEventListener('click',function(){var phone=document.getElementById('ref-phone').value.trim();if(!phone||phone.length<10){toast('Enter a valid phone number.','e');return}var code=uid().slice(0,8);ss('my_ref_code',code);ss('my_ref_phone',phone);showRefLink(code);toast('Referral link generated!','s')});
 function showRefLink(code){document.getElementById('ref-link-input').value=location.origin+location.pathname+'?ref='+code;document.getElementById('ref-link-section').style.display='block';updateRefP(code)}
-function updateRefP(code){const users=ls('users')||[];const count=users.filter(u=>u.refBy===code).length;const pct=Math.min(100,Math.round((count/3)*100));document.getElementById('ref-count').textContent=count+' / 3';document.getElementById('ref-fill').style.width=pct+'%';if(count>=3){document.getElementById('ref-count').innerHTML='<i class="fa-solid fa-check" style="margin-right:4px;"></i> Complete!';document.getElementById('ref-fill').style.background='var(--success)'}}
-document.getElementById('copy-ref-btn').addEventListener('click',()=>{navigator.clipboard.writeText(document.getElementById('ref-link-input').value).then(()=>toast('Link copied!','s')).catch(()=>toast('Link copied!','s'))});
-document.getElementById('wa-share-btn').addEventListener('click',()=>{const link=document.getElementById('ref-link-input').value;window.open('https://wa.me/?text='+encodeURIComponent("Hey! I'm using GLOWUP — a reward-based transformation system where you earn coins for daily habits and redeem real skincare products. Join using my link: "+link),'_blank')});
+function updateRefP(code){var users=ls('users')||[];var count=0;for(var i=0;i<users.length;i++){if(users[i].refBy===code)count++}var pct=Math.min(100,Math.round((count/3)*100));document.getElementById('ref-count').textContent=count+' / 3';document.getElementById('ref-fill').style.width=pct+'%';if(count>=3){document.getElementById('ref-count').innerHTML='<i class="fa-solid fa-check" style="margin-right:4px;"></i> Complete!';document.getElementById('ref-fill').style.background='var(--success)'}}
+document.getElementById('copy-ref-btn').addEventListener('click',function(){var input=document.getElementById('ref-link-input');navigator.clipboard.writeText(input.value).then(function(){toast('Link copied!','s')}).catch(function(){input.select();document.execCommand('copy');toast('Link copied!','s')})});
+document.getElementById('wa-share-btn').addEventListener('click',function(){var link=document.getElementById('ref-link-input').value;window.open('https://wa.me/?text='+encodeURIComponent("Hey! I'm using GLOWUP — a reward-based transformation system where you earn coins for daily habits and redeem real skincare products. Join using my link: "+link),'_blank')});
 
-document.querySelectorAll('input[type="tel"],input[type="text"],input[type="password"]').forEach(inp=>{inp.addEventListener('focus',()=>inp.style.borderColor='var(--accent)');inp.addEventListener('blur',()=>inp.style.borderColor='var(--border)')});
+document.querySelectorAll('input[type="tel"],input[type="text"],input[type="password"]').forEach(function(inp){inp.addEventListener('focus',function(){inp.style.borderColor='var(--accent)'});inp.addEventListener('blur',function(){inp.style.borderColor='var(--border)'})});
 </script>
 </body>
 </html>
