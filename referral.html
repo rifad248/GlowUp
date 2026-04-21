@@ -134,104 +134,141 @@ a{color:var(--accent);text-decoration:none}
 <svg width="0" height="0" style="position:absolute;"><defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c9a84c"/><stop offset="50%" stop-color="#e0c672"/><stop offset="100%" stop-color="#c9a84c"/></linearGradient></defs></svg>
 
 <script>
-const REF_TIERS=[{req:1,coins:20,label:'+20 Glow Coins',icon:'fa-coins'},{req:3,coins:50,label:'+50 Bonus Coins',icon:'fa-gem'},{req:5,reward:'mentor',label:'Free Mentor Session',icon:'fa-video'},{req:10,reward:'elite',label:'Elite Badge + 200 Coins',icon:'fa-trophy'}];
-const D={_g(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch{return null}},_s(k,v){try{localStorage.setItem('g_'+k,JSON.stringify(v))}catch(e){}},gU(){return this._g('users')||[]},gS(){return this._g('sess')},fP(p){return this.gU().find(u=>u.phone===p)},cur(){const s=this.gS();return s?this.fP(s.phone):null}};
-const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
-function toast(msg,type='i'){const b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};const el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);setTimeout(()=>{el.classList.add('hide');setTimeout(()=>el.remove(),300)},3200)}
+var REF_TIERS=[{req:1,coins:20,label:'+20 Glow Coins',icon:'fa-coins'},{req:3,coins:50,label:'+50 Bonus Coins',icon:'fa-gem'},{req:5,reward:'mentor',label:'Free Mentor Session',icon:'fa-video'},{req:10,reward:'elite',label:'Elite Badge + 200 Coins',icon:'fa-trophy'}];
+
+function D(){};
+D._g=function(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch(e){return null}};
+D._s=function(k,v){try{localStorage.setItem('g_'+k,JSON.stringify(v))}catch(e){}};
+D.gU=function(){return this._g('users')||[]};
+D.gS=function(){return this._g('sess')};
+D.fP=function(p){var us=this.gU();for(var i=0;i<us.length;i++){if(us[i].phone===p)return us[i]}return null};
+D.cur=function(){var s=this.gS();if(!s)return null;return this.fP(s.phone)};
+
+var esc=function(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML};
+function toast(msg,type){type=type||'i';var b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};var el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);setTimeout(function(){el.classList.add('hide');setTimeout(function(){el.remove()},300)},3200)}
 
 function render(){
-const u=D.cur();
-if(!u){document.getElementById('app').innerHTML=`<div class="not-logged"><div class="not-logged-card"><i class="fa-solid fa-lock"></i><h2>Sign In Required</h2><p>You need to be logged in to access your referral link and track your progress.</p><button class="btn btn-p" onclick="location.href='index.html'" style="width:100%;">Go to Home Page</button></div></div>`;return}
-const users=D.gU(),myRefC=u.refC||0;
-const myRank=[...users].sort((a,b)=>(b.refC||0)-(a.refC||0)).findIndex(x=>x.id===u.id)+1;
-const refCode=u.refCode||(u.id||'').slice(0,8);
-const refLink=location.origin+location.pathname.replace(/referral\.html.*$/,'index.html')+'?ref='+refCode;
-const circumference=2*Math.PI*62;
-const progress=Math.min(myRefC/3,1);
-const offset=circumference-(progress*circumference);
-const params=new URLSearchParams(location.search);
-if(params.get('ref'))sessionStorage.removeItem('g_incoming_ref');
+var u=D.cur();
+if(!u){document.getElementById('app').innerHTML='<div class="not-logged"><div class="not-logged-card"><i class="fa-solid fa-lock"></i><h2>Sign In Required</h2><p>You need to be logged in to access your referral link and track your progress.</p><button class="btn btn-p" onclick="location.href=\'index.html\'" style="width:100%;">Go to Home Page</button></div></div>';return}
+var users=D.gU(),myRefC=u.refC||0;
+var myRank=0;
+var sorted=[].concat(users).sort(function(a,b){return(b.refC||0)-(a.refC||0)});
+for(var ri=0;ri<sorted.length;ri++){if(sorted[ri].id===u.id){myRank=ri+1;break}}
+var refCode=u.refCode||(u.id||'').slice(0,8);
+var refLink=location.origin+location.pathname.replace(/referral\.html.*$/,'index.html')+'?ref='+refCode;
+var circumference=2*Math.PI*62;
+var progress=Math.min(myRefC/3,1);
+var offset=circumference-(progress*circumference);
 
-document.getElementById('app').innerHTML=`
-<nav class="topnav">
-<button class="nav-btn" onclick="location.href='dashboard.html'"><i class="fa-solid fa-arrow-left" style="font-size:11px;"></i> Dashboard</button>
-<a href="index.html" class="nl">GLOW<span>UP</span></a>
-<div class="nav-coins"><i class="fa-solid fa-coins"></i>${u.coins||0}</div>
-</nav>
-<section class="ref-hero">
-<div class="ref-hero-badge fi"><i class="fa-solid fa-user-group" style="font-size:9px;"></i> Referral Program</div>
-<h1 class="fi f1">Invite Friends.<br><span class="gold-text">Earn Rewards.</span></h1>
-<p class="fi f2">Share your unique link with friends. When they join GLOWUP, you earn Glow Cash and unlock exclusive rewards.</p>
-</section>
-<div class="container">
-<div class="link-card fi f2">
-<div class="link-label">Your Unique Referral Link</div>
-<div class="link-box"><input type="text" readonly id="ref-link" value="${esc(refLink)}"><button class="btn btn-p btn-sm" id="copy-btn"><i class="fa-solid fa-copy" style="font-size:11px;"></i> Copy</button></div>
-<div class="link-actions">
-<button class="btn btn-wa btn-sm" id="wa-share" style="flex:1;"><i class="fa-brands fa-whatsapp" style="font-size:14px;"></i> WhatsApp</button>
-<button class="btn btn-ig btn-sm" id="ig-share" style="flex:1;"><i class="fa-brands fa-instagram" style="font-size:13px;"></i> Instagram</button>
-<button class="btn btn-tg btn-sm" id="tg-share" style="flex:1;"><i class="fa-brands fa-telegram" style="font-size:13px;"></i> Telegram</button>
-</div></div>
-<div class="progress-section fi f3">
-<div class="progress-ring-wrap">
-<svg class="progress-ring-svg" viewBox="0 0 140 140"><circle class="progress-ring-bg" cx="70" cy="70" r="62"/><circle class="progress-ring-fill" cx="70" cy="70" r="62" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"/></svg>
-<div class="progress-ring-center"><div class="progress-ring-num">${myRefC}</div><div class="progress-ring-den">/ 3 for free access</div></div></div>
-<div class="progress-status ${myRefC>=3?'complete':'incomplete'}">${myRefC>=3?'<i class="fa-solid fa-check-circle" style="margin-right:4px;"></i> Free Access Unlocked!':'Keep going — '+(3-myRefC)+' more to go'}</div>
-<div class="progress-sub">${myRefC>=3?'Your dashboard is unlocked. Share more to earn bonus rewards.':'When 3 friends sign up and pay using your link, your full access unlocks automatically.'}</div></div>
-<div class="milestones fi f3"><h3><i class="fa-solid fa-route"></i> Your Milestones</h3><div class="milestone-track">
- ${REF_TIERS.map((t,i)=>{const isE=myRefC>=t.req;const isC=!isE&&(i===0||myRefC>=REF_TIERS[i-1].req);return`<div class="milestone-node ${isE?'earned':''}"><div class="milestone-dot ${isE?'earned':''} ${isC?'current':''}">${isE?'<i class="fa-solid fa-check"></i>':'<span>'+t.req+'</span>'}</div><div class="milestone-req">${t.req} ref${t.req>1?'errals':'erral'}</div><div class="milestone-reward">${t.label}</div></div>`}).join('')}
-</div></div>
-<div class="rewards-grid fi f4">
- ${REF_TIERS.map(t=>{const isE=myRefC>=t.req;return`<div class="reward-card ${isE?'earned':''}"><div class="reward-check"><i class="fa-solid fa-check"></i></div><div class="reward-lock"><i class="fa-solid fa-lock"></i></div><div class="reward-icon"><i class="fa-solid ${t.icon}"></i></div><h4>${t.label}</h4><p>${t.req} referral${t.req>1?'s':''} needed</p></div>`}).join('')}
-</div>
-<div class="leaderboard fi f4"><h3><i class="fa-solid fa-trophy"></i> Top Referrers</h3>${buildLB(users,u,myRank)}</div>
-<div class="how-section fi f5"><h3><i class="fa-solid fa-circle-question"></i> How It Works</h3><div class="how-steps">
-<div class="how-step"><div class="how-num">1</div><div class="how-text">Share your <strong>unique referral link</strong> with friends via WhatsApp, Instagram, Telegram, or any platform.</div></div>
-<div class="how-step"><div class="how-num">2</div><div class="how-text">Your friend clicks the link, visits GLOWUP, and <strong>pays ₹99</strong> to create their account. Your code is automatically tracked.</div></div>
-<div class="how-step"><div class="how-num">3</div><div class="how-text">At <strong>3 successful referrals</strong>, your dashboard unlocks for free. You also earn <strong>+20 Glow Coins</strong> per referral.</div></div>
-<div class="how-step"><div class="how-num">4</div><div class="how-text">Keep referring to hit <strong>5 and 10 referral milestones</strong> for a free mentor session, Elite badge, and 200 bonus coins.</div></div>
-</div></div>
-<div class="fi f5"><h3 style="font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px;justify-content:center;"><i class="fa-solid fa-circle-question" style="color:var(--accent);font-size:12px;"></i> Referral FAQ</h3>
-<div class="faq-list">
-<div class="faq-item"><button class="faq-q" data-faq>Does my friend have to pay for the referral to count?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Yes. The referral only counts when your friend signs up and completes the ₹99 payment.</div></div></div>
-<div class="faq-item"><button class="faq-q" data-faq>How do I know if someone signed up using my link?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Your referral count on this page updates in real-time when someone uses your link to sign up and pay.</div></div></div>
-<div class="faq-item"><button class="faq-q" data-faq>What happens at 3 referrals?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Your GLOWUP dashboard unlocks for free — full access to everything. You'll receive your login credentials on WhatsApp.</div></div></div>
-<div class="faq-item"><button class="faq-q" data-faq>Can I share the link on Instagram?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Yes! Click the Instagram button to copy a caption-ready message. Post it on your story, in DMs, or in your bio.</div></div></div>
-<div class="faq-item"><button class="faq-q" data-faq>Is there a limit on referrals?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">No limit. You earn 20 Glow Coins per referral no matter how many you bring. The #1 monthly referrer gets a bonus 500 coins + free mentor session.</div></div></div>
-</div></div>
-</div>
-<footer class="ref-footer">GLOWUP &mdash; Earn. Level Up. Transform.</footer>`;
+/* FIX: Read ref param from URL and store in localStorage */
+var params=new URLSearchParams(location.search);
+var urlRef=params.get('ref');
+if(urlRef){localStorage.setItem('g_incoming_ref',JSON.stringify(urlRef))}
+
+document.getElementById('app').innerHTML=
+'<nav class="topnav">'+
+'<button class="nav-btn" onclick="location.href=\'dashboard.html\'"><i class="fa-solid fa-arrow-left" style="font-size:11px;"></i> Dashboard</button>'+
+'<a href="index.html" class="nl">GLOW<span>UP</span></a>'+
+'<div class="nav-coins"><i class="fa-solid fa-coins"></i>'+(u.coins||0)+'</div>'+
+'</nav>'+
+'<section class="ref-hero">'+
+'<div class="ref-hero-badge fi"><i class="fa-solid fa-user-group" style="font-size:9px;"></i> Referral Program</div>'+
+'<h1 class="fi f1">Invite Friends.<br><span class="gold-text">Earn Rewards.</span></h1>'+
+'<p class="fi f2">Share your unique link with friends. When they join GLOWUP, you earn Glow Cash and unlock exclusive rewards.</p>'+
+'</section>'+
+'<div class="container">'+
+'<div class="link-card fi f2">'+
+'<div class="link-label">Your Unique Referral Link</div>'+
+'<div class="link-box"><input type="text" readonly id="ref-link" value="'+esc(refLink)+'"><button class="btn btn-p btn-sm" id="copy-btn"><i class="fa-solid fa-copy" style="font-size:11px;"></i> Copy</button></div>'+
+'<div class="link-actions">'+
+'<button class="btn btn-wa btn-sm" id="wa-share" style="flex:1;"><i class="fa-brands fa-whatsapp" style="font-size:14px;"></i> WhatsApp</button>'+
+'<button class="btn btn-ig btn-sm" id="ig-share" style="flex:1;"><i class="fa-brands fa-instagram" style="font-size:13px;"></i> Instagram</button>'+
+'<button class="btn btn-tg btn-sm" id="tg-share" style="flex:1;"><i class="fa-brands fa-telegram" style="font-size:13px;"></i> Telegram</button>'+
+'</div></div>'+
+'<div class="progress-section fi f3">'+
+'<div class="progress-ring-wrap">'+
+'<svg class="progress-ring-svg" viewBox="0 0 140 140"><circle class="progress-ring-bg" cx="70" cy="70" r="62"/><circle class="progress-ring-fill" cx="70" cy="70" r="62" stroke-dasharray="'+circumference+'" stroke-dashoffset="'+offset+'"/></svg>'+
+'<div class="progress-ring-center"><div class="progress-ring-num">'+myRefC+'</div><div class="progress-ring-den">/ 3 for free access</div></div></div>'+
+'<div class="progress-status '+(myRefC>=3?'complete':'incomplete')+'">'+(myRefC>=3?'<i class="fa-solid fa-check-circle" style="margin-right:4px;"></i> Free Access Unlocked!':'Keep going — '+(3-myRefC)+' more to go')+'</div>'+
+'<div class="progress-sub">'+(myRefC>=3?'Your dashboard is unlocked. Share more to earn bonus rewards.':'When 3 friends sign up and pay using your link, your full access unlocks automatically.')+'</div></div>'+
+'<div class="milestones fi f3"><h3><i class="fa-solid fa-route"></i> Your Milestones</h3><div class="milestone-track">'+
+REF_TIERS.map(function(t,i){var isE=myRefC>=t.req;var isC=!isE&&(i===0||myRefC>=REF_TIERS[i-1].req);return'<div class="milestone-node '+(isE?'earned':'')+'"><div class="milestone-dot '+(isE?'earned':'')+' '+(isC?'current':'')+'">'+(isE?'<i class="fa-solid fa-check"></i>':'<span>'+t.req+'</span>')+'</div><div class="milestone-req">'+t.req+' ref'+(t.req>1?'errals':'erral')+'</div><div class="milestone-reward">'+t.label+'</div></div>'}).join('')+
+'</div></div>'+
+'<div class="rewards-grid fi f4">'+
+REF_TIERS.map(function(t){var isE=myRefC>=t.req;return'<div class="reward-card '+(isE?'earned':'')+'"><div class="reward-check"><i class="fa-solid fa-check"></i></div><div class="reward-lock"><i class="fa-solid fa-lock"></i></div><div class="reward-icon"><i class="fa-solid '+t.icon+'"></i></div><h4>'+t.label+'</h4><p>'+t.req+' referral'+(t.req>1?'s':'')+' needed</p></div>'}).join('')+
+'</div>'+
+'<div class="leaderboard fi f4"><h3><i class="fa-solid fa-trophy"></i> Top Referrers</h3>'+buildLB(users,u,myRank)+'</div>'+
+'<div class="how-section fi f5"><h3><i class="fa-solid fa-circle-question"></i> How It Works</h3><div class="how-steps">'+
+'<div class="how-step"><div class="how-num">1</div><div class="how-text">Share your <strong>unique referral link</strong> with friends via WhatsApp, Instagram, Telegram, or any platform.</div></div>'+
+'<div class="how-step"><div class="how-num">2</div><div class="how-text">Your friend clicks the link, visits GLOWUP, and <strong>pays ₹99</strong> to create their account. Your code is automatically tracked.</div></div>'+
+'<div class="how-step"><div class="how-num">3</div><div class="how-text">At <strong>3 successful referrals</strong>, your dashboard unlocks for free. You also earn <strong>+20 Glow Coins</strong> per referral.</div></div>'+
+'<div class="how-step"><div class="how-num">4</div><div class="how-text">Keep referring to hit <strong>5 and 10 referral milestones</strong> for a free mentor session, Elite badge, and 200 bonus coins.</div></div>'+
+'</div></div>'+
+'<div class="fi f5"><h3 style="font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px;justify-content:center;"><i class="fa-solid fa-circle-question" style="color:var(--accent);font-size:12px;"></i> Referral FAQ</h3>'+
+'<div class="faq-list">'+
+'<div class="faq-item"><button class="faq-q" data-faq>Does my friend have to pay for the referral to count?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Yes. The referral only counts when your friend signs up and completes the ₹99 payment.</div></div></div>'+
+'<div class="faq-item"><button class="faq-q" data-faq>How do I know if someone signed up using my link?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Your referral count on this page updates in real-time when someone uses your link to sign up and pay.</div></div></div>'+
+'<div class="faq-item"><button class="faq-q" data-faq>What happens at 3 referrals?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Your GLOWUP dashboard unlocks for free — full access to everything. You\'ll receive your login credentials on WhatsApp.</div></div></div>'+
+'<div class="faq-item"><button class="faq-q" data-faq>Can I share the link on Instagram?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">Yes! Click the Instagram button to copy a caption-ready message. Post it on your story, in DMs, or in your bio.</div></div></div>'+
+'<div class="faq-item"><button class="faq-q" data-faq>Is there a limit on referrals?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">No limit. You earn 20 Glow Coins per referral no matter how many you bring. The #1 monthly referrer gets a bonus 500 coins + free mentor session.</div></div></div>'+
+'</div></div>'+
+'</div>'+
+'<footer class="ref-footer">GLOWUP &mdash; Earn. Level Up. Transform.</footer>';
 
 /* Bind events */
-const shareText="Hey! I'm using GLOWUP — a reward-based transformation system where you earn coins for daily habits and redeem real skincare products. It's only ₹99. Join using my link: "+refLink;
+var shareText="Hey! I'm using GLOWUP — a reward-based transformation system where you earn coins for daily habits and redeem real skincare products. It's only ₹99. Join using my link: "+refLink;
 
-document.getElementById('copy-btn').addEventListener('click',()=>{
-const inp=document.getElementById('ref-link');
-navigator.clipboard.writeText(inp.value).then(()=>{toast('Link copied!','s');document.getElementById('copy-btn').innerHTML='<i class="fa-solid fa-check" style="font-size:11px;"></i> Copied';setTimeout(()=>{document.getElementById('copy-btn').innerHTML='<i class="fa-solid fa-copy" style="font-size:11px;"></i> Copy'},2000)}).catch(()=>{inp.select();document.execCommand('copy');toast('Link copied!','s')});
+document.getElementById('copy-btn').addEventListener('click',function(){
+var inp=document.getElementById('ref-link');
+navigator.clipboard.writeText(inp.value).then(function(){
+toast('Link copied!','s');
+document.getElementById('copy-btn').innerHTML='<i class="fa-solid fa-check" style="font-size:11px;"></i> Copied';
+setTimeout(function(){document.getElementById('copy-btn').innerHTML='<i class="fa-solid fa-copy" style="font-size:11px;"></i> Copy'},2000);
+}).catch(function(){inp.select();document.execCommand('copy');toast('Link copied!','s')});
 });
-document.getElementById('wa-share').addEventListener('click',()=>{window.open('https://wa.me/?text='+encodeURIComponent(shareText),'_blank')});
-document.getElementById('ig-share').addEventListener('click',()=>{const igText="I'm transforming with GLOWUP \u2014 earn coins for habits, redeem real skincare. Only \u20b999.\n\nJoin here: "+refLink+"\n\n#GLOWUP #SelfCare #Transformation";navigator.clipboard.writeText(igText).then(()=>toast('Instagram caption copied!','s')).catch(()=>toast('Could not copy.','e'))});
-document.getElementById('tg-share').addEventListener('click',()=>{window.open('https://t.me/share/url?url='+encodeURIComponent(refLink)+'&text='+encodeURIComponent("Join GLOWUP — earn coins for daily habits and redeem real skincare. Only ₹99."),'_blank')});
+
+document.getElementById('wa-share').addEventListener('click',function(){window.open('https://wa.me/?text='+encodeURIComponent(shareText),'_blank')});
+
+document.getElementById('ig-share').addEventListener('click',function(){
+var igText="I'm transforming with GLOWUP \u2014 earn coins for habits, redeem real skincare. Only \u20b999.\n\nJoin here: "+refLink+"\n\n#GLOWUP #SelfCare #Transformation";
+navigator.clipboard.writeText(igText).then(function(){toast('Instagram caption copied!','s')}).catch(function(){toast('Could not copy.','e')});
+});
+
+document.getElementById('tg-share').addEventListener('click',function(){
+window.open('https://t.me/share/url?url='+encodeURIComponent(refLink)+'&text='+encodeURIComponent("Join GLOWUP — earn coins for daily habits and redeem real skincare. Only ₹99."),'_blank');
+});
 
 /* FAQ */
-document.querySelectorAll('[data-faq]').forEach(btn=>{btn.addEventListener('click',function(){const item=this.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0'});if(!isOpen){item.classList.add('open');const a=item.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px'}})});
+document.querySelectorAll('[data-faq]').forEach(function(btn){
+btn.addEventListener('click',function(){
+var item=this.closest('.faq-item');
+var isOpen=item.classList.contains('open');
+document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0'});
+if(!isOpen){item.classList.add('open');var a=item.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px'}
+});
+});
 }
 
 function buildLB(users,me,myRank){
-const sorted=[...users].filter(u=>(u.refC||0)>0).sort((a,b)=>(b.refC||0)-(a.refC||0)).slice(0,10);
+var sorted=[].concat(users).filter(function(u){return(u.refC||0)>0}).sort(function(a,b){return(b.refC||0)-(a.refC||0)}).slice(0,10);
 if(!sorted.length)return'<div class="lb-empty"><i class="fa-solid fa-trophy"></i><p>No referrals yet. Be the first!</p></div>';
-let html='';
-sorted.forEach((u,i)=>{
-const isMe=u.id===me.id;const ini=u.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'normal';
-html+=`<div class="lb-row ${isMe?'me':''}"><div class="lb-rank ${rc}">${i+1}</div><div class="lb-avatar">${ini}</div><div class="lb-info"><div class="lb-name ${isMe?'me-name':''}">${esc(u.name)}${isMe?' (You)':''}</div><div class="lb-phone">${esc(u.phone)}</div></div><div class="lb-count"><div class="lb-num">${u.refC||0}</div><div class="lb-label">refs</div></div></div>`});
-if(myRank>10&&!sorted.some(u=>u.id===me.id)){
-const ini=me.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-html+=`<div style="height:1px;background:var(--border);margin:8px 0;"></div><div class="lb-row me"><div class="lb-rank normal">${myRank}</div><div class="lb-avatar">${ini}</div><div class="lb-info"><div class="lb-name me-name">${esc(me.name)} (You)</div><div class="lb-phone">${esc(me.phone)}</div></div><div class="lb-count"><div class="lb-num">${me.refC||0}</div><div class="lb-label">refs</div></div></div>`}
+var html='';
+sorted.forEach(function(u,i){
+var isMe=u.id===me.id;
+var ini=u.name.split(' ').map(function(w){return w[0]}).join('').toUpperCase().slice(0,2);
+var rc=i===0?'gold':i===1?'silver':i===2?'bronze':'normal';
+html+='<div class="lb-row '+(isMe?'me':'')+'"><div class="lb-rank '+rc+'">'+(i+1)+'</div><div class="lb-avatar">'+ini+'</div><div class="lb-info"><div class="lb-name '+(isMe?'me-name':'')+'">'+esc(u.name)+(isMe?' (You)':'')+'</div><div class="lb-phone">'+esc(u.phone)+'</div></div><div class="lb-count"><div class="lb-num">'+(u.refC||0)+'</div><div class="lb-label">refs</div></div></div>';
+});
+var foundMe=false;
+for(var fi=0;fi<sorted.length;fi++){if(sorted[fi].id===me.id){foundMe=true;break}}
+if(myRank>10&&!foundMe){
+var ini=me.name.split(' ').map(function(w){return w[0]}).join('').toUpperCase().slice(0,2);
+html+='<div style="height:1px;background:var(--border);margin:8px 0;"></div><div class="lb-row me"><div class="lb-rank normal">'+myRank+'</div><div class="lb-avatar">'+ini+'</div><div class="lb-info"><div class="lb-name me-name">'+esc(me.name)+' (You)</div><div class="lb-phone">'+esc(me.phone)+'</div></div><div class="lb-count"><div class="lb-num">'+(me.refC||0)+'</div><div class="lb-label">refs</div></div></div>';
+}
 return html;
 }
 
-(function(){const params=new URLSearchParams(location.search);if(params.get('ref'))sessionStorage.setItem('g_incoming_ref',params.get('ref'));render()})();
+render();
 </script>
 </body>
 </html>
