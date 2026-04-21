@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOWUP — Unlock Full Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#08080a;--card:#0f0f12;--border:#1a1a1f;--border2:#26262d;
+--fg:#fff;--muted:#888;--dim:#4a4a52;--accent:#c9a84c;--accent2:#e0c672;
+--abg:rgba(201,168,76,.06);--abg2:rgba(201,168,76,.12);
+--danger:#e74c3c;--success:#2ecc71;--warn:#f39c12;
+--gg:linear-gradient(135deg,#c9a84c,#e0c672,#c9a84c);
+--gt:linear-gradient(135deg,#c9a84c 0%,#f0dfa0 50%,#c9a84c 100%)
+}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.gold-text{background:var(--gt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* NAV */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);background:rgba(8,8,10,.92);backdrop-filter:blur(16px);position:sticky;top:0;z-index:50}
+.brand{font-size:15px;font-weight:800;letter-spacing:2.5px;cursor:pointer}.brand em{color:var(--accent);font-style:normal}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.trust-pill{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--success);background:rgba(46,204,113,.06);padding:5px 12px;border-radius:20px;border:1px solid rgba(46,204,113,.1)}
+.trust-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
+
+/* PAGE */
+.page{max-width:680px;margin:0 auto;padding:0 20px}
+.sec{padding:48px 0}
+
+/* HERO */
+.hero{text-align:center;padding:56px 0 40px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.04) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--warn);background:rgba(243,156,18,.06);border:1px solid rgba(243,156,18,.15);padding:6px 18px;border-radius:20px;margin-bottom:24px;animation:fi .6s ease both}
+.hero-badge i{animation:pulse 1.5s infinite}
+.hero-title{font-size:clamp(26px,6vw,42px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:16px;animation:fi .6s ease .1s both}
+.hero-sub{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto 24px;font-weight:300;animation:fi .6s ease .2s both}
+
+/* Price */
+.price-box{display:inline-flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 32px;margin-bottom:8px;animation:fi .6s ease .3s both}
+.price-old{font-size:18px;color:var(--dim);text-decoration:line-through;font-weight:400}
+.price-new{font-size:40px;font-weight:900;color:var(--accent);line-height:1}
+.price-new span{font-size:18px;font-weight:600}
+.price-tag{font-size:10px;font-weight:700;color:var(--success);background:rgba(46,204,113,.08);padding:4px 12px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;animation:fi .6s ease .35s both}
+
+/* Timer */
+.timer-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;padding:12px 20px;background:rgba(231,76,60,.04);border:1px solid rgba(231,76,60,.1);border-radius:12px;animation:fi .6s ease .4s both}
+.timer-bar i{color:var(--danger);font-size:14px}
+.timer-bar span{font-size:13px;color:var(--danger);font-weight:600}
+.timer-digits{font-size:20px;font-weight:800;color:var(--danger);letter-spacing:2px;font-variant-numeric:tabular-nums}
+
+/* Trust */
+.trust-row{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:20px;animation:fi .6s ease .45s both}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim)}
+.trust-item i{font-size:10px;color:var(--accent)}
+.trust-item strong{color:var(--muted)}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .3s}
+.gc{border:1px solid rgba(201,168,76,.06)}.gc:hover{border-color:rgba(201,168,76,.15);box-shadow:0 0 24px rgba(201,168,76,.03)}
+.sec-title{text-align:center;font-size:22px;font-weight:800;margin-bottom:8px}
+.sec-sub{text-align:center;font-size:13px;color:var(--muted);margin-bottom:32px}
+.benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.benefit{padding:20px;text-align:center}
+.benefit-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 12px}
+.benefit-icon.gold{background:var(--abg2);color:var(--accent)}
+.benefit-icon.green{background:rgba(46,204,113,.08);color:var(--success)}
+.benefit-icon.blue{background:rgba(59,130,246,.08);color:#3b82f6}
+.benefit-icon.purple{background:rgba(168,85,247,.08);color:#a855f7}
+.benefit h3{font-size:13px;font-weight:700;margin-bottom:4px}
+.benefit p{font-size:11px;color:var(--muted);line-height:1.55}
+
+/* PAYMENT SECTION */
+.pay-section{padding:48px 0}
+.pay-wrapper{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.pay-header{background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,rgba(201,168,76,.02) 100%);padding:24px;text-align:center;border-bottom:1px solid var(--border)}
+.pay-header h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.pay-header p{font-size:12px;color:var(--muted)}
+.pay-body{padding:28px 24px}
+.qr-box{width:220px;height:220px;margin:0 auto 20px;border-radius:14px;background:#fff;padding:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.3);position:relative}
+.qr-box img{width:100%;height:100%;object-fit:contain}
+.qr-fallback{width:100%;height:100%;background:repeating-conic-gradient(#333 0% 25%,#fff 0% 50%) 50%/18px 18px;border-radius:4px;opacity:.25}
+.qr-amount{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:var(--gg);color:#0a0a0a;font-size:13px;font-weight:800;padding:5px 16px;border-radius:8px;white-space:nowrap;box-shadow:0 2px 12px rgba(201,168,76,.3)}
+.upi-id{text-align:center;margin-bottom:20px}
+.upi-id-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.upi-id-val{font-size:13px;font-weight:600;color:var(--fg);font-family:monospace;background:rgba(255,255,255,.03);display:inline-block;padding:6px 16px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.upi-id-val:hover{border-color:var(--accent);color:var(--accent)}
+.upi-id-val i{margin-left:6px;font-size:10px;color:var(--dim)}
+
+/* Steps */
+.steps{margin:24px 0 0}
+.step{display:flex;gap:12px;padding:10px 0;position:relative}
+.step:not(:last-child)::after{content:'';position:absolute;left:15px;top:36px;bottom:-2px;width:1px;background:var(--border)}
+.step-num{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;background:var(--abg2);color:var(--accent);z-index:1}
+.step-text{font-size:12px;color:#aaa;padding-top:4px;line-height:1.5}
+.step-text strong{color:var(--fg);font-weight:600}
+
+/* UPLOAD */
+.upload-section{padding:32px 0;border-top:1px solid var(--border)}
+.upload-title{text-align:center;font-size:15px;font-weight:700;margin-bottom:4px}
+.upload-sub{text-align:center;font-size:12px;color:var(--muted);margin-bottom:20px}
+
+.drop-zone{border:2px dashed var(--border2);border-radius:14px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .3s;position:relative;background:rgba(255,255,255,.01)}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--accent);background:var(--abg)}
+.drop-zone i{font-size:28px;color:var(--dim);margin-bottom:10px;display:block}
+.drop-zone p{font-size:12px;color:var(--dim);margin-bottom:4px}
+.drop-zone .browse{color:var(--accent);font-weight:600;text-decoration:underline;cursor:pointer}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+.preview-wrap{display:none;margin-top:16px;text-align:center}
+.preview-wrap.show{display:block}
+.preview-img{max-width:240px;max-height:200px;border-radius:10px;border:1px solid var(--border);margin:0 auto 10px}
+.preview-name{font-size:11px;color:var(--muted)}
+.preview-remove{font-size:11px;color:var(--danger);cursor:pointer;margin-left:8px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.form-group{margin-bottom:0}
+.form-full{grid-column:1/-1}
+.form-label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.form-input{width:100%;background:#0a0a0b;border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--fg);font-family:'Poppins',sans-serif;font-size:13px;transition:border-color .25s;outline:none}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--dim)}
+textarea.form-input{resize:vertical;min-height:60px;line-height:1.5}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;padding:14px 28px;border-radius:11px;border:none;cursor:pointer;transition:all .25s;outline:none;white-space:nowrap}
+.btn:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.bp{background:var(--gg);color:#0a0a0a;font-weight:800}.bp:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.bo{background:0 0;color:var(--fg);border:1px solid var(--border2)}.bo:hover{border-color:var(--accent);color:var(--accent)}
+.bf{width:100%}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important;filter:none!important}
+.submit-row{margin-top:20px}
+
+.note{text-align:center;margin-top:14px;font-size:11px;color:var(--dim);line-height:1.6}
+.note i{color:var(--accent);margin-right:3px}
+
+/* SUCCESS STATE */
+.success-state{display:none;text-align:center;padding:48px 20px}
+.success-state.show{display:block}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(46,204,113,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:var(--success);animation:successPop .5s ease both}
+.success-state h3{font-size:20px;font-weight:800;margin-bottom:6px}
+.success-state p{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6}
+.success-details{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:left;margin-bottom:20px}
+.success-row{display:flex;justify-content:space-between;padding:6px 0;font-size:12px}
+.success-row .label{color:var(--dim)}
+.success-row .value{font-weight:600;color:var(--fg)}
+.success-row .value.gold{color:var(--accent)}
+
+/* FAQ */
+.faq-section{padding:48px 0;border-top:1px solid var(--border)}
+.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;background:var(--card);transition:border-color .2s}
+.faq-item:hover{border-color:var(--border2)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;font-size:13px;font-weight:600;gap:10px;user-select:none}
+.faq-q i{font-size:10px;color:var(--dim);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:0 18px 14px;font-size:12px;color:var(--muted);line-height:1.7}
+
+/* CTA CONTACT */
+.contact-bar{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;background:rgba(37,211,102,.04);border:1px solid rgba(37,211,102,.1);border-radius:12px;cursor:pointer;transition:all .25s;text-align:center}
+.contact-bar:hover{background:rgba(37,211,102,.08);transform:translateY(-1px)}
+.contact-bar i{font-size:18px;color:#25D366}
+.contact-bar span{font-size:13px;font-weight:600;color:#25D366}
+
+/* FOOTER */
+.footer{text-align:center;padding:28px 20px;font-size:10px;color:var(--dim);border-top:1px solid var(--border);margin-top:20px}
+
+/* DIVIDER */
+.div{height:1px;background:var(--border);margin:0}
+
+/* TOAST */
+#tb{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px}
+.toast{padding:11px 16px;border-radius:10px;font-size:12px;font-weight:500;max-width:360px;animation:ti .35s ease;display:flex;align-items:center;gap:7px}
+.toast.out{animation:to .3s ease forwards}
+.ts{background:#0f2416;border:1px solid rgba(46,204,113,.3);color:#2ecc71}
+.te{background:#241010;border:1px solid rgba(231,76,60,.3);color:#e74c3c}
+.ti{background:#1a1608;border:1px solid rgba(201,168,76,.3);color:var(--accent)}
+
+/* Loading overlay */
+.loading-overlay{position:fixed;inset:0;background:rgba(8,8,10,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s}
+.loading-overlay.show{opacity:1;pointer-events:all}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}
+.loading-overlay p{font-size:13px;color:var(--muted);font-weight:500}
+
+@keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ti{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes to{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(28px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes successPop{0%{opacity:0;transform:scale(.5)}60%{transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:600px){
+.benefits-grid{grid-template-columns:1fr}.hero-title{letter-spacing:0}
+.price-box{padding:16px 24px}.price-new{font-size:34px}
+.form-row{grid-template-columns:1fr}.qr-box{width:190px;height:190px}
+.pay-body{padding:20px 16px}.trust-row{flex-direction:column;gap:8px}
+.step:not(:last-child)::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+<div class="brand" onclick="location.href='index.html'">GLOW<em>UP</em></div>
+<div class="topbar-right">
+<div class="trust-pill"><span class="dot"></span> Secure Payment</div>
+</div>
+</nav>
+
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-glow"></div>
+<div class="hero-badge"><i class="fa-solid fa-bolt"></i> Limited Time Offer</div>
+<h1 class="hero-title">Unlock the Full<br><span class="gold-text">Glow-Up System</span></h1>
+<p class="hero-sub">Everything you need to transform your skin, fitness, and confidence — in one system.</p>
+<div class="price-box">
+<span class="price-old">₹199</span>
+<div class="price-new"><span>₹</span>99</div>
+</div>
+<div class="price-tag">70% OFF — Today Only</div>
+
+<div class="timer-bar">
+<i class="fa-solid fa-clock"></i>
+<span>Offer ends in:</span>
+<span class="timer-digits" id="timer">23:59:59</span>
+</div>
+
+<div class="trust-row">
+<div class="trust-item"><i class="fa-solid fa-shield-check"></i> <strong>Secure UPI</strong></div>
+<div class="trust-item"><i class="fa-solid fa-users"></i> <strong>200+ joined</strong></div>
+<div class="trust-item"><i class="fa-solid fa-star"></i> <strong>4.9 rating</strong></div>
+</div>
+</div>
+
+<!-- WHAT YOU GET -->
+<div class="sec" id="benefits">
+<h2 class="sec-title">What You Get</h2>
+<p class="sec-sub">Complete transformation toolkit — not just a tracker.</p>
+<div class="benefits-grid">
+<div class="card gc benefit" style="animation:fi .5s ease both;">
+<div class="benefit-icon gold"><i class="fa-solid fa-chart-line"></i></div>
+<h3>Daily Glow Tracker</h3>
+<p>Track habits, build streaks, and watch your progress skyrocket day by day.</p>
+</div>
+<div class="card gc benefit" style="animation:fi .5s ease .08s both;">
+<div class="benefit-icon green"><i class="fa-solid fa-coins"></i></div>
+<h3>Glow Cash System</h3>
+<p>Earn coins for every task. Redeem them for real skincare products.</p>
+</div>
+<div class="card gc benefit" style="animation:fi .5s ease .16s both;">
+<div class="benefit-icon blue"><i class="fa-solid fa-book"></i></div>
+<h3>Premium PDF Guides</h3>
+<p>Skincare Bible, Motivation Blueprint, and Confidence Building guides included.</p>
+</div>
+<div class="card gc benefit" style="animation:fi .5s ease .24s both;">
+<div class="benefit-icon purple"><i class="fa-solid fa-headset"></i></div>
+<h3>Mentor Guidance</h3>
+<p>Book 1-on-1 sessions with certified coaches for skin, fitness & confidence.</p>
+</div>
+</div>
+</div>
+
+<div class="div"></div>
+
+<!-- PAYMENT SECTION -->
+<div class="pay-section" id="pay-section">
+<div class="pay-wrapper">
+<div class="pay-header">
+<h3><i class="fa-solid fa-qrcode" style="color:var(--accent);margin-right:6px;"></i> Scan & Pay ₹99</h3>
+<p>Use any UPI app — Google Pay, PhonePe, Paytm, or BHIM</p>
+</div>
+<div class="pay-body">
+<div class="qr-box">
+<div class="qr-fallback"></div>
+<div class="qr-amount">₹99</div>
+</div>
+<div class="upi-id">
+<div class="upi-id-label">UPI ID (if QR doesn't work)</div>
+<div class="upi-id-val" id="upi-copy" title="Click to copy">yourupi@paytm <i class="fa-regular fa-copy"></i></div>
+</div>
+<div class="steps">
+<div class="step"><div class="step-num">1</div><div class="step-text">Open <strong>any UPI app</strong> (GPay, PhonePe, Paytm)</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text"><strong>Scan the QR code</strong> above or enter the UPI ID</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Pay <strong>₹99</strong> and <strong>take a screenshot</strong> of the payment confirmation</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text"><strong>Upload the screenshot</strong> below with your details</div></div>
+</div>
+</div>
+
+<div class="upload-section" id="upload-section">
+<div class="upload-title">Upload Payment Proof</div>
+<div class="upload-sub">Screenshot of your successful payment</div>
+
+<div class="drop-zone" id="drop-zone">
+<i class="fa-solid fa-cloud-arrow-up"></i>
+<p>Drag & drop screenshot here or <span class="browse">browse files</span></p>
+<p style="font-size:10px;color:var(--dim);margin-top:4px;">JPG, PNG — Max 5MB</p>
+<input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" aria-label="Upload payment screenshot">
+</div>
+
+<div class="preview-wrap" id="preview-wrap">
+<img class="preview-img" id="preview-img" alt="Payment screenshot preview">
+<div><span class="preview-name" id="preview-name"></span><span class="preview-remove" id="preview-remove"><i class="fa-solid fa-xmark"></i> Remove</span></div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Full Name *</label>
+<input type="text" class="form-input" id="f-name" placeholder="Your full name" autocomplete="name">
+</div>
+<div class="form-group">
+<label class="form-label">Phone Number *</label>
+<input type="tel" class="form-input" id="f-phone" placeholder="+91 98765 43210" autocomplete="tel">
+</div>
+<div class="form-group form-full">
+<label class="form-label">Transaction ID / UTR (optional)</label>
+<input type="text" class="form-input" id="f-utr" placeholder="Find it on your payment confirmation screen">
+</div>
+<div class="form-group form-full">
+<label class="form-label">Note (optional)</label>
+<textarea class="form-input" id="f-note" placeholder="Any message for us?"></textarea>
+</div>
+</div>
+
+<div class="submit-row">
+<button class="btn bp bf" id="submit-btn" disabled>
+<i class="fa-solid fa-paper-plane"></i> Submit Payment Proof
+</button>
+</div>
+
+<p class="note"><i class="fa-solid fa-info-circle"></i> Your access will be activated within 30 minutes after verification. You'll receive your login credentials on WhatsApp.</p>
+</div>
+</div>
+</div>
+
+<!-- SUCCESS STATE -->
+<div class="success-state" id="success-state">
+<div class="success-icon"><i class="fa-solid fa-check"></i></div>
+<h3>Payment Submitted Successfully</h3>
+<p>Your payment proof has been received. Our team will verify it and activate your account within 30 minutes.</p>
+<div class="success-details">
+<div class="success-row"><span class="label">Name</span><span class="value" id="s-name"></span></div>
+<div class="success-row"><span class="label">Phone</span><span class="value gold" id="s-phone"></span></div>
+<div class="success-row"><span class="label">Amount</span><span class="value gold">₹99</span></div>
+<div class="success-row"><span class="label">Status</span><span class="value" style="color:var(--warn);"><i class="fa-solid fa-clock" style="margin-right:4px;"></i>Under Review</span></div>
+</div>
+<p class="note" style="margin-bottom:20px;"><i class="fa-solid fa-whatsapp" style="color:#25D366;"></i> You'll get a WhatsApp message with your login credentials once approved.</p>
+<button class="btn bo bf" onclick="location.href='index.html'"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+</div>
+
+<div class="div"></div>
+
+<!-- FAQ -->
+<div class="faq-section">
+<h2 class="sec-title">Frequently Asked Questions</h2>
+<p class="sec-sub">Got doubts? We've got answers.</p>
+
+<div class="faq-item" data-faq>
+<div class="faq-q">How long does it take to activate my account?<i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-a"><div class="faq-a-inner">Usually within 30 minutes during working hours (10 AM – 10 PM). In rare cases, it may take up to 2 hours. You'll receive a WhatsApp message with your login credentials.</div></div>
+</div>
+<div class="faq-item" data-faq>
+<div class="faq-q">What if my payment fails?<i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-a"><div class="faq-a-inner">If money was deducted but payment failed, the amount will be refunded to your bank account within 3-5 business days by your UPI app. Try again with a different UPI app or contact us on WhatsApp.</div></div>
+</div>
+<div class="faq-item" data-faq>
+<div class="faq-q">Is this a one-time payment?<i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-a"><div class="faq-a-inner">Yes! ₹99 is a one-time payment for full access. There are no hidden charges, no subscriptions, no recurring payments. You pay once, you get lifetime access.</div></div>
+</div>
+<div class="faq-item" data-faq>
+<div class="faq-q">Can I get a refund?<i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-a"><div class="faq-a-inner">Since we're providing instant digital access and the price is already heavily discounted, we don't offer refunds. But if you face any technical issue, contact us and we'll resolve it within 24 hours.</div></div>
+</div>
+<div class="faq-item" data-faq>
+<div class="faq-q">What do I get for ₹99?<i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-a"><div class="faq-a-inner">Full access to the Glow-Up System — daily habit tracker, Glow Cash rewards, premium PDF guides, mentor booking, skincare product store, 10-level progression system, referral rewards, and all future updates. Everything listed on this page.</div></div>
+</div>
+<div class="faq-item" data-faq>
+<div class="faq-q">I sent the screenshot but haven't received access yet.<i class="fa-solid fa-chevron-down"></i></div>
+<div class="faq-a"><div class="faq-a-inner">Please wait up to 30 minutes. If it's been longer, message us on WhatsApp with your phone number and we'll check immediately. During late night hours (after 10 PM), activation may take until morning.</div></div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div style="padding:0 0 8px;">
+<div class="contact-bar" id="wa-contact">
+<i class="fa-brands fa-whatsapp"></i>
+<span>Having issues? Contact support on WhatsApp</span>
+</div>
+</div>
+
+</div>
+
+<footer class="footer">GLOWUP &mdash; Earn. Level Up. Transform. &middot; Secure payments via UPI</footer>
+
+<div id="tb"></div>
+<div class="loading-overlay" id="loading">
+<div class="spinner"></div>
+<p>Submitting your payment proof...</p>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const UPI_ID='yourupi@paytm',WA_NUM='919876543210',PRICE=99;
+
+/* ===================== TIMER ===================== */
+function startTimer(){
+let total=23*3600+59*60+59;
+const el=document.getElementById('timer');
+const stored=localStorage.getItem('g_pay_timer');
+if(stored){const diff=Math.floor((Date.now()-parseInt(stored))/1000);total=Math.max(0,total-diff)}
+if(total<=0){el.textContent='00:00:00';el.style.color='var(--dim)';return}
+function tick(){
+if(total<=0){el.textContent='00:00:00';el.style.color='var(--dim)';return}
+total--;const h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;
+el.textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+if(!stored)localStorage.setItem('g_pay_timer',Date.now().toString());
+tick();setInterval(tick,1000);
+}
+
+/* ===================== UPI COPY ===================== */
+document.getElementById('upi-copy').addEventListener('click',function(){
+navigator.clipboard.writeText(UPI_ID).then(()=>toast('UPI ID copied!','s')).catch(()=>{
+const ta=document.createElement('textarea');ta.value=UPI_ID;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('UPI ID copied!','s');
+});
+});
+
+/* ===================== FILE UPLOAD ===================== */
+let fileData=null;
+const dropZone=document.getElementById('drop-zone');
+const fileInput=document.getElementById('file-input');
+const previewWrap=document.getElementById('preview-wrap');
+const previewImg=document.getElementById('preview-img');
+const previewName=document.getElementById('preview-name');
+const previewRemove=document.getElementById('preview-remove');
+const submitBtn=document.getElementById('submit-btn');
+
+function validateForm(){
+const name=document.getElementById('f-name').value.trim();
+const phone=document.getElementById('f-phone').value.trim();
+submitBtn.disabled=!(fileData&&name&&phone);
+}
+
+function handleFile(file){
+if(!file)return;
+if(!['image/jpeg','image/png','image/webp'].includes(file.type)){toast('Please upload a JPG, PNG, or WebP image.','e');return}
+if(file.size>5*1024*1024){toast('Image must be under 5MB.','e');return}
+const reader=new FileReader();
+reader.onload=function(e){
+fileData=e.target.result;
+previewImg.src=fileData;
+previewName.textContent=file.name;
+previewWrap.classList.add('show');
+dropZone.style.display='none';
+validateForm();
+};
+reader.readAsDataURL(file);
+}
+
+fileInput.addEventListener('change',function(){if(this.files[0])handleFile(this.files[0])});
+
+dropZone.addEventListener('dragover',function(e){e.preventDefault();this.classList.add('drag')});
+dropZone.addEventListener('dragleave',function(){this.classList.remove('drag')});
+dropZone.addEventListener('drop',function(e){e.preventDefault();this.classList.remove('drag');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0])});
+
+previewRemove.addEventListener('click',function(){
+fileData=null;fileInput.value='';
+previewWrap.classList.remove('show');
+dropZone.style.display='';
+validateForm();
+});
+
+document.getElementById('f-name').addEventListener('input',validateForm);
+document.getElementById('f-phone').addEventListener('input',validateForm);
+
+/* ===================== SUBMIT ===================== */
+submitBtn.addEventListener('click',function(){
+const name=document.getElementById('f-name').value.trim();
+const phone=document.getElementById('f-phone').value.trim();
+const utr=document.getElementById('f-utr').value.trim();
+const note=document.getElementById('f-note').value.trim();
+if(!fileData||!name||!phone)return;
+
+/* Check for duplicate submission */
+const existing=JSON.parse(localStorage.getItem('g_payments')||'[]');
+if(existing.find(p=>p.phone===phone&&p.status==='pending')){
+toast('You already have a pending payment with this number. Please wait for verification.','e');return;
+}
+
+const loading=document.getElementById('loading');
+loading.classList.add('show');
+
+/* Simulate upload delay */
+setTimeout(()=>{
+const payment={
+id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+userId:null,
+userName:name,
+phone:phone,
+amount:PRICE,
+utr:utr,
+note:note,
+screenshot:fileData,
+status:'pending',
+ts:Date.now()
+};
+
+const payments=JSON.parse(localStorage.getItem('g_payments')||'[]');
+payments.push(payment);
+localStorage.setItem('g_payments',JSON.stringify(payments));
+
+loading.classList.remove('show');
+
+/* Show success */
+document.getElementById('pay-section').style.display='none';
+document.getElementById('success-state').classList.add('show');
+document.getElementById('s-name').textContent=name;
+document.getElementById('s-phone').textContent=phone;
+
+/* Scroll to success */
+document.getElementById('success-state').scrollIntoView({behavior:'smooth',block:'center'});
+
+toast('Payment proof submitted!','s');
+},1800);
+});
+
+/* ===================== FAQ ===================== */
+document.querySelectorAll('[data-faq]').forEach(item=>{
+item.querySelector('.faq-q').addEventListener('click',function(){
+const wasOpen=item.classList.contains('open');
+document.querySelectorAll('[data-faq]').forEach(i=>i.classList.remove('open'));
+if(!wasOpen)item.classList.add('open');
+});
+});
+
+/* ===================== WHATSAPP ===================== */
+document.getElementById('wa-contact').addEventListener('click',function(){
+window.open('https://wa.me/'+WA_NUM+'?text='+encodeURIComponent("Hi! I'm facing an issue with the GLOWUP payment. Can you help?"),'_blank');
+});
+
+/* ===================== TOAST ===================== */
+function toast(msg,type='i'){
+const b=document.getElementById('tb'),ic={s:'fa-check-circle',e:'fa-exclamation-circle',i:'fa-coins'};
+const el=document.createElement('div');el.className='toast t'+type;
+el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+msg+'</span>';
+b.appendChild(el);setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),300)},3500);
+}
+
+/* ===================== CHECK IF ALREADY PAID ===================== */
+(function(){
+const params=new URLSearchParams(location.search);
+if(params.get('paid')==='true'){
+document.getElementById('pay-section').style.display='none';
+document.getElementById('success-state').classList.add('show');
+document.getElementById('s-name').textContent=params.get('name')||'User';
+document.getElementById('s-phone').textContent=params.get('phone')||'';
+}
+})();
+
+/* ===================== INIT ===================== */
+startTimer();
+</script>
+</body>
+</html>
