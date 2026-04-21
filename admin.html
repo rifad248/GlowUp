@@ -8,49 +8,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
---bg:#08080a;--card:#0f0f12;--card2:#131316;--border:#1a1a1f;--border2:#26262d;
---fg:#fff;--muted:#888;--dim:#4a4a52;--accent:#c9a84c;--accent2:#e0c672;
---abg:rgba(201,168,76,.06);--abg2:rgba(201,168,76,.12);
---danger:#e74c3c;--success:#2ecc71;--warn:#f39c12;--info:#3b82f6;
---gg:linear-gradient(135deg,#c9a84c,#e0c672,#c9a84c);
---gt:linear-gradient(135deg,#c9a84c 0%,#f0dfa0 50%,#c9a84c 100%)
-}
-html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;line-height:1.6}
+:root{--bg:#08080a;--card:#0f0f12;--card2:#131316;--border:#1a1a1f;--border2:#26262d;--fg:#fff;--muted:#888;--dim:#4a4a52;--accent:#c9a84c;--accent2:#e0c672;--abg:rgba(201,168,76,.06);--abg2:rgba(201,168,76,.12);--danger:#e74c3c;--success:#2ecc71;--warn:#f39c12;--info:#3b82f6;--gg:linear-gradient(135deg,#c9a84c,#e0c672,#c9a84c);--gt:linear-gradient(135deg,#c9a84c 0%,#f0dfa0 50%,#c9a84c 100%)}
+html{scroll-behavior:smooth}body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;line-height:1.6}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 a{color:var(--accent);text-decoration:none}
-
 .gold-text{background:var(--gt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-/* Layout */
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:250px;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:50;transition:transform .3s}
 .sb-logo{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .sb-logo span{font-size:15px;font-weight:800;letter-spacing:2px}.sb-logo span em{color:var(--accent);font-style:normal}
 .sb-badge{font-size:8px;font-weight:700;letter-spacing:1px;color:#000;background:var(--gg);padding:2px 8px;border-radius:4px;text-transform:uppercase}
 .sb-nav{flex:1;padding:12px 10px;overflow-y:auto}
-.sb-link{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .2s;border:1px solid transparent;margin-bottom:2px;position:relative}
+.sb-link{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .2s;border:1px solid transparent;margin-bottom:2px}
 .sb-link:hover{color:var(--muted);background:rgba(255,255,255,.02)}
 .sb-link.active{color:var(--accent);background:var(--abg);border-color:rgba(201,168,76,.12)}
 .sb-link i{width:18px;text-align:center;font-size:13px}
 .sb-link .cnt{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;min-width:18px;text-align:center}
-.cnt-warn{background:rgba(243,156,18,.15);color:var(--warn)}
-.cnt-red{background:rgba(231,76,60,.15);color:var(--danger)}
-.cnt-gold{background:var(--abg2);color:var(--accent)}
+.cnt-warn{background:rgba(243,156,18,.15);color:var(--warn)}.cnt-red{background:rgba(231,76,60,.15);color:var(--danger)}
 .sb-foot{padding:14px 18px;border-top:1px solid var(--border);font-size:10px;color:var(--dim)}
 .sb-foot span{display:block;font-size:9px;margin-top:2px}
-
 .main{margin-left:250px;min-height:100vh}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-bottom:1px solid var(--border);background:rgba(8,8,10,.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:40}
 .tb-left{display:flex;align-items:center;gap:12px}
-.tb-title{font-size:16px;font-weight:700}
-.tb-sub{font-size:11px;color:var(--dim)}
+.tb-title{font-size:16px;font-weight:700}.tb-sub{font-size:11px;color:var(--dim)}
 .tb-right{display:flex;align-items:center;gap:10px}
 .hamburger{display:none;width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:0 0;color:var(--muted);cursor:pointer;font-size:15px;align-items:center;justify-content:center}
-
 .content{padding:24px 28px;max-width:1300px}
-
-/* Cards & Components */
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .3s}
 .card:hover{border-color:var(--border2)}
 .gc{border:1px solid rgba(201,168,76,.06)}.gc:hover{border-color:rgba(201,168,76,.15);box-shadow:0 0 24px rgba(201,168,76,.03)}
@@ -61,625 +43,242 @@ a{color:var(--accent);text-decoration:none}
 .bd{background:rgba(231,76,60,.08);color:#e74c3c;border:1px solid rgba(231,76,60,.15)}.bd:hover{background:rgba(231,76,60,.14)}
 .bs{background:rgba(46,204,113,.08);color:#2ecc71;border:1px solid rgba(46,204,113,.15)}.bs:hover{background:rgba(46,204,113,.14)}
 .bw{background:rgba(59,130,246,.08);color:#3b82f6;border:1px solid rgba(59,130,246,.15)}.bw:hover{background:rgba(59,130,246,.14)}
-.bsm{padding:7px 14px;font-size:11px;border-radius:7px}
-.bxs{padding:5px 10px;font-size:10px;border-radius:6px}
-.bf{width:100%}
+.bsm{padding:7px 14px;font-size:11px;border-radius:7px}.bxs{padding:5px 10px;font-size:10px;border-radius:6px}.bf{width:100%}
 .btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;filter:none!important}
 .input{width:100%;background:#0a0a0b;border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--fg);font-family:'Poppins',sans-serif;font-size:13px;transition:border-color .25s;outline:none}
 .input:focus{border-color:var(--accent)}.input::placeholder{color:var(--dim)}
 textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 .label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:7px;letter-spacing:.2px}
 .badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:5px;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
-.b-pending{background:rgba(243,156,18,.1);color:var(--warn)}
-.b-approved{background:rgba(46,204,113,.1);color:var(--success)}
-.b-rejected{background:rgba(231,76,60,.1);color:var(--danger)}
-.b-replied{background:var(--abg);color:var(--accent)}
-.b-resolved{background:rgba(46,204,113,.1);color:var(--success)}
-.b-shipped{background:rgba(59,130,246,.1);color:var(--info)}
-
-/* Stats Grid */
+.b-pending{background:rgba(243,156,18,.1);color:var(--warn)}.b-approved{background:rgba(46,204,113,.1);color:var(--success)}
+.b-rejected{background:rgba(231,76,60,.1);color:var(--danger)}.b-replied{background:var(--abg);color:var(--accent)}
+.b-resolved{background:rgba(46,204,113,.1);color:var(--success)}.b-shipped{background:rgba(59,130,246,.1);color:var(--info)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .stat{padding:20px;position:relative;overflow:hidden}
 .stat::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;opacity:.04}
 .stat-gold::after{background:var(--accent)}.stat-green::after{background:var(--success)}.stat-blue::after{background:var(--info)}.stat-red::after{background:var(--danger)}
 .stat-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:12px}
-.stat-gold .stat-icon{background:var(--abg2);color:var(--accent)}
-.stat-green .stat-icon{background:rgba(46,204,113,.1);color:var(--success)}
-.stat-blue .stat-icon{background:rgba(59,130,246,.1);color:var(--info)}
-.stat-red .stat-icon{background:rgba(231,76,60,.1);color:var(--danger)}
+.stat-gold .stat-icon{background:var(--abg2);color:var(--accent)}.stat-green .stat-icon{background:rgba(46,204,113,.1);color:var(--success)}
+.stat-blue .stat-icon{background:rgba(59,130,246,.1);color:var(--info)}.stat-red .stat-icon{background:rgba(231,76,60,.1);color:var(--danger)}
 .stat-val{font-size:28px;font-weight:800;line-height:1;margin-bottom:4px}
 .stat-gold .stat-val{color:var(--accent)}.stat-green .stat-val{color:var(--success)}.stat-blue .stat-val{color:var(--info)}.stat-red .stat-val{color:var(--danger)}
 .stat-lbl{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.6px;text-transform:uppercase}
 .stat-sub{font-size:10px;color:var(--muted);margin-top:3px}
-
-/* Section */
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
 .sec-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px}
 .sec-title i{color:var(--accent);font-size:13px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
 .grid-1{margin-bottom:24px}
-
-/* User Row */
 .u-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.025);transition:background .15s}
-.u-row:last-child{border-bottom:none}
-.u-row:hover{background:rgba(255,255,255,.012)}
+.u-row:last-child{border-bottom:none}.u-row:hover{background:rgba(255,255,255,.012)}
 .u-av{width:36px;height:36px;border-radius:9px;background:var(--abg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--accent);flex-shrink:0}
-.u-info{flex:1;min-width:0}
-.u-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u-info{flex:1;min-width:0}.u-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .u-meta{font-size:10px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap;margin-top:1px}
-.u-meta span{display:flex;align-items:center;gap:3px}
-.u-meta i{font-size:8px}
+.u-meta span{display:flex;align-items:center;gap:3px}.u-meta i{font-size:8px}
 .u-acts{display:flex;gap:5px;flex-shrink:0}
-
-/* Payment Request Card */
 .pay-card{padding:16px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:var(--card);transition:all .2s}
 .pay-card:hover{border-color:var(--border2)}
 .pay-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .pay-user{display:flex;align-items:center;gap:10px}
 .pay-thumb{width:80px;height:80px;border-radius:8px;object-fit:cover;background:var(--abg);border:1px solid var(--border)}
-.pay-details{flex:1}
-.pay-name{font-size:13px;font-weight:700}
-.pay-phone{font-size:11px;color:var(--dim)}
-.pay-time{font-size:10px;color:var(--dim);margin-top:2px}
+.pay-details{flex:1}.pay-name{font-size:13px;font-weight:700}.pay-phone{font-size:11px;color:var(--dim)}.pay-time{font-size:10px;color:var(--dim);margin-top:2px}
 .pay-amount{font-size:15px;font-weight:800;color:var(--accent)}
 .pay-actions{display:flex;gap:8px;margin-top:10px}
-
-/* Message Layout */
 .msg-layout{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;min-height:460px}
 .msg-list{border-right:1px solid var(--border);overflow-y:auto;max-height:520px}
 .msg-item{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.02);cursor:pointer;transition:background .2s}
-.msg-item:hover{background:rgba(255,255,255,.015)}
-.msg-item.active{background:var(--abg);border-left:3px solid var(--accent)}
-.msg-item-name{font-size:11px;font-weight:700;margin-bottom:2px}
-.msg-item-preview{font-size:10px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msg-item:hover{background:rgba(255,255,255,.015)}.msg-item.active{background:var(--abg);border-left:3px solid var(--accent)}
+.msg-item-name{font-size:11px;font-weight:700;margin-bottom:2px}.msg-item-preview{font-size:10px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .msg-item-meta{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
 .msg-item-time{font-size:9px;color:var(--dim)}
 .msg-detail{display:flex;flex-direction:column}
-.msg-detail-header{padding:16px 20px;border-bottom:1px solid var(--border)}
-.msg-detail-body{padding:20px;flex:1;overflow-y:auto}
-.msg-detail-footer{padding:12px 20px;border-top:1px solid var(--border)}
-.msg-detail-actions{display:flex;gap:6px;margin-top:8px}
+.msg-detail-header{padding:16px 20px;border-bottom:1px solid var(--border)}.msg-detail-body{padding:20px;flex:1;overflow-y:auto}.msg-detail-footer{padding:12px 20px;border-top:1px solid var(--border)}
 .msg-bubble{padding:10px 14px;border-radius:10px;font-size:12px;line-height:1.6;max-width:85%;margin-bottom:6px}
 .msg-user{background:var(--abg);color:#bbb;border:1px solid rgba(201,168,76,.06)}
 .msg-admin{background:rgba(46,204,113,.04);color:#aaa;border:1px solid rgba(46,204,113,.06);margin-left:auto}
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;color:var(--dim);text-align:center}
-.empty-state i{font-size:32px;margin-bottom:12px;opacity:.15}
-.empty-state p{font-size:12px}
-
-/* Order Row */
+.empty-state i{font-size:32px;margin-bottom:12px;opacity:.15}.empty-state p{font-size:12px}
 .ord-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.025)}
 .ord-row:last-child{border-bottom:none}
 .ord-img{width:50px;height:50px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--abg)}
-.ord-info{flex:1;min-width:0}
-.ord-name{font-size:13px;font-weight:600}
+.ord-info{flex:1;min-width:0}.ord-name{font-size:13px;font-weight:600}
 .ord-addr{font-size:10px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:280px}
 .ord-meta{font-size:10px;color:var(--dim);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap}
-
-/* Referral Leaderboard */
 .ref-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.025)}
 .ref-row:last-child{border-bottom:none}
 .ref-rank{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
-.ref-rank.top{background:var(--abg2);color:var(--accent)}
-.ref-rank.normal{background:var(--abg);color:var(--dim)}
+.ref-rank.top{background:var(--abg2);color:var(--accent)}.ref-rank.normal{background:var(--abg);color:var(--dim)}
 .ref-count{font-size:18px;font-weight:800;color:var(--accent);min-width:40px;text-align:right}
 .ref-label{font-size:9px;color:var(--dim);text-align:right}
-
-/* Broadcast */
 .bc-item{padding:14px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,.01)}
-.bc-item p{font-size:12px;color:#aaa;line-height:1.6}
-.bc-item time{font-size:9px;color:var(--dim);margin-top:6px;display:block}
-
-/* Chart */
+.bc-item p{font-size:12px;color:#aaa;line-height:1.6}.bc-item time{font-size:9px;color:var(--dim);margin-top:6px;display:block}
 .chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:24px}
 .chart-wrap h3{font-size:13px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:7px}
 .chart-wrap h3 i{color:var(--accent);font-size:12px}
 #chart{width:100%;height:200px;display:block}
-
-/* Add User Form */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-full{grid-column:1/-1}
-
-/* Filters */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-full{grid-column:1/-1}
 .filters{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
 .fbtn{padding:5px 12px;font-size:10px;font-weight:600;border-radius:7px;border:1px solid var(--border);background:0 0;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
 .fbtn.active{background:var(--abg);border-color:rgba(201,168,76,.2);color:var(--accent)}
-
-/* Divider */
 .div{height:1px;background:var(--border);margin:18px 0}
-
-/* Toast */
 #tb{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px}
 .toast{padding:11px 16px;border-radius:10px;font-size:12px;font-weight:500;max-width:360px;animation:ti .35s ease;display:flex;align-items:center;gap:7px}
 .toast.out{animation:to .3s ease forwards}
 .ts{background:#0f2416;border:1px solid rgba(46,204,113,.3);color:#2ecc71}
 .te{background:#241010;border:1px solid rgba(231,76,60,.3);color:#e74c3c}
 .ti{background:#1a1608;border:1px solid rgba(201,168,76,.3);color:var(--accent)}
-
-/* Modal */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:300;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-bg.show{opacity:1;pointer-events:all}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;transform:scale(.95);transition:transform .3s}
 .modal-bg.show .modal{transform:scale(1)}
 .modal h3{font-size:17px;font-weight:800;margin-bottom:4px;text-align:center}
 .modal .sub{font-size:12px;color:var(--muted);margin-bottom:20px;text-align:center}
-
-/* Screenshot preview */
 .ss-preview{max-width:200px;max-height:200px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:opacity .2s}
 .ss-preview:hover{opacity:.85}
-
-/* Overlay for mobile sidebar */
-.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:45}
-.sb-overlay.show{display:block}
-
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:45}.sb-overlay.show{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes ti{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
 @keyframes to{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(28px)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .anim{animation:fi .4s ease both}.a1{animation-delay:.05s}.a2{animation-delay:.1s}.a3{animation-delay:.15s}.a4{animation-delay:.2s}.a5{animation-delay:.25s}
-
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(max-width:1024px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
-@media(max-width:768px){
-.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}
-.sb-overlay.show{display:block}.hamburger{display:flex}
-.main{margin-left:0}.content{padding:16px}.topbar{padding:12px 16px}
-.msg-layout{grid-template-columns:1fr}.msg-list{border-right:none;border-bottom:1px solid var(--border);max-height:180px}
-.form-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr;gap:8px}
-.stat-val{font-size:22px}
-}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.sb-overlay.show{display:block}.hamburger{display:flex}.main{margin-left:0}.content{padding:16px}.topbar{padding:12px 16px}.msg-layout{grid-template-columns:1fr}.msg-list{border-right:none;border-bottom:1px solid var(--border);max-height:180px}.form-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr;gap:8px}.stat-val{font-size:22px}}
 @media(max-width:480px){.stats{grid-template-columns:1fr}.pay-head{flex-direction:column;align-items:flex-start;gap:8px}.pay-actions{flex-direction:column}}
 </style>
 </head>
 <body>
-
 <div class="sb-overlay" id="sb-overlay"></div>
-
 <aside class="sidebar" id="sidebar">
-<div class="sb-logo">
-<span>GLOW<em>UP</em></span>
-<span class="sb-badge">Admin</span>
-</div>
+<div class="sb-logo"><span>GLOW<em>UP</em></span><span class="sb-badge">Admin</span></div>
 <nav class="sb-nav" id="sb-nav"></nav>
-<div class="sb-foot">
-<i class="fa-solid fa-shield-halved" style="margin-right:3px;"></i> Admin Panel
-<span id="sb-time"></span>
-</div>
+<div class="sb-foot"><i class="fa-solid fa-shield-halved" style="margin-right:3px;"></i> Admin Panel<span id="sb-time"></span></div>
 </aside>
-
 <div class="main">
 <header class="topbar">
-<div class="tb-left">
-<button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
-<div>
-<div class="tb-title" id="tb-title">Overview</div>
-<div class="tb-sub" id="tb-sub">Dashboard analytics</div>
-</div>
-</div>
-<div class="tb-right">
-<button class="btn bo bxs" id="btn-refresh" title="Refresh data"><i class="fa-solid fa-arrows-rotate"></i></button>
-<a href="index.html" class="btn bo bxs" id="btn-site" title="Visit website" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;padding:5px 10px;border-radius:7px;border:1px solid var(--border2);background:0 0;color:var(--fg);cursor:pointer;transition:all .25s;white-space:nowrap;"><i class="fa-solid fa-globe"></i></a> <a href="index.html" class="btn bo bxs" id="btn-site" title="Visit website" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;padding:5px 10px;border-radius:7px;border:1px solid var(--border2);background:0 0;color:var(--fg);cursor:pointer;transition:all .25s;white-space:nowrap;"><i class="fa-solid fa-globe"></i></a> <a href="index.html" class="btn bo bxs" id="btn-site" title="Visit website" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;padding:5px 10px;border-radius:7px;border:1px solid var(--border2);background:0 0;color:var(--fg);cursor:pointer;transition:all .25s;white-space:nowrap;"><i class="fa-solid fa-globe"></i></a> <button class="btn bd bxs" id="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
-</div>
+<div class="tb-left"><button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button><div><div class="tb-title" id="tb-title">Overview</div><div class="tb-sub" id="tb-sub">Dashboard analytics</div></div></div>
+<div class="tb-right"><button class="btn bo bxs" id="btn-refresh" title="Refresh data"><i class="fa-solid fa-arrows-rotate"></i></button><a href="index.html" class="btn bo bxs" title="Visit website" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;padding:5px 10px;border-radius:7px;border:1px solid var(--border2);background:0 0;color:var(--fg);cursor:pointer;transition:all .25s;white-space:nowrap;"><i class="fa-solid fa-globe"></i></a><button class="btn bd bxs" id="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button></div>
 </header>
 <div class="content" id="content"></div>
 </div>
-
 <div id="tb"></div>
 <div class="modal-bg" id="modal-bg"></div>
 
 <script>
-/* ===================== CONSTANTS ===================== */
-const AE='admin@gmail.com',AP='admin123',PRICE=99;
-const LX=[0,100,250,500,800,1200,1700,2300,3000,4000];
-const gLv=xp=>{for(let i=LX.length-1;i>=0;i--)if(xp>=LX[i])return i+1;return 1};
+var AE='admin@gmail.com',AP='admin123',PRICE=99;
+var LX=[0,100,250,500,800,1200,1700,2300,3000,4000];
+function gLv(xp){for(var i=LX.length-1;i>=0;i--)if(xp>=LX[i])return i+1;return 1}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 
-/* ===================== DATA LAYER ===================== */
-const D={
-_g(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch{return null}},
-_s(k,v){localStorage.setItem('g_'+k,JSON.stringify(v))},
-gU(){return this._g('users')||[]},sU(u){this._s('users',u)},
-gM(){return this._g('msgs')||[]},sM(m){this._s('msgs',m)},
-gB(){return this._g('bcasts')||[]},sB(b){this._s('bcasts',b)},
-gO(){return this._g('orders')||[]},sO(o){this._s('orders',o)},
-gP(){return this._g('payments')||[]},sP(p){this._s('payments',p)},
-gS(){return this._g('sess')},cS(){localStorage.removeItem('g_sess')},
-fPI(id){return this.gU().find(u=>u.id===id)}
-};
+var D={};
+D._g=function(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch(e){return null}};
+D._s=function(k,v){localStorage.setItem('g_'+k,JSON.stringify(v))};
+D.gU=function(){return this._g('users')||[]};D.sU=function(u){this._s('users',u)};
+D.gM=function(){return this._g('msgs')||[]};D.sM=function(m){this._s('msgs',m)};
+D.gB=function(){return this._g('bcasts')||[]};D.sB=function(b){this._s('bcasts',b)};
+D.gO=function(){return this._g('orders')||[]};D.sO=function(o){this._s('orders',o)};
+D.gP=function(){return this._g('payments')||[]};D.sP=function(p){this._s('payments',p)};
+D.gS=function(){return this._g('sess')};D.cS=function(){localStorage.removeItem('g_sess')};
+D.fPI=function(id){var us=this.gU();for(var i=0;i<us.length;i++){if(us[i].id===id)return us[i]}return null};
 
-/* ===================== HELPERS ===================== */
-const fDT=t=>new Date(t).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-const fD=t=>new Date(t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
-const trn=(s,n)=>s.length>n?s.slice(0,n)+'...':s;
-const ini=u=>(u.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-const dA=t=>Math.max(0,Math.floor((Date.now()-t)/864e5));
+var fDT=function(t){return new Date(t).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})};
+var fD=function(t){return new Date(t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})};
+var esc=function(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML};
+var trn=function(s,n){return s.length>n?s.slice(0,n)+'...':s};
+var ini=function(u){return(u.name||'?').split(' ').map(function(w){return w[0]}).join('').toUpperCase().slice(0,2)};
+var dA=function(t){return Math.max(0,Math.floor((Date.now()-t)/864e5))};
+function cStreak(h){var s=0,d=new Date(),t=new Date().toISOString().split('T')[0];if(h&&h[t]&&Object.values(h[t]).some(function(v){return v})){s=1;d.setDate(d.getDate()-1)}else{d.setDate(d.getDate()-1)}for(var i=0;i<365;i++){var k=d.toISOString().split('T')[0];if(h&&h[k]&&Object.values(h[k]).some(function(v){return v})){s++;d.setDate(d.getDate()-1)}else{break}}return s}
 
-function toast(msg,type='i'){
-const b=document.getElementById('tb'),ic={s:'fa-check-circle',e:'fa-exclamation-circle',i:'fa-coins'};
-const el=document.createElement('div');el.className='toast t'+type;
-el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';
-b.appendChild(el);setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),300)},3500);
-}
-function openModal(html){
-const m=document.getElementById('modal-bg');m.innerHTML='<div class="modal">'+html+'</div>';m.classList.add('show');
-}
+function toast(msg,type){type=type||'i';var b=document.getElementById('tb'),ic={s:'fa-check-circle',e:'fa-exclamation-circle',i:'fa-coins'};var el=document.createElement('div');el.className='toast t'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);setTimeout(function(){el.classList.add('out');setTimeout(function(){el.remove()},300)},3500)}
+function openModal(html){var m=document.getElementById('modal-bg');m.innerHTML='<div class="modal">'+html+'</div>';m.classList.add('show')}
 function closeModal(){document.getElementById('modal-bg').classList.remove('show')}
 document.getElementById('modal-bg').addEventListener('click',function(e){if(e.target===this)closeModal()});
 
-/* ===================== AUTH ===================== */
-function checkAuth(){
-const s=D.gS();
-if(!s||s.phone!==AE){showLogin();return false}
-return true;
-}
+function checkAuth(){var s=D.gS();if(!s||s.phone!==AE){showLogin();return false}return true}
 function showLogin(){
-document.getElementById('sidebar').style.display='none';
-document.querySelector('.main').style.display='none';
-document.getElementById('sb-overlay').style.display='none';
-document.body.innerHTML=`
-<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg);">
-<div class="card anim" style="width:100%;max-width:380px;text-align:center;padding:36px;">
-<div style="margin-bottom:20px;"><span style="font-size:16px;font-weight:800;letter-spacing:2.5px;">GLOW<span style="color:var(--accent);">UP</span></span><br><span style="font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;">Admin Panel</span></div>
-<h2 style="font-size:20px;font-weight:800;margin-bottom:4px;">Sign In</h2>
-<p style="font-size:12px;color:var(--muted);margin-bottom:24px;">Enter admin credentials to continue.</p>
-<div style="text-align:left;margin-bottom:14px;"><label class="label">Email</label><input type="email" class="input" id="l-email" placeholder="admin@gmail.com" autocomplete="email"></div>
-<div style="text-align:left;margin-bottom:20px;"><label class="label">Password</label><input type="password" class="input" id="l-pass" placeholder="Password" autocomplete="current-password"></div>
-<button class="btn bp bf" id="l-btn" style="padding:13px;">Sign In</button>
-<div id="l-err" style="margin-top:12px;font-size:11px;color:var(--danger);display:none;"></div>
-</div></div>`;
-document.getElementById('l-btn').onclick=doLogin;
-document.getElementById('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
-document.getElementById('l-email').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('l-pass').focus()});
+document.getElementById('sidebar').style.display='none';document.querySelector('.main').style.display='none';document.getElementById('sb-overlay').style.display='none';
+document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg);"><div class="card anim" style="width:100%;max-width:380px;text-align:center;padding:36px;"><div style="margin-bottom:20px;"><span style="font-size:16px;font-weight:800;letter-spacing:2.5px;">GLOW<span style="color:var(--accent);">UP</span></span><br><span style="font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;">Admin Panel</span></div><h2 style="font-size:20px;font-weight:800;margin-bottom:4px;">Sign In</h2><p style="font-size:12px;color:var(--muted);margin-bottom:24px;">Enter admin credentials to continue.</p><div style="text-align:left;margin-bottom:14px;"><label class="label">Email</label><input type="email" class="input" id="l-email" placeholder="admin@gmail.com" autocomplete="email"></div><div style="text-align:left;margin-bottom:20px;"><label class="label">Password</label><input type="password" class="input" id="l-pass" placeholder="Password" autocomplete="current-password"></div><button class="btn bp bf" id="l-btn" style="padding:13px;">Sign In</button><div id="l-err" style="margin-top:12px;font-size:11px;color:var(--danger);display:none;"></div></div></div>';
+document.getElementById('l-btn').onclick=doLogin;document.getElementById('l-pass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});document.getElementById('l-email').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('l-pass').focus()});
 }
-function doLogin(){
-const em=document.getElementById('l-email').value.trim(),pw=document.getElementById('l-pass').value;
-const err=document.getElementById('l-err');
-if(em!==AE||pw!==AP){err.textContent='Invalid credentials.';err.style.display='block';return}
-D._s('sess',{phone:AE,ra:0});location.reload();
-}
+function doLogin(){var em=document.getElementById('l-email').value.trim(),pw=document.getElementById('l-pass').value,err=document.getElementById('l-err');if(em!==AE||pw!==AP){err.textContent='Invalid credentials.';err.style.display='block';return}D._s('sess',{phone:AE,ra:0});location.reload()}
 
-/* ===================== NAV ===================== */
-let tab='overview',msgSel=null,userFil='all',payFil='pending';
-const TABS=[
-{id:'overview',i:'fa-chart-pie',l:'Overview'},
-{id:'payments',i:'fa-indian-rupee-sign',l:'Payments'},
-{id:'add-user',i:'fa-user-plus',l:'Add User'},
-{id:'users',i:'fa-users',l:'All Users'},
-{id:'messages',i:'fa-envelope',l:'Messages'},
-{id:'orders',i:'fa-box',l:'Orders'},
-{id:'referrals',i:'fa-trophy',l:'Referrals'},
-{id:'broadcast',i:'fa-bullhorn',l:'Broadcast'}
-];
+var tab='overview',msgSel=null,userFil='all',payFil='pending';
+var TABS=[{id:'overview',i:'fa-chart-pie',l:'Overview'},{id:'payments',i:'fa-indian-rupee-sign',l:'Payments'},{id:'add-user',i:'fa-user-plus',l:'Add User'},{id:'users',i:'fa-users',l:'All Users'},{id:'messages',i:'fa-envelope',l:'Messages'},{id:'orders',i:'fa-box',l:'Orders'},{id:'referrals',i:'fa-trophy',l:'Referrals'},{id:'broadcast',i:'fa-bullhorn',l:'Broadcast'}];
 
 function renderNav(){
-const us=D.gU(),ms=D.gM(),ords=D.gO(),pays=D.gP();
-const pPend=pays.filter(p=>p.status==='pending').length;
-const mPend=ms.filter(m=>m.st==='pending').length;
-const counts={payments:pPend,messages:mPend,orders:ords.filter(o=>o.status==='pending').length};
-document.getElementById('sb-nav').innerHTML=TABS.map(t=>{
-const c=counts[t.id];let cnt='';
-if(c&&c>0){const cls=t.id==='payments'?'cnt-red':'cnt-warn';cnt=`<span class="cnt ${cls}">${c}</span>`}
-return`<div class="sb-link ${tab===t.id?'active':''}" data-tab="${t.id}"><i class="fa-solid ${t.i}"></i>${t.l}${cnt}</div>`
-}).join('');
-document.querySelectorAll('.sb-link').forEach(el=>el.addEventListener('click',()=>{tab=el.dataset.tab;msgSel=null;renderNav();renderContent();closeSB()}));
+var us=D.gU(),ms=D.gM(),ords=D.gO(),pays=D.gP();
+var pPend=0,mPend=0,oPend=0;for(var i=0;i<pays.length;i++){if(pays[i].status==='pending')pPend++}for(var i=0;i<ms.length;i++){if(ms[i].st==='pending')mPend++}for(var i=0;i<ords.length;i++){if(ords[i].status==='pending')oPend++}
+var counts={payments:pPend,messages:mPend,orders:oPend};
+var html='';for(var i=0;i<TABS.length;i++){var t=TABS[i];var c=counts[t.id];var cnt='';if(c&&c>0){var cls=t.id==='payments'?'cnt-red':'cnt-warn';cnt='<span class="cnt '+cls+'">'+c+'</span>'}html+='<div class="sb-link '+(tab===t.id?'active':'')+'" data-tab="'+t.id+'"><i class="fa-solid '+t.i+'"></i>'+t.l+cnt+'</div>'}
+document.getElementById('sb-nav').innerHTML=html;
+var links=document.querySelectorAll('.sb-link');for(var i=0;i<links.length;i++){(function(el){el.addEventListener('click',function(){tab=el.dataset.tab;msgSel=null;renderNav();renderContent();closeSB()})})(links[i])}
 }
 
 function renderContent(){
-const titles={overview:['Overview','Dashboard analytics'],payments:['Payment Approvals','Review & approve payment proofs'],add-user:['Add User','Create new accounts manually'],users:['All Users','Manage registered users'],messages:['Messages','User support tickets'],orders:['Orders','Product redemption orders'],referrals:['Referrals','Referral program leaderboard'],broadcast:['Broadcast','Send announcements to all users']};
-document.getElementById('tb-title').textContent=titles[tab][0];
-document.getElementById('tb-sub').textContent=titles[tab][1];
-const ct=document.getElementById('content');
-switch(tab){
-case'overview':ct.innerHTML=vOverview();drawChart();break;
-case'payments':ct.innerHTML=vPayments();break;
-case'add-user':ct.innerHTML=vAddUser();break;
-case'users':ct.innerHTML=vUsers();break;
-case'messages':ct.innerHTML=vMessages();break;
-case'orders':ct.innerHTML=vOrders();break;
-case'referrals':ct.innerHTML=vReferrals();break;
-case'broadcast':ct.innerHTML=vBroadcast();break;
-}
+var titles={overview:['Overview','Dashboard analytics'],payments:['Payment Approvals','Review & approve payment proofs'],adduser:['Add User','Create new accounts manually'],users:['All Users','Manage registered users'],messages:['Messages','User support tickets'],orders:['Orders','Product redemption orders'],referrals:['Referrals','Referral program leaderboard'],broadcast:['Broadcast','Send announcements to all users']};
+var t=titles[tab]||['',''];
+document.getElementById('tb-title').textContent=t[0];document.getElementById('tb-sub').textContent=t[1];
+var ct=document.getElementById('content');
+switch(tab){case'overview':ct.innerHTML=vOverview();drawChart();break;case'payments':ct.innerHTML=vPayments();break;case'adduser':ct.innerHTML=vAddUser();break;case'users':ct.innerHTML=vUsers();break;case'messages':ct.innerHTML=vMessages();break;case'orders':ct.innerHTML=vOrders();break;case'referrals':ct.innerHTML=vReferrals();break;case'broadcast':ct.innerHTML=vBroadcast();break}
 bindContent();
 }
 
-/* ===================== OVERVIEW ===================== */
 function vOverview(){
-const us=D.gU(),ms=D.gM(),ords=D.gO(),pays=D.gP();
-const tRef=us.reduce((s,u)=>s+(u.refC||0),0);
-const tCoins=us.reduce((s,u)=>s+(u.coins||0),0);
-const approved=pays.filter(p=>p.status==='approved').length;
-const rev=approved*PRICE;
-const pPend=pays.filter(p=>p.status==='pending').length;
-return`
-<div class="stats">
-<div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-val">${us.length}</div><div class="stat-lbl">Total Users</div><div class="stat-sub">+${us.filter(u=>dA(u.createdAt)<7).length} this week</div></div>
-<div class="card stat stat-green anim a1"><div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-val">₹${rev.toLocaleString()}</div><div class="stat-lbl">Revenue</div><div class="stat-sub">${approved} approved payments</div></div>
-<div class="card stat stat-red anim a2"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-val">${pPend}</div><div class="stat-lbl">Pending Payments</div><div class="stat-sub">${pays.length} total requests</div></div>
-<div class="card stat stat-blue anim a3"><div class="stat-icon"><i class="fa-solid fa-user-group"></i></div><div class="stat-val">${tRef}</div><div class="stat-lbl">Total Referrals</div><div class="stat-sub">${tRef*20} coins distributed</div></div>
-</div>
-<div class="chart-wrap anim a2"><h3><i class="fa-solid fa-chart-bar"></i> User Signups (Last 7 Days)</h3><canvas id="chart"></canvas></div>
-<div class="grid-2">
-<div class="card gc anim a3"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-clock"></i> Pending Payments</div></div>
- ${pPend?pays.filter(p=>p.status==='pending').slice(0,5).map(p=>{const u=D.fPI(p.userId);return`<div class="u-row"><div class="u-av">${u?ini(u):'?'}</div><div class="u-info"><div class="u-name">${esc(u?u.name:'Unknown')}</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>${u?u.phone:'?'}</span><span><i class="fa-solid fa-clock"></i>${fDT(p.ts)}</span></div></div><div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--accent);">₹${p.amount||PRICE}</div><button class="btn bp bxs mt-8" data-action="quick-approve" data-id="${p.id}">Approve</button></div></div>`}).join(''):'<div class="empty-state"><i class="fa-solid fa-check-circle"></i><p>All caught up! No pending payments.</p></div>'}
-</div>
-<div class="card gc anim a4"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-envelope"></i> Recent Messages</div></div>
- ${ms.length?ms.slice(0,5).map(m=>{const u=D.fPI(m.userId);return`<div class="u-row" style="cursor:pointer;" data-action="go-msg" data-id="${m.id}"><div class="u-av">${u?ini(u):'?'}</div><div class="u-info"><div class="u-name">${esc(u?u.name:'Unknown')}</div><div class="u-meta"><span style="color:var(--muted);">${esc(trn(m.message,35))}</span></div></div><span class="badge b-${m.st}" style="flex-shrink:0;">${m.st}</span></div>`}).join(''):'<div class="empty-state"><i class="fa-solid fa-envelope"></i><p>No messages yet.</p></div>'}
-</div>
-</div>
-<div class="grid-2">
-<div class="card gc anim a4"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-box"></i> Recent Orders</div></div>
- ${ords.length?ords.slice(0,4).map(o=>{const u=D.fPI(o.userId);return`<div class="u-row"><div style="width:36px;height:36px;border-radius:8px;background:var(--abg);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--accent);flex-shrink:0;"><i class="fa-solid fa-box"></i></div><div class="u-info"><div class="u-name">${esc(o.itemName)}</div><div class="u-meta"><span>${esc(u?u.name:'?')}</span><span>${fDT(o.ts)}</span></div></div><span class="badge b-${o.status}" style="flex-shrink:0;">${o.status}</span></div>`}).join(''):'<div class="empty-state"><i class="fa-solid fa-box-open"></i><p>No orders yet.</p></div>'}
-</div>
-<div class="card gc anim a5"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-coins"></i> Quick Stats</div></div>
-<div style="display:grid;gap:10px;">
-<div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Total Coins in Circulation</span><span style="font-size:13px;font-weight:700;color:var(--accent);">${tCoins}</span></div>
-<div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Product Orders</span><span style="font-size:13px;font-weight:700;">${ords.length}</span></div>
-<div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Pending Support Tickets</span><span style="font-size:13px;font-weight:700;color:var(--warn);">${ms.filter(m=>m.st==='pending').length}</span></div>
-<div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Avg. User Level</span><span style="font-size:13px;font-weight:700;color:var(--accent);">${us.length?Math.round(us.reduce((s,u)=>s+gLv(u.xp||0),0)/us.length*10)/10:'-'}</span></div>
-<div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Active Referrers</span><span style="font-size:13px;font-weight:700;">${us.filter(u=>(u.refC||0)>0).length}</span></div>
-</div></div>
-</div>`
+var us=D.gU(),ms=D.gM(),ords=D.gO(),pays=D.gP();
+var tRef=0,tCoins=0,approved=0,rev=0,pPend=0,weekNew=0;
+for(var i=0;i<us.length;i++){tRef+=(us[i].refC||0);tCoins+=(us[i].coins||0);if(dA(us[i].createdAt)<7)weekNew++}
+for(var i=0;i<pays.length;i++){if(pays[i].status==='approved')approved++;if(pays[i].status==='pending')pPend++}
+rev=approved*PRICE;
+var pendPayHtml='',recentMsgHtml='';
+var pendPays=[];for(var i=0;i<pays.length;i++){if(pays[i].status==='pending')pendPays.push(pays[i])}
+if(pendPays.length>0){for(var i=0;i<Math.min(5,pendPays.length);i++){var p=pendPays[i],u=D.fPI(p.userId);pendPayHtml+='<div class="u-row"><div class="u-av">'+(u?ini(u):'?')+'</div><div class="u-info"><div class="u-name">'+esc(u?u.name:'Unknown')+'</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>'+(u?u.phone:'?')+'</span><span><i class="fa-solid fa-clock"></i>'+fDT(p.ts)+'</span></div></div><div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--accent);">₹'+(p.amount||PRICE)+'</div><button class="btn bp bxs" style="margin-top:6px;" data-action="quick-approve" data-id="'+p.id+'">Approve</button></div></div>'}}
+else{pendPayHtml='<div class="empty-state"><i class="fa-solid fa-check-circle"></i><p>All caught up!</p></div>'}
+if(ms.length>0){for(var i=0;i<Math.min(5,ms.length);i++){var m=ms[i],u=D.fPI(m.userId);recentMsgHtml+='<div class="u-row" style="cursor:pointer;" data-action="go-msg" data-id="'+m.id+'"><div class="u-av">'+(u?ini(u):'?')+'</div><div class="u-info"><div class="u-name">'+esc(u?u.name:'Unknown')+'</div><div class="u-meta"><span style="color:var(--muted);">'+esc(trn(m.message,35))+'</span></div></div><span class="badge b-'+m.st+'" style="flex-shrink:0;">'+m.st+'</span></div>'}}
+else{recentMsgHtml='<div class="empty-state"><i class="fa-solid fa-envelope"></i><p>No messages.</p></div>'}
+var ordHtml='';if(ords.length>0){for(var i=0;i<Math.min(4,ords.length);i++){var o=ords[i],u=D.fPI(o.userId);ordHtml+='<div class="u-row"><div style="width:36px;height:36px;border-radius:8px;background:var(--abg);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--accent);flex-shrink:0;"><i class="fa-solid fa-box"></i></div><div class="u-info"><div class="u-name">'+esc(o.itemName)+'</div><div class="u-meta"><span>'+esc(u?u.name:'?')+'</span><span>'+fDT(o.ts)+'</span></div></div><span class="badge b-'+o.status+'" style="flex-shrink:0;">'+o.status+'</span></div>'}}
+else{ordHtml='<div class="empty-state"><i class="fa-solid fa-box-open"></i><p>No orders.</p></div>'}
+var pendMs=0;for(var i=0;i<ms.length;i++){if(ms[i].st==='pending')pendMs++}
+var activeRef=0;for(var i=0;i<us.length;i++){if((us[i].refC||0)>0)activeRef++}
+var avgLv=0;if(us.length>0){var sum=0;for(var i=0;i<us.length;i++)sum+=gLv(us[i].xp||0);avgLv=Math.round(sum/us.length*10)/10}
+
+return '<div class="stats"><div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-val">'+us.length+'</div><div class="stat-lbl">Total Users</div><div class="stat-sub">+'+weekNew+' this week</div></div><div class="card stat stat-green anim a1"><div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-val">₹'+rev.toLocaleString()+'</div><div class="stat-lbl">Revenue</div><div class="stat-sub">'+approved+' approved</div></div><div class="card stat stat-red anim a2"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-val">'+pPend+'</div><div class="stat-lbl">Pending</div><div class="stat-sub">'+pays.length+' total</div></div><div class="card stat stat-blue anim a3"><div class="stat-icon"><i class="fa-solid fa-user-group"></i></div><div class="stat-val">'+tRef+'</div><div class="stat-lbl">Referrals</div><div class="stat-sub">'+tRef*20+' coins dist.</div></div></div><div class="chart-wrap anim a2"><h3><i class="fa-solid fa-chart-bar"></i> User Signups (Last 7 Days)</h3><canvas id="chart"></canvas></div><div class="grid-2"><div class="card gc anim a3"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-clock"></i> Pending Payments</div></div>'+pendPayHtml+'</div><div class="card gc anim a4"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-envelope"></i> Recent Messages</div></div>'+recentMsgHtml+'</div></div><div class="grid-2"><div class="card gc anim a4"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-box"></i> Recent Orders</div></div>'+ordHtml+'</div><div class="card gc anim a5"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-coins"></i> Quick Stats</div></div><div style="display:grid;gap:10px;"><div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Coins in Circulation</span><span style="font-size:13px;font-weight:700;color:var(--accent);">'+tCoins+'</span></div><div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Product Orders</span><span style="font-size:13px;font-weight:700;">'+ords.length+'</span></div><div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Pending Tickets</span><span style="font-size:13px;font-weight:700;color:var(--warn);">'+pendMs+'</span></div><div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Avg User Level</span><span style="font-size:13px;font-weight:700;color:var(--accent);">'+(us.length?avgLv:'-')+'</span></div><div style="display:flex;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border-radius:8px;"><span style="font-size:12px;color:var(--muted);">Active Referrers</span><span style="font-size:13px;font-weight:700;">'+activeRef+'</span></div></div></div></div>'
 }
 
-function drawChart(){
-const c=document.getElementById('chart');if(!c)return;
-const ctx=c.getContext('2d'),us=D.gU();
-const dpr=devicePixelRatio||1,r=c.getBoundingClientRect();
-c.width=r.width*dpr;c.height=r.height*dpr;ctx.scale(dpr,dpr);
-const w=r.width,h=r.height,days=[];
-for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0];days.push({l:d.toLocaleDateString('en-US',{weekday:'short'}),c:us.filter(u=>u.createdAt&&new Date(u.createdAt).toISOString().split('T')[0]===k).length})}
-const mx=Math.max(...days.map(d=>d.c),1),pd={t:8,r:8,b:22,l:28},cw=w-pd.l-pd.r,ch=h-pd.t-pd.b,gap=cw/days.length,bw=Math.max(1,gap*.45);
-ctx.clearRect(0,0,w,h);
-days.forEach((d,i)=>{const x=pd.l+gap*i+(gap-bw)/2,bh=Math.max(0,(d.c/mx)*ch),y=pd.t+ch-bh;
-const g=ctx.createLinearGradient(x,y,x,y+bh);g.addColorStop(0,'#c9a84c');g.addColorStop(1,'rgba(201,168,76,.2)');ctx.fillStyle=g;
-ctx.beginPath();const rr=Math.min(4,bw/2);ctx.moveTo(x+rr,y);ctx.lineTo(x+bw-rr,y);ctx.quadraticCurveTo(x+bw,y,x+bw,y+rr);ctx.lineTo(x+bw,y+bh);ctx.lineTo(x,y+bh);ctx.lineTo(x,y+rr);ctx.quadraticCurveTo(x,y,x+rr,y);ctx.fill();
-ctx.fillStyle='#444';ctx.font='500 9px Poppins';ctx.textAlign='center';ctx.fillText(d.l,x+bw/2,h-3);
-if(d.c>0){ctx.fillStyle='#c9a84c';ctx.font='700 10px Poppins';ctx.fillText(d.c,x+bw/2,y-5)}});
-}
+function drawChart(){var c=document.getElementById('chart');if(!c)return;var ctx=c.getContext('2d'),us=D.gU();var dpr=devicePixelRatio||1,r=c.getBoundingClientRect();c.width=r.width*dpr;c.height=r.height*dpr;ctx.scale(dpr,dpr);var w=r.width,h=r.height,days=[];for(var i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);var k=d.toISOString().split('T')[0];var cnt=0;for(var j=0;j<us.length;j++){if(us[j].createdAt&&new Date(us[j].createdAt).toISOString().split('T')[0]===k)cnt++}days.push({l:d.toLocaleDateString('en-US',{weekday:'short'}),c:cnt})}var mx=1;for(var i=0;i<days.length;i++){if(days[i].c>mx)mx=days[i].c}var pd={t:8,r:8,b:22,l:28},cw=w-pd.l-pd.r,ch=h-pd.t-pd.b,gap=cw/days.length,bw=Math.max(1,gap*.45);ctx.clearRect(0,0,w,h);for(var i=0;i<days.length;i++){var d=days[i],x=pd.l+gap*i+(gap-bw)/2,bh=Math.max(0,(d.c/mx)*ch),y=pd.t+ch-bh;var g=ctx.createLinearGradient(x,y,x,y+bh);g.addColorStop(0,'#c9a84c');g.addColorStop(1,'rgba(201,168,76,.2)');ctx.fillStyle=g;ctx.beginPath();var rr=Math.min(4,bw/2);ctx.moveTo(x+rr,y);ctx.lineTo(x+bw-rr,y);ctx.quadraticCurveTo(x+bw,y,x+bw,y+rr);ctx.lineTo(x+bw,y+bh);ctx.lineTo(x,y+bh);ctx.lineTo(x,y+rr);ctx.quadraticCurveTo(x,y,x+rr,y);ctx.fill();ctx.fillStyle='#444';ctx.font='500 9px Poppins';ctx.textAlign='center';ctx.fillText(d.l,x+bw/2,h-3);if(d.c>0){ctx.fillStyle='#c9a84c';ctx.font='700 10px Poppins';ctx.fillText(d.c,x+bw/2,y-5)}}}
 
-/* ===================== PAYMENTS ===================== */
-function vPayments(){
-const pays=D.gP().sort((a,b)=>b.ts-a.ts);
-const filtered=payFil==='all'?pays:pays.filter(p=>p.status===payFil);
-const pPend=pays.filter(p=>p.status==='pending').length;
-const pApproved=pays.filter(p=>p.status==='approved').length;
-const pRejected=pays.filter(p=>p.status==='rejected').length;
-return`
-<div class="stats" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
-<div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-receipt"></i></div><div class="stat-val">${pays.length}</div><div class="stat-lbl">Total Requests</div></div>
-<div class="card stat stat-red anim a1"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-val">${pPend}</div><div class="stat-lbl">Pending</div></div>
-<div class="card stat stat-green anim a2"><div class="stat-icon"><i class="fa-solid fa-check"></i></div><div class="stat-val">${pApproved}</div><div class="stat-lbl">Approved</div></div>
-<div class="card stat stat-blue anim a3"><div class="stat-icon"><i class="fa-solid fa-xmark"></i></div><div class="stat-val">${pRejected}</div><div class="stat-lbl">Rejected</div></div>
-</div>
-<div class="filters anim a2">
-<button class="fbtn ${payFil==='pending'?'active':''}" data-filter="pending">Pending (${pPend})</button>
-<button class="fbtn ${payFil==='approved'?'active':''}" data-filter="approved">Approved (${pApproved})</button>
-<button class="fbtn ${payFil==='rejected'?'active':''}" data-filter="rejected">Rejected (${pRejected})</button>
-<button class="fbtn ${payFil==='all'?'active':''}" data-filter="all">All (${pays.length})</button>
-</div>
-<div class="grid-1 anim a3">
- ${filtered.length?filtered.map(p=>{const u=D.fPI(p.userId);
-const exists=u?'yes':'no';
-return`<div class="pay-card">
-<div class="pay-head">
-<div class="pay-user"><div class="u-av">${u?ini(u):'?'}</div><div class="pay-details"><div class="pay-name">${esc(u?u.name:'Unknown User')}</div><div class="pay-phone">${esc(p.phone||'No phone')}</div><div class="pay-time">${fDT(p.ts)}</div></div></div>
-<div style="text-align:right;"><div class="pay-amount">₹${p.amount||PRICE}</div><span class="badge b-${p.status}" style="margin-top:4px;">${p.status}</span>${!u?'<div style="font-size:9px;color:var(--warn);margin-top:3px;">Account not created</div>':''}</div>
-</div>
-<div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
- ${p.screenshot?`<div><div style="font-size:10px;color:var(--dim);margin-bottom:6px;font-weight:600;">Payment Proof</div><img src="${p.screenshot}" class="ss-preview" data-action="view-ss" data-src="${p.screenshot}" alt="Payment screenshot"></div>`:'<div style="font-size:11px;color:var(--dim);padding:20px;background:rgba(255,255,255,.02);border-radius:8px;">No screenshot uploaded</div>'}
-<div style="flex:1;min-width:200px;">
-<div style="font-size:10px;color:var(--dim);margin-bottom:4px;font-weight:600;">Transaction ID / UTR</div>
-<div style="font-size:12px;color:#bbb;padding:6px 10px;background:rgba(255,255,255,.02);border-radius:6px;font-family:monospace;">${esc(p.utr||'Not provided')}</div>
- ${p.note?`<div style="font-size:10px;color:var(--dim);margin-top:8px;font-weight:600;">Note</div><div style="font-size:11px;color:#aaa;">${esc(p.note)}</div>`:''}
-</div></div>
- ${p.status==='pending'?`<div class="pay-actions">
- ${!u?`<button class="btn bw bsm" data-action="approve-create" data-id="${p.id}"><i class="fa-solid fa-user-plus"></i> Approve & Create Account</button>`:`<button class="btn bs bsm" data-action="approve-pay" data-id="${p.id}"><i class="fa-solid fa-check"></i> Approve</button>`}
-<button class="btn bd bsm" data-action="reject-pay" data-id="${p.id}"><i class="fa-solid fa-xmark"></i> Reject</button>
-</div>`:''}
-</div>`}).join(''):'<div class="empty-state" style="padding:60px 20px;"><i class="fa-solid fa-receipt"></i><p>No payment requests found.</p></div>'}
-</div>`
-}
+function vPayments(){var pays=D.gP().sort(function(a,b){return b.ts-a.ts});var filtered=[];for(var i=0;i<pays.length;i++){if(payFil==='all'||pays[i].status===payFil)filtered.push(pays[i])}var pPend=0,pApp=0,pRej=0;for(var i=0;i<pays.length;i++){if(pays[i].status==='pending')pPend++;else if(pays[i].status==='approved')pApp++;else if(pays[i].status==='rejected')pRej++}
+var html='<div class="stats" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;"><div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-receipt"></i></div><div class="stat-val">'+pays.length+'</div><div class="stat-lbl">Total</div></div><div class="card stat stat-red anim a1"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-val">'+pPend+'</div><div class="stat-lbl">Pending</div></div><div class="card stat stat-green anim a2"><div class="stat-icon"><i class="fa-solid fa-check"></i></div><div class="stat-val">'+pApp+'</div><div class="stat-lbl">Approved</div></div><div class="card stat stat-blue anim a3"><div class="stat-icon"><i class="fa-solid fa-xmark"></i></div><div class="stat-val">'+pRej+'</div><div class="stat-lbl">Rejected</div></div></div><div class="filters anim a2"><button class="fbtn '+(payFil==='pending'?'active':'')+'" data-filter="pending">Pending ('+pPend+')</button><button class="fbtn '+(payFil==='approved'?'active':'')+'" data-filter="approved">Approved ('+pApp+')</button><button class="fbtn '+(payFil==='rejected'?'active':'')+'" data-filter="rejected">Rejected ('+pRej+')</button><button class="fbtn '+(payFil==='all'?'active':'')+'" data-filter="all">All ('+pays.length+')</button></div><div class="grid-1 anim a3">';
+if(filtered.length>0){for(var i=0;i<filtered.length;i++){var p=filtered[i],u=D.fPI(p.userId);var exists=u?'yes':'no';html+='<div class="pay-card"><div class="pay-head"><div class="pay-user"><div class="u-av">'+(u?ini(u):'?')+'</div><div class="pay-details"><div class="pay-name">'+esc(u?u.name:'Unknown User')+'</div><div class="pay-phone">'+esc(p.phone||'No phone')+'</div><div class="pay-time">'+fDT(p.ts)+'</div></div></div><div style="text-align:right;"><div class="pay-amount">₹'+(p.amount||PRICE)+'</div><span class="badge b-'+p.status+'" style="margin-top:4px;">'+p.status+'</span>'+(!u?'<div style="font-size:9px;color:var(--warn);margin-top:3px;">No account</div>':'')+'</div></div><div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">'+(p.screenshot?'<div><div style="font-size:10px;color:var(--dim);margin-bottom:6px;font-weight:600;">Proof</div><img src="'+p.screenshot+'" class="ss-preview" data-action="view-ss" data-src="'+p.screenshot+'" alt="Screenshot"></div>':'<div style="font-size:11px;color:var(--dim);padding:20px;background:rgba(255,255,255,.02);border-radius:8px;">No screenshot</div>')+'<div style="flex:1;min-width:200px;"><div style="font-size:10px;color:var(--dim);margin-bottom:4px;font-weight:600;">UTR</div><div style="font-size:12px;color:#bbb;padding:6px 10px;background:rgba(255,255,255,.02);border-radius:6px;font-family:monospace;">'+esc(p.utr||'Not provided')+'</div>'+(p.note?'<div style="font-size:10px;color:var(--dim);margin-top:8px;font-weight:600;">Note</div><div style="font-size:11px;color:#aaa;">'+esc(p.note)+'</div>':'')+'</div></div>'+(p.status==='pending'?'<div class="pay-actions">'+(!u?'<button class="btn bw bsm" data-action="approve-create" data-id="'+p.id+'"><i class="fa-solid fa-user-plus"></i> Approve & Create</button>':'<button class="btn bs bsm" data-action="approve-pay" data-id="'+p.id+'"><i class="fa-solid fa-check"></i> Approve</button>')+'<button class="btn bd bsm" data-action="reject-pay" data-id="'+p.id+'"><i class="fa-solid fa-xmark"></i> Reject</button></div>':'')+'</div>'}}
+else{html+='<div class="empty-state" style="padding:60px 20px;"><i class="fa-solid fa-receipt"></i><p>No payment requests.</p></div>'}
+html+='</div>';return html}
 
-/* ===================== ADD USER ===================== */
-function vAddUser(){
-return`<div class="grid-2">
-<div class="card gc anim">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-user-plus"></i> Create Account</div></div>
-<p style="font-size:12px;color:var(--muted);margin-bottom:20px;">After a user pays, create their account here. Send them their phone number and password via WhatsApp.</p>
-<div class="form-grid">
-<div class="form-full"><label class="label">Full Name</label><input type="text" class="input" id="au-name" placeholder="e.g. Arjun Sharma"></div>
-<div><label class="label">Phone Number</label><input type="tel" class="input" id="au-phone" placeholder="+91 98765 43210"></div>
-<div><label class="label">Password</label><input type="text" class="input" id="au-pass" placeholder="Set a password"></div>
-<div class="form-full"><button class="btn bp bf" data-action="add-user"><i class="fa-solid fa-plus"></i> Create Account</button></div>
-</div>
-<div class="div"></div>
-<div style="font-size:11px;color:var(--dim);line-height:1.7;">
-<strong style="color:var(--muted);">Instructions:</strong><br>
-1. User pays ₹${PRICE} via WhatsApp QR<br>
-2. You verify the payment screenshot<br>
-3. Fill in their name, phone, and set a password<br>
-4. Click Create Account<br>
-5. Send the credentials to the user on WhatsApp<br>
-6. User signs in at the login page
-</div>
-</div>
-<div class="card gc anim a2">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-clock-rotate-left"></i> Recently Added</div></div>
- ${(()=>{
-const us=D.gU().slice(-8).reverse();
-return us.length?us.map(u=>`<div class="u-row"><div class="u-av">${ini(u)}</div><div class="u-info"><div class="u-name">${esc(u.name)}</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>${esc(u.phone)}</span><span><i class="fa-solid fa-calendar"></i>${fD(u.createdAt)}</span></div></div><div style="text-align:right;"><div style="font-size:10px;color:var(--dim);">Lvl ${gLv(u.xp||0)}</div><button class="btn bd bxs mt-8" data-action="del-user" data-id="${u.id}" title="Delete"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''):'<div class="empty-state"><i class="fa-solid fa-user-slash"></i><p>No users yet.</p></div>'
-})()}
-</div></div>`
-}
+function vAddUser(){var us=D.gU().slice(-8).reverse();var html='<div class="grid-2"><div class="card gc anim"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-user-plus"></i> Create Account</div></div><p style="font-size:12px;color:var(--muted);margin-bottom:20px;">Create accounts for users who paid.</p><div class="form-grid"><div class="form-full"><label class="label">Full Name</label><input type="text" class="input" id="au-name" placeholder="e.g. Arjun Sharma"></div><div><label class="label">Phone Number</label><input type="tel" class="input" id="au-phone" placeholder="+91 98765 43210"></div><div><label class="label">Password</label><input type="text" class="input" id="au-pass" placeholder="Set a password"></div><div class="form-full"><button class="btn bp bf" data-action="add-user"><i class="fa-solid fa-plus"></i> Create Account</button></div></div><div class="div"></div><div style="font-size:11px;color:var(--dim);line-height:1.7;"><strong style="color:var(--muted);">Steps:</strong><br>1. User pays ₹'+PRICE+' via QR<br>2. Verify screenshot<br>3. Fill name, phone, password<br>4. Click Create<br>5. Send credentials via WhatsApp</div></div><div class="card gc anim a2"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-clock-rotate-left"></i> Recently Added</div></div>';
+if(us.length>0){for(var i=0;i<us.length;i++){var u=us[i];html+='<div class="u-row"><div class="u-av">'+ini(u)+'</div><div class="u-info"><div class="u-name">'+esc(u.name)+'</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>'+esc(u.phone)+'</span><span><i class="fa-solid fa-calendar"></i>'+fD(u.createdAt)+'</span></div></div><div style="text-align:right;"><div style="font-size:10px;color:var(--dim);">Lvl '+gLv(u.xp||0)+'</div><button class="btn bd bxs" style="margin-top:6px;" data-action="del-user" data-id="'+u.id+'" title="Delete"><i class="fa-solid fa-trash"></i></button></div></div>'}}
+else{html+='<div class="empty-state"><i class="fa-solid fa-user-slash"></i><p>No users.</p></div>'}
+html+='</div></div>';return html}
 
-/* ===================== ALL USERS ===================== */
-function vUsers(){
-const us=D.gU().sort((a,b)=>b.createdAt-a.createdAt);
-const levels=[...new Set(us.map(u=>gLv(u.xp||0)))].sort((a,b)=>a-b);
-return`
-<div class="filters anim"><span style="font-size:11px;color:var(--dim);margin-right:4px;">Filter:</span>
-<button class="fbtn ${userFil==='all'?'active':''}" data-ufil="all">All (${us.length})</button>
- ${levels.map(l=>`<button class="fbtn ${userFil==='lvl'+l?'active':''}" data-ufil="lvl${l}">Level ${l} (${us.filter(u=>gLv(u.xp||0)===l).length})</button>`).join('')}
-</div>
-<div class="card gc anim a1">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-users"></i> ${us.length} Registered Users</div></div>
- ${(()=>{
-let fil=us;if(userFil!=='all'){const lv=parseInt(userFil.replace('lvl',''));fil=us.filter(u=>gLv(u.xp||0)===lv)}
-return fil.length?fil.map(u=>{
-const lv=gLv(u.xp||0),streak=cStreak(u.habits||{}),days=dA(u.createdAt);
-return`<div class="u-row"><div class="u-av">${ini(u)}</div><div class="u-info"><div class="u-name">${esc(u.name)}</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>${esc(u.phone)}</span><span><i class="fa-solid fa-layer-group"></i>Lvl ${lv}</span><span><i class="fa-solid fa-coins"></i>${u.coins||0}</span><span><i class="fa-solid fa-fire"></i>${streak}d</span><span><i class="fa-solid fa-calendar"></i>${days}d ago</span><span><i class="fa-solid fa-user-plus"></i>${u.refC||0} ref</span></div></div>
-<div class="u-acts"><button class="btn bo bxs" data-action="view-user" data-id="${u.id}" title="View details"><i class="fa-solid fa-eye"></i></button><button class="btn bd bxs" data-action="del-user" data-id="${u.id}" title="Delete"><i class="fa-solid fa-trash"></i></button></div></div>`}).join(''):'<div class="empty-state"><i class="fa-solid fa-user-slash"></i><p>No users match this filter.</p></div>'
-})()}
-</div>`
-}
-function cStreak(h){let s=0,d=new Date(),t=new Date().toISOString().split('T')[0];if(h[t]&&Object.values(h[t]).some(v=>v)){s=1;d.setDate(d.getDate()-1)}else d.setDate(d.getDate()-1);for(let i=0;i<365;i++){const k=d.toISOString().split('T')[0];if(h[k]&&Object.values(h[k]).some(v=>v)){s++;d.setDate(d.getDate()-1)}else break}return s}
+function vUsers(){var us=D.gU().sort(function(a,b){return b.createdAt-a.createdAt});var levels={};for(var i=0;i<us.length;i++){var l=gLv(us[i].xp||0);levels[l]=true}var levelKeys=Object.keys(levels).sort(function(a,b){return a-b});var html='<div class="filters anim"><span style="font-size:11px;color:var(--dim);margin-right:4px;">Filter:</span><button class="fbtn '+(userFil==='all'?'active':'')+'" data-ufil="all">All ('+us.length+')</button>';for(var i=0;i<levelKeys.length;i++){var l=levelKeys[i],cnt=0;for(var j=0;j<us.length;j++){if(gLv(us[j].xp||0)==l)cnt++}html+='<button class="fbtn '+(userFil==='lvl'+l?'active':'')+'" data-ufil="lvl'+l+'">Level '+l+' ('+cnt+')</button>'}html+='</div><div class="card gc anim a1"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-users"></i> '+us.length+' Users</div></div>';var fil=us;if(userFil!=='all'){var lv=parseInt(userFil.replace('lvl',''));fil=[];for(var i=0;i<us.length;i++){if(gLv(us[i].xp||0)===lv)fil.push(us[i])}}if(fil.length>0){for(var i=0;i<fil.length;i++){var u=fil[i],lv=gLv(u.xp||0),streak=cStreak(u.habits||{}),days=dA(u.createdAt);html+='<div class="u-row"><div class="u-av">'+ini(u)+'</div><div class="u-info"><div class="u-name">'+esc(u.name)+'</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>'+esc(u.phone)+'</span><span><i class="fa-solid fa-layer-group"></i>Lvl '+lv+'</span><span><i class="fa-solid fa-coins"></i>'+(u.coins||0)+'</span><span><i class="fa-solid fa-fire"></i>'+streak+'d</span><span><i class="fa-solid fa-calendar"></i>'+days+'d</span><span><i class="fa-solid fa-user-plus"></i>'+(u.refC||0)+' ref</span></div></div><div class="u-acts"><button class="btn bo bxs" data-action="view-user" data-id="'+u.id+'" title="View"><i class="fa-solid fa-eye"></i></button><button class="btn bd bxs" data-action="del-user" data-id="'+u.id+'" title="Delete"><i class="fa-solid fa-trash"></i></button></div></div>'}}else{html+='<div class="empty-state"><i class="fa-solid fa-user-slash"></i><p>No match.</p></div>'}html+='</div>';return html}
 
-/* ===================== MESSAGES ===================== */
-function vMessages(){
-const ms=D.gM().sort((a,b)=>b.ts-a.ts);
-const sel=ms.find(m=>m.id===msgSel);
-return`<div class="msg-layout card anim" style="padding:0;">
-<div class="msg-list">
- ${ms.length?ms.map(m=>{const u=D.fPI(m.userId);return`<div class="msg-item ${msgSel===m.id?'active':''}" data-action="sel-msg" data-id="${m.id}">
-<div class="msg-item-name">${esc(u?u.name:'Unknown')}</div>
-<div class="msg-item-preview">${esc(trn(m.message,38))}</div>
-<div class="msg-item-meta"><span class="msg-item-time">${fDT(m.ts)}</span><span class="badge b-${m.st}">${m.st}</span></div></div>`}).join(''):'<div class="empty-state" style="padding:36px 16px;"><i class="fa-solid fa-envelope"></i><p>No messages.</p></div>'}
-</div>
-<div class="msg-detail">
- ${sel?`<div class="msg-detail-header">
-<div style="font-size:14px;font-weight:700;">${esc((D.fPI(sel.userId)||{}).name||'Unknown')}</div>
-<div style="font-size:11px;color:var(--dim);margin-top:2px;">${(D.fPI(sel.userId)||{}).phone||''} &middot; ${fDT(sel.ts)}</div>
-<div style="margin-top:6px;display:flex;gap:6px;"><span class="badge b-${sel.st}">${sel.st}</span></div>
-</div>
-<div class="msg-detail-body">
-<div class="msg-bubble msg-user"><strong style="font-size:9px;color:var(--accent);display:block;margin-bottom:3px;">USER</strong>${esc(sel.message)}</div>
- ${sel.reply?`<div style="margin-top:14px;"><div style="font-size:9px;font-weight:700;color:var(--success);margin-bottom:4px;letter-spacing:.3px;">YOUR REPLY</div><div class="msg-bubble msg-admin">${esc(sel.reply)}</div></div>`:''}
-</div>
- ${sel.st!=='resolved'?`<div class="msg-detail-footer"><textarea class="input" id="msg-reply" placeholder="Type your reply..." style="min-height:48px;"></textarea><div class="msg-detail-actions"><button class="btn bp bsm" data-action="reply-msg" data-id="${sel.id}"><i class="fa-solid fa-reply"></i> Reply</button><button class="btn bs bsm" data-action="resolve-msg" data-id="${sel.id}"><i class="fa-solid fa-check-double"></i> Resolve</button></div></div>`:`<div class="msg-detail-footer" style="text-align:center;"><span class="badge b-resolved" style="font-size:10px;padding:5px 14px;"><i class="fa-solid fa-check" style="margin-right:4px;"></i>Resolved</span></div>`}`:`<div class="empty-state"><i class="fa-solid fa-envelope-open"></i><p>Select a message to view.</p></div>`}
-</div></div>`
-}
+function vMessages(){var ms=D.gM().sort(function(a,b){return b.ts-a.ts});var sel=null;for(var i=0;i<ms.length;i++){if(ms[i].id===msgSel){sel=ms[i];break}}var html='<div class="msg-layout card anim" style="padding:0;"><div class="msg-list">';if(ms.length>0){for(var i=0;i<ms.length;i++){var m=ms[i],u=D.fPI(m.userId);html+='<div class="msg-item '+(msgSel===m.id?'active':'')+'" data-action="sel-msg" data-id="'+m.id+'"><div class="msg-item-name">'+esc(u?u.name:'Unknown')+'</div><div class="msg-item-preview">'+esc(trn(m.message,38))+'</div><div class="msg-item-meta"><span class="msg-item-time">'+fDT(m.ts)+'</span><span class="badge b-'+m.st+'">'+m.st+'</span></div></div>'}}else{html+='<div class="empty-state" style="padding:36px 16px;"><i class="fa-solid fa-envelope"></i><p>No messages.</p></div>'}html+='</div><div class="msg-detail">';if(sel){var su=D.fPI(sel.userId);html+='<div class="msg-detail-header"><div style="font-size:14px;font-weight:700;">'+esc(su?su.name:'Unknown')+'</div><div style="font-size:11px;color:var(--dim);margin-top:2px;">'+(su?su.phone:'')+' &middot; '+fDT(sel.ts)+'</div><div style="margin-top:6px;"><span class="badge b-'+sel.st+'">'+sel.st+'</span></div></div><div class="msg-detail-body"><div class="msg-bubble msg-user"><strong style="font-size:9px;color:var(--accent);display:block;margin-bottom:3px;">USER</strong>'+esc(sel.message)+'</div>';if(sel.reply){html+='<div style="margin-top:14px;"><div style="font-size:9px;font-weight:700;color:var(--success);margin-bottom:4px;">YOUR REPLY</div><div class="msg-bubble msg-admin">'+esc(sel.reply)+'</div></div>'}html+='</div>';if(sel.st!=='resolved'){html+='<div class="msg-detail-footer"><textarea class="input" id="msg-reply" placeholder="Type your reply..." style="min-height:48px;"></textarea><div style="display:flex;gap:6px;margin-top:8px;"><button class="btn bp bsm" data-action="reply-msg" data-id="'+sel.id+'"><i class="fa-solid fa-reply"></i> Reply</button><button class="btn bs bsm" data-action="resolve-msg" data-id="'+sel.id+'"><i class="fa-solid fa-check-double"></i> Resolve</button></div></div>'}else{html+='<div class="msg-detail-footer" style="text-align:center;"><span class="badge b-resolved" style="font-size:10px;padding:5px 14px;"><i class="fa-solid fa-check" style="margin-right:4px;"></i>Resolved</span></div>'}}else{html+='<div class="empty-state"><i class="fa-solid fa-envelope-open"></i><p>Select a message.</p></div>'}html+='</div></div>';return html}
 
-/* ===================== ORDERS ===================== */
-function vOrders(){
-const ords=D.gO().sort((a,b)=>b.ts-a.ts);
-const pending=ords.filter(o=>o.status==='pending').length;
-const shipped=ords.filter(o=>o.status==='shipped').length;
-return`
-<div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
-<div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-box"></i></div><div class="stat-val">${ords.length}</div><div class="stat-lbl">Total Orders</div></div>
-<div class="card stat stat-red anim a1"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-val">${pending}</div><div class="stat-lbl">Pending Shipment</div></div>
-<div class="card stat stat-green anim a2"><div class="stat-icon"><i class="fa-solid fa-truck"></i></div><div class="stat-val">${shipped}</div><div class="stat-lbl">Shipped</div></div>
-</div>
-<div class="card gc anim a2">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-box"></i> All Orders</div></div>
- ${ords.length?ords.map(o=>{const u=D.fPI(o.userId);return`<div class="ord-row">
- ${o.img?`<img src="${o.img}" class="ord-img" alt="" onerror="this.style.background='var(--abg)'">`:`<div class="ord-img" style="display:flex;align-items:center;justify-content:center;background:var(--abg);"><i class="fa-solid fa-box" style="color:var(--accent);"></i></div>`}
-<div class="ord-info"><div class="ord-name">${esc(o.itemName)}</div><div class="ord-addr"><i class="fa-solid fa-location-dot" style="margin-right:3px;"></i>${esc(o.address)}</div><div class="ord-meta"><span>${esc(u?u.name:'?')}</span><span>${fDT(o.ts)}</span><span style="color:var(--accent);">${o.coins} coins</span></div></div>
-<div style="text-align:right;flex-shrink:0;"><span class="badge b-${o.status}" style="margin-bottom:6px;display:inline-block;">${o.status}</span>
- ${o.status==='pending'?`<div><button class="btn bs bxs" data-action="ship-ord" data-id="${o.id}"><i class="fa-solid fa-truck"></i> Ship</button></div>`:''}
-</div></div>`}).join(''):'<div class="empty-state" style="padding:60px 20px;"><i class="fa-solid fa-box-open"></i><p>No orders yet.</p></div>'}
-</div>`
-}
+function vOrders(){var ords=D.gO().sort(function(a,b){return b.ts-a.ts});var pending=0,shipped=0;for(var i=0;i<ords.length;i++){if(ords[i].status==='pending')pending++;else if(ords[i].status==='shipped')shipped++}var html='<div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;"><div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-box"></i></div><div class="stat-val">'+ords.length+'</div><div class="stat-lbl">Total Orders</div></div><div class="card stat stat-red anim a1"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-val">'+pending+'</div><div class="stat-lbl">Pending</div></div><div class="card stat stat-green anim a2"><div class="stat-icon"><i class="fa-solid fa-truck"></i></div><div class="stat-val">'+shipped+'</div><div class="stat-lbl">Shipped</div></div></div><div class="card gc anim a2"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-box"></i> All Orders</div></div>';if(ords.length>0){for(var i=0;i<ords.length;i++){var o=ords[i],u=D.fPI(o.userId);html+='<div class="ord-row">'+(o.img?'<img src="'+o.img+'" class="ord-img" alt="" onerror="this.style.background=\'var(--abg)\'">':'<div class="ord-img" style="display:flex;align-items:center;justify-content:center;background:var(--abg);"><i class="fa-solid fa-box" style="color:var(--accent);"></i></div>')+'<div class="ord-info"><div class="ord-name">'+esc(o.itemName)+'</div><div class="ord-addr"><i class="fa-solid fa-location-dot" style="margin-right:3px;"></i>'+esc(o.address)+'</div><div class="ord-meta"><span>'+esc(u?u.name:'?')+'</span><span>'+fDT(o.ts)+'</span><span style="color:var(--accent);">'+o.coins+' coins</span></div></div><div style="text-align:right;flex-shrink:0;"><span class="badge b-'+o.status+'" style="margin-bottom:6px;display:inline-block;">'+o.status+'</span>'+(o.status==='pending'?'<div><button class="btn bs bxs" data-action="ship-ord" data-id="'+o.id+'"><i class="fa-solid fa-truck"></i> Ship</button></div>':'')+'</div></div>'}}else{html+='<div class="empty-state" style="padding:60px 20px;"><i class="fa-solid fa-box-open"></i><p>No orders.</p></div>'}html+='</div>';return html}
 
-/* ===================== REFERRALS ===================== */
-function vReferrals(){
-const us=D.gU();
-const rU=us.filter(u=>(u.refC||0)>0).sort((a,b)=>(b.refC||0)-(a.refC||0));
-const tRef=us.reduce((s,u)=>s+(u.refC||0),0);
-const tCoins=tRef*20;
-return`
-<div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
-<div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-user-group"></i></div><div class="stat-val">${tRef}</div><div class="stat-lbl">Total Referrals</div></div>
-<div class="card stat stat-green anim a1"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-val">${rU.length}</div><div class="stat-lbl">Active Referrers</div></div>
-<div class="card stat stat-blue anim a2"><div class="stat-icon"><i class="fa-solid fa-coins"></i></div><div class="stat-val">${tCoins}</div><div class="stat-lbl">Coins Distributed</div></div>
-</div>
-<div class="card gc anim a2">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-trophy"></i> Referral Leaderboard</div></div>
- ${rU.length?rU.map((u,i)=>`<div class="ref-row">
-<div class="ref-rank ${i<3?'top':'normal'}">${i+1}</div>
-<div class="u-av">${ini(u)}</div>
-<div class="u-info"><div class="u-name">${esc(u.name)}</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>${esc(u.phone)}</span><span><i class="fa-solid fa-layer-group"></i>Lvl ${gLv(u.xp||0)}</span></div></div>
-<div><div class="ref-count">${u.refC||0}</div><div class="ref-label">referrals</div></div>
-</div>`).join(''):'<div class="empty-state" style="padding:60px 20px;"><i class="fa-solid fa-trophy"></i><p>No referrals yet.</p></div>'}
-</div>`
-}
+function vReferrals(){var us=D.gU();var rU=[];for(var i=0;i<us.length;i++){if((us[i].refC||0)>0)rU.push(us[i])}rU.sort(function(a,b){return(b.refC||0)-(a.refC||0)});var tRef=0;for(var i=0;i<us.length;i++)tRef+=(us[i].refC||0);var html='<div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;"><div class="card stat stat-gold anim"><div class="stat-icon"><i class="fa-solid fa-user-group"></i></div><div class="stat-val">'+tRef+'</div><div class="stat-lbl">Total Referrals</div></div><div class="card stat stat-green anim a1"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-val">'+rU.length+'</div><div class="stat-lbl">Active Referrers</div></div><div class="card stat stat-blue anim a2"><div class="stat-icon"><i class="fa-solid fa-coins"></i></div><div class="stat-val">'+(tRef*20)+'</div><div class="stat-lbl">Coins Distributed</div></div></div><div class="card gc anim a2"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-trophy"></i> Referral Leaderboard</div></div>';if(rU.length>0){for(var i=0;i<rU.length;i++){var u=rU[i];html+='<div class="ref-row"><div class="ref-rank '+(i<3?'top':'normal')+'">'+(i+1)+'</div><div class="u-av">'+ini(u)+'</div><div class="u-info"><div class="u-name">'+esc(u.name)+'</div><div class="u-meta"><span><i class="fa-solid fa-phone"></i>'+esc(u.phone)+'</span><span><i class="fa-solid fa-layer-group"></i>Lvl '+gLv(u.xp||0)+'</span></div></div><div><div class="ref-count">'+(u.refC||0)+'</div><div class="ref-label">referrals</div></div></div>'}}else{html+='<div class="empty-state" style="padding:60px 20px;"><i class="fa-solid fa-trophy"></i><p>No referrals.</p></div>'}html+='</div>';return html}
 
-/* ===================== BROADCAST ===================== */
-function vBroadcast(){
-const bc=D.gB().sort((a,b)=>b.ts-a.ts);
-return`<div class="grid-2">
-<div class="card gc anim">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-bullhorn"></i> New Broadcast</div></div>
-<p style="font-size:12px;color:var(--muted);margin-bottom:16px;">This message will appear on every user's dashboard.</p>
-<div style="margin-bottom:14px;"><label class="label">Message</label><textarea class="input" id="bc-msg" placeholder="Write your announcement..." style="min-height:100px;"></textarea></div>
-<button class="btn bp bf" data-action="send-bc"><i class="fa-solid fa-paper-plane"></i> Send to All Users</button>
-<div class="div"></div>
-<div style="font-size:11px;color:var(--dim);line-height:1.7;">
-<strong style="color:var(--muted);">Tips:</strong><br>
-Use broadcasts for: new features, motivational messages, event announcements, schedule changes.<br>
-Users see broadcasts at the top of their dashboard.
-</div>
-</div>
-<div class="card gc anim a2">
-<div class="sec-head"><div class="sec-title"><i class="fa-solid fa-clock-rotate-left"></i> Past Broadcasts (${bc.length})</div></div>
- ${bc.length?bc.map(b=>`<div class="bc-item"><p>${esc(b.message)}</p><time>${fDT(b.ts)}</time></div>`).join(''):'<div class="empty-state"><i class="fa-solid fa-bullhorn"></i><p>No broadcasts sent yet.</p></div>'}
-</div></div>`
-}
+function vBroadcast(){var bc=D.gB().sort(function(a,b){return b.ts-a.ts});var html='<div class="grid-2"><div class="card gc anim"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-bullhorn"></i> New Broadcast</div></div><p style="font-size:12px;color:var(--muted);margin-bottom:16px;">This message will appear on every user\'s dashboard.</p><div style="margin-bottom:14px;"><label class="label">Message</label><textarea class="input" id="bc-msg" placeholder="Write your announcement..." style="min-height:100px;"></textarea></div><button class="btn bp bf" data-action="send-bc"><i class="fa-solid fa-paper-plane"></i> Send to All Users</button><div class="div"></div><div style="font-size:11px;color:var(--dim);line-height:1.7;"><strong style="color:var(--muted);">Tips:</strong><br>Use for: new features, motivational messages, events.</div></div><div class="card gc anim a2"><div class="sec-head"><div class="sec-title"><i class="fa-solid fa-clock-rotate-left"></i> Past Broadcasts ('+bc.length+')</div></div>';if(bc.length>0){for(var i=0;i<bc.length;i++){html+='<div class="bc-item"><p>'+esc(bc[i].message)+'</p><time>'+fDT(bc[i].ts)+'</time></div>'}}else{html+='<div class="empty-state"><i class="fa-solid fa-bullhorn"></i><p>No broadcasts.</p></div>'}html+='</div></div>';return html}
 
-/* ===================== USER DETAIL MODAL ===================== */
-function viewUserDetail(id){
-const u=D.fPI(id);if(!u)return;
-const lv=gLv(u.xp||0),streak=cStreak(u.habits||{}),days=dA(u.createdAt);
-const txns=(u.txns||[]).slice(-10).reverse();
-const purch=u.purch||[];
-const LXN=[0,100,250,500,800,1200,1700,2300,3000,4000];
-const cLvl=LXN[lv-1]||0,nLvl=LXN[lv]||(LXN[LXN.length-1]*1.5);
-const xpPct=Math.min(100,Math.round(((u.xp-cLvl)/(nLvl-cLvl))*100));
-openModal(`
-<h3>${esc(u.name)}</h3>
-<p class="sub">${esc(u.phone)} &middot; Joined ${fD(u.createdAt)}</p>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;">
-<div style="text-align:center;padding:10px;background:var(--abg);border-radius:8px;"><div style="font-size:18px;font-weight:800;color:var(--accent);">Lvl ${lv}</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Level</div></div>
-<div style="text-align:center;padding:10px;background:rgba(255,255,255,.02);border-radius:8px;"><div style="font-size:18px;font-weight:800;">${u.coins||0}</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Coins</div></div>
-<div style="text-align:center;padding:10px;background:rgba(255,255,255,.02);border-radius:8px;"><div style="font-size:18px;font-weight:800;color:var(--warn);">${streak}</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Streak</div></div>
-<div style="text-align:center;padding:10px;background:rgba(255,255,255,.02);border-radius:8px;"><div style="font-size:18px;font-weight:800;">${u.refC||0}</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Referrals</div></div>
-</div>
-<div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-bottom:4px;"><span>XP: ${u.xp||0}</span><span>${xpPct}% to Level ${lv+1}</span></div><div style="height:6px;background:#0c0c0c;border-radius:3px;overflow:hidden;"><div style="height:100%;width:${xpPct}%;background:var(--gg);border-radius:3px;"></div></div></div>
-<div style="margin-bottom:14px;"><label class="label">Purchases (${purch.length})</label>
- ${purch.length?purch.map(pid=>`<div style="font-size:11px;color:#aaa;padding:4px 0;"><i class="fa-solid fa-check" style="color:var(--success);margin-right:5px;font-size:9px;"></i>${pid}</div>`).join(''):'<div style="font-size:11px;color:var(--dim);">No purchases.</div>'}
-</div>
-<div><label class="label">Recent Transactions</label>
- ${txns.length?txns.map(t=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.025);"><div><span style="font-size:11px;color:#aaa;">${esc(t.r)}</span><div style="font-size:9px;color:var(--dim);">${fDT(t.ts)}</div></div><span style="font-size:11px;font-weight:700;color:${t.a>0?'var(--success)':'var(--danger)'};">${t.a>0?'+':''}${t.a}</span></div>`).join(''):'<div style="font-size:11px;color:var(--dim);">No transactions.</div>'}
-</div>
-<div class="div"></div>
-<div style="display:flex;gap:8px;">
-<button class="btn bo bsm bf" data-action="edit-coins" data-id="${u.id}"><i class="fa-solid fa-coins"></i> Adjust Coins</button>
-<button class="btn bo bsm bf" data-action="edit-xp" data-id="${u.id}"><i class="fa-solid fa-star"></i> Adjust XP</button>
-</div>
-`);
-bindModal();
-}
+function viewUserDetail(id){var u=D.fPI(id);if(!u)return;var lv=gLv(u.xp||0),streak=cStreak(u.habits||{}),days=dA(u.createdAt);var txns=(u.txns||[]).slice(-10).reverse();var purch=u.purch||[];var cLvl=LX[lv-1]||0,nLvl=LX[lv]||(LX[LX.length-1]*1.5);var xpPct=Math.min(100,Math.round(((u.xp-cLvl)/(nLvl-cLvl))*100));var purchHtml='';if(purch.length>0){for(var i=0;i<purch.length;i++){purchHtml+='<div style="font-size:11px;color:#aaa;padding:4px 0;"><i class="fa-solid fa-check" style="color:var(--success);margin-right:5px;font-size:9px;"></i>'+purch[i]+'</div>'}}else{purchHtml='<div style="font-size:11px;color:var(--dim);">No purchases.</div>'}var txnHtml='';if(txns.length>0){for(var i=0;i<txns.length;i++){var t=txns[i];txnHtml+='<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.025);"><div><span style="font-size:11px;color:#aaa;">'+esc(t.r)+'</span><div style="font-size:9px;color:var(--dim);">'+fDT(t.ts)+'</div></div><span style="font-size:11px;font-weight:700;color:'+(t.a>0?'var(--success)':'var(--danger)')+';">'+(t.a>0?'+':'')+t.a+'</span></div>'}}else{txnHtml='<div style="font-size:11px;color:var(--dim);">No transactions.</div>'}
+openModal('<h3>'+esc(u.name)+'</h3><p class="sub">'+esc(u.phone)+' &middot; Joined '+fD(u.createdAt)+'</p><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;"><div style="text-align:center;padding:10px;background:var(--abg);border-radius:8px;"><div style="font-size:18px;font-weight:800;color:var(--accent);">Lvl '+lv+'</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Level</div></div><div style="text-align:center;padding:10px;background:rgba(255,255,255,.02);border-radius:8px;"><div style="font-size:18px;font-weight:800;">'+(u.coins||0)+'</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Coins</div></div><div style="text-align:center;padding:10px;background:rgba(255,255,255,.02);border-radius:8px;"><div style="font-size:18px;font-weight:800;color:var(--warn);">'+streak+'</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Streak</div></div><div style="text-align:center;padding:10px;background:rgba(255,255,255,.02);border-radius:8px;"><div style="font-size:18px;font-weight:800;">'+(u.refC||0)+'</div><div style="font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;">Referrals</div></div></div><div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-bottom:4px;"><span>XP: '+(u.xp||0)+'</span><span>'+xpPct+'% to Level '+(lv+1)+'</span></div><div style="height:6px;background:#0c0c0c;border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+xpPct+'%;background:var(--gg);border-radius:3px;"></div></div></div><div style="margin-bottom:14px;"><label class="label">Purchases ('+purch.length+')</label>'+purchHtml+'</div><div><label class="label">Recent Transactions</label>'+txnHtml+'</div><div class="div"></div><div style="display:flex;gap:8px;"><button class="btn bo bsm bf" data-action="edit-coins" data-id="'+u.id+'"><i class="fa-solid fa-coins"></i> Adjust Coins</button><button class="btn bo bsm bf" data-action="edit-xp" data-id="'+u.id+'"><i class="fa-solid fa-star"></i> Adjust XP</button></div>');bindModal()}
 
-/* ===================== ACTIONS ===================== */
-function bindContent(){
-/* Filters */
-document.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener('click',()=>{payFil=el.dataset.filter;renderContent()}));
-document.querySelectorAll('[data-ufil]').forEach(el=>el.addEventListener('click',()=>{userFil=el.dataset.ufil;renderContent()}));
-
-/* All data-action in content */
-document.querySelectorAll('#content [data-action]').forEach(el=>el.addEventListener('click',()=>handleAction(el.dataset.action,el.dataset)));
-}
-
-function bindModal(){
-document.querySelectorAll('.modal [data-action]').forEach(el=>el.addEventListener('click',()=>handleAction(el.dataset.action,el.dataset)));
-}
+function bindContent(){var filters=document.querySelectorAll('#content [data-filter]');for(var i=0;i<filters.length;i++){(function(el){el.addEventListener('click',function(){payFil=el.dataset.filter;renderContent()})})(filters[i])}var ufs=document.querySelectorAll('#content [data-ufil]');for(var i=0;i<ufs.length;i++){(function(el){el.addEventListener('click',function(){userFil=el.dataset.ufil;renderContent()})})(ufs[i])}var acts=document.querySelectorAll('#content [data-action]');for(var i=0;i<acts.length;i++){(function(el){el.addEventListener('click',function(){handleAction(el.dataset.action,el.dataset)})})(acts[i])}}
+function bindModal(){var acts=document.querySelectorAll('.modal [data-action]');for(var i=0;i<acts.length;i++){(function(el){el.addEventListener('click',function(){handleAction(el.dataset.action,el.dataset)})})(acts[i])}}
 
 function handleAction(action,data){
 switch(action){
-case'quick-approve':quickApprove(data.id);break;
+case'quick-approve':approvePay(data.id,false);break;
 case'approve-pay':approvePay(data.id,false);break;
 case'approve-create':approvePay(data.id,true);break;
 case'reject-pay':rejectPay(data.id);break;
-case'view-ss':viewScreenshot(data.src);break;
+case'view-ss':openModal('<h3>Payment Proof</h3><p class="sub">User\'s screenshot</p><div style="text-align:center;"><img src="'+data.src+'" style="max-width:100%;max-height:70vh;border-radius:10px;border:1px solid var(--border);" alt="Screenshot"></div><div style="margin-top:14px;text-align:center;"><button class="btn bo bsm" onclick="closeModal()">Close</button></div>');break;
 case'add-user':addUser();break;
 case'del-user':deleteUser(data.id);break;
 case'view-user':viewUserDetail(data.id);break;
@@ -694,164 +293,33 @@ case'edit-xp':editXP(data.id);break;
 }
 }
 
-/* Payment Actions */
-function quickApprove(id){approvePay(id,false)}
-function approvePay(id,createAccount){
-const pays=D.gP();const i=pays.findIndex(p=>p.id===id);if(i===-1)return;
-const p=pays[i];p.status='approved';p.approvedAt=Date.now();D.sP(pays);
+function approvePay(id,createAccount){var pays=D.gP();var idx=-1;for(var i=0;i<pays.length;i++){if(pays[i].id===id){idx=i;break}}if(idx===-1)return;pays[idx].status='approved';pays[idx].approvedAt=Date.now();D.sP(pays);if(createAccount){var p=pays[idx],u=D.fPI(p.userId);if(!u){var name=p.userName||'User',phone=p.phone||'';if(phone){var pw='glow'+Math.random().toString(36).slice(2,6),newId=uid(),rc=newId.slice(0,8);var refBy=null;var refCode=null;try{refCode=JSON.parse(localStorage.getItem('g_incoming_ref'))}catch(e){}if(refCode){var us=D.gU();for(var j=0;j<us.length;j++){if(us[j].refCode===refCode){refBy=us[j].id;us[j].refC=(us[j].refC||0)+1;us[j].coins=(us[j].coins||0)+20;if(!us[j].txns)us[j].txns=[];us[j].txns.push({t:'earn',r:'Referral: '+name,a:20,ts:Date.now()});D.sU(us);break}}localStorage.removeItem('g_incoming_ref')}var newUser={id:newId,name:name,phone:phone,password:pw,createdAt:Date.now(),habits:{},xp:0,coins:20,progress:0,refCode:rc,refBy:refBy,refC:0,txns:[{t:'earn',r:'Welcome bonus',a:20,ts:Date.now()}],purch:[],unlocks:{},lastCI:null,banned:false};var us2=D.gU();us2.push(newUser);D.sU(us2);toast('Approved & account created: '+phone+' / '+pw,'s')}else{toast('No phone. Can\'t create account.','e')}}else{toast('Payment approved.','s')}}else{toast('Payment approved.','s')}renderNav();renderContent()}
 
-if(createAccount&&!D.fPI(p.userId)){
-const name=p.userName||'User',phone=p.phone||'';
-if(phone){
-const u={id:uid(),name,phone,password:'glow'+Math.random().toString(36).slice(2,6),createdAt:Date.now(),habits:{},xp:0,coins:20,progress:0,refCode:uid().slice(0,8),refBy:null,refC:0,txns:[{t:'earn',r:'Welcome bonus',a:20,ts:Date.now()}],purch:[],unlocks:{},lastCI:null,banned:false};
-const us=D.gU();us.push(u);D.sU(us);
-toast('Payment approved & account created: '+phone+' / '+u.password,'s');
-}else{toast('No phone number. Can\'t create account.','e')}
-}else{toast('Payment approved.','s')}
-renderNav();renderContent();
-}
+function rejectPay(id){openModal('<h3>Reject Payment?</h3><p class="sub">Mark as rejected.</p><div style="margin-bottom:16px;"><label class="label">Reason (optional)</label><textarea class="input" id="rej-reason" placeholder="e.g. Screenshot unclear..."></textarea></div><div style="display:flex;gap:8px;"><button class="btn bd bf" id="confirm-rej-btn"><i class="fa-solid fa-xmark"></i> Reject</button><button class="btn bo bf" onclick="closeModal()">Cancel</button></div>');setTimeout(function(){var btn=document.getElementById('confirm-rej-btn');if(btn)btn.addEventListener('click',function(){var reason=document.getElementById('rej-reason')?document.getElementById('rej-reason').value:'';var pays=D.gP();for(var i=0;i<pays.length;i++){if(pays[i].id===id){pays[i].status='rejected';pays[i].rejectReason=reason;pays[i].rejectedAt=Date.now();break}}D.sP(pays);closeModal();toast('Payment rejected.','i');renderNav();renderContent()})},50)}
 
-function rejectPay(id){
-openModal(`<h3>Reject Payment?</h3><p class="sub">This will mark the payment as rejected. The user won't be notified automatically.</p>
-<div style="margin-bottom:16px;"><label class="label">Reason (optional)</label><textarea class="input" id="rej-reason" placeholder="e.g. Screenshot unclear, wrong amount..."></textarea></div>
-<div style="display:flex;gap:8px;"><button class="btn bd bf" data-action="confirm-reject" data-id="${id}"><i class="fa-solid fa-xmark"></i> Reject</button><button class="btn bo bf" onclick="closeModal()">Cancel</button></div>`);
-bindModal();
-/* Attach confirm reject handler */
-setTimeout(()=>{
-const btn=document.querySelector('[data-action="confirm-reject"]');
-if(btn)btn.addEventListener('click',()=>{confirmReject(id)});
-},50);
-}
-function confirmReject(id){
-const reason=document.getElementById('rej-reason')?.value||'';
-const pays=D.gP();const i=pays.findIndex(p=>p.id===id);if(i===-1)return;
-pays[i].status='rejected';pays[i].rejectReason=reason;pays[i].rejectedAt=Date.now();D.sP(pays);
-closeModal();toast('Payment rejected.','i');renderNav();renderContent();
-}
+function addUser(){var name=document.getElementById('au-name')?document.getElementById('au-name').value.trim():'';var phone=document.getElementById('au-phone')?document.getElementById('au-phone').value.trim():'';var pass=document.getElementById('au-pass')?document.getElementById('au-pass').value:'';if(!name||!phone||!pass){toast('Fill in all fields.','e');return}var us=D.gU();for(var i=0;i<us.length;i++){if(us[i].phone===phone){toast('Phone already exists.','e');return}}var newId=uid(),rc=newId.slice(0,8);var refBy=null,refCode=null;try{refCode=JSON.parse(localStorage.getItem('g_incoming_ref'))}catch(e){}if(refCode){for(var j=0;j<us.length;j++){if(us[j].refCode===refCode){refBy=us[j].id;us[j].refC=(us[j].refC||0)+1;us[j].coins=(us[j].coins||0)+20;if(!us[j].txns)us[j].txns=[];us[j].txns.push({t:'earn',r:'Referral: '+name,a:20,ts:Date.now()});break}}localStorage.removeItem('g_incoming_ref')}var newUser={id:newId,name:name,phone:phone,password:pass,createdAt:Date.now(),habits:{},xp:0,coins:20,progress:0,refCode:rc,refBy:refBy,refC:0,txns:[{t:'earn',r:'Welcome bonus',a:20,ts:Date.now()}],purch:[],unlocks:{},lastCI:null,banned:false};us.push(newUser);D.sU(us);toast('Account created! '+phone+' / '+pass,'s');document.getElementById('au-name').value='';document.getElementById('au-phone').value='';document.getElementById('au-pass').value='';renderNav();renderContent()}
 
-function viewScreenshot(src){
-openModal(`<h3>Payment Proof</h3><p class="sub">User's payment screenshot</p>
-<div style="text-align:center;"><img src="${src}" style="max-width:100%;max-height:70vh;border-radius:10px;border:1px solid var(--border);" alt="Payment screenshot"></div>
-<div style="margin-top:14px;text-align:center;"><button class="btn bo bsm" onclick="closeModal()">Close</button></div>`);
-}
+function deleteUser(id){openModal('<h3>Delete User?</h3><p class="sub">This cannot be undone.</p><div style="display:flex;gap:8px;margin-top:16px;"><button class="btn bd bf" id="confirm-del-btn"><i class="fa-solid fa-trash"></i> Delete</button><button class="btn bo bf" onclick="closeModal()">Cancel</button></div>');setTimeout(function(){var btn=document.getElementById('confirm-del-btn');if(btn)btn.addEventListener('click',function(){var us=D.gU();var filtered=[];for(var i=0;i<us.length;i++){if(us[i].id!==id)filtered.push(us[i])}D.sU(filtered);closeModal();toast('User deleted.','i');renderNav();renderContent()})},50)}
 
-/* User Actions */
-function addUser(){
-const name=document.getElementById('au-name')?.value.trim();
-const phone=document.getElementById('au-phone')?.value.trim();
-const pass=document.getElementById('au-pass')?.value;
-if(!name||!phone||!pass){toast('Fill in all fields.','e');return}
-if(D.gU().find(u=>u.phone===phone)){toast('Phone already exists.','e');return}
-const u={id:uid(),name,phone,password:pass,createdAt:Date.now(),habits:{},xp:0,coins:20,progress:0,refCode:uid().slice(0,8),refBy:null,refC:0,txns:[{t:'earn',r:'Welcome bonus',a:20,ts:Date.now()}],purch:[],unlocks:{},lastCI:null,banned:false};
+function editCoins(id){openModal('<h3>Adjust Coins</h3><p class="sub">Add or subtract Glow Cash.</p><div style="margin-bottom:14px;"><label class="label">Amount (negative to subtract)</label><input type="number" class="input" id="coin-amt" placeholder="e.g. 100 or -50"></div><div style="margin-bottom:14px;"><label class="label">Reason</label><input type="text" class="input" id="coin-reason" placeholder="e.g. Bonus"></div><button class="btn bp bf" id="save-coins-btn">Save</button>');setTimeout(function(){var btn=document.getElementById('save-coins-btn');if(btn)btn.addEventListener('click',function(){var amt=parseInt(document.getElementById('coin-amt').value);var reason=document.getElementById('coin-reason').value.trim()||'Admin adjustment';if(isNaN(amt)||amt===0){toast('Enter a valid amount.','e');return}var us=D.gU();for(var i=0;i<us.length;i++){if(us[i].id===id){us[i].coins=(us[i].coins||0)+amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:amt>0?'earn':'spend',r:reason,a:amt,ts:Date.now()});break}}D.sU(us);closeModal();toast((amt>0?'+':'')+amt+' coins.','s');viewUserDetail(id)})},50)}
 
-/* Handle referral code from sessionStorage */
-const refCode=sessionStorage.getItem('g_ref');
-if(refCode){const us=D.gU();const ri=us.findIndex(x=>x.refCode===refCode);
-if(ri!==-1){us[ri].refC=(us[ri].refC||0)+1;us[ri].coins=(us[ri].coins||0)+20;us[ri].txns.push({t:'earn',r:'Referral: '+name,a:20,ts:Date.now()});u.coins+=20;u.refBy=us[ri].id;u.txns.push({t:'earn',r:'Referral bonus',a:20,ts:Date.now()});D.sU(us);sessionStorage.removeItem('g_ref')}}
+function editXP(id){openModal('<h3>Adjust XP</h3><p class="sub">Add or subtract XP.</p><div style="margin-bottom:14px;"><label class="label">Amount (negative to subtract)</label><input type="number" class="input" id="xp-amt" placeholder="e.g. 50 or -30"></div><div style="margin-bottom:14px;"><label class="label">Reason</label><input type="text" class="input" id="xp-reason" placeholder="e.g. Bonus"></div><button class="btn bp bf" id="save-xp-btn">Save</button>');setTimeout(function(){var btn=document.getElementById('save-xp-btn');if(btn)btn.addEventListener('click',function(){var amt=parseInt(document.getElementById('xp-amt').value);var reason=document.getElementById('xp-reason').value.trim()||'Admin adjustment';if(isNaN(amt)||amt===0){toast('Enter a valid amount.','e');return}var us=D.gU();for(var i=0;i<us.length;i++){if(us[i].id===id){us[i].xp=(us[i].xp||0)+amt;break}}D.sU(us);closeModal();toast((amt>0?'+':'')+amt+' XP.','s');viewUserDetail(id)})},50)}
 
-const us=D.gU();us.push(u);D.sU(us);
-toast('Account created! Phone: '+phone+' / Pass: '+pass,'s');
-document.getElementById('au-name').value='';document.getElementById('au-phone').value='';document.getElementById('au-pass').value='';
-renderNav();renderContent();
-}
+function replyMsg(id){var ta=document.getElementById('msg-reply');var r=ta?ta.value.trim():'';if(!r){toast('Type a reply.','e');return}var ms=D.gM();for(var i=0;i<ms.length;i++){if(ms[i].id===id){ms[i].reply=r;ms[i].st='replied';break}}D.sM(ms);toast('Reply sent.','s');renderNav();renderContent()}
+function resolveMsg(id){var ms=D.gM();for(var i=0;i<ms.length;i++){if(ms[i].id===id){ms[i].st='resolved';break}}D.sM(ms);toast('Resolved.','s');renderNav();renderContent()}
+function shipOrder(id){var ords=D.gO();for(var i=0;i<ords.length;i++){if(ords[i].id===id){ords[i].status='shipped';ords[i].shippedAt=Date.now();break}}D.sO(ords);toast('Marked as shipped.','s');renderNav();renderContent()}
+function sendBroadcast(){var ta=document.getElementById('bc-msg');var msg=ta?ta.value.trim():'';if(!msg){toast('Write a message.','e');return}var bc=D.gB();bc.push({id:uid(),message:msg,ts:Date.now()});D.sB(bc);toast('Broadcast sent.','s');renderContent()}
 
-function deleteUser(id){
-openModal(`<h3>Delete User?</h3><p class="sub">This action cannot be undone. All user data will be permanently removed.</p>
-<div style="display:flex;gap:8px;margin-top:16px;"><button class="btn bd bf" id="confirm-del"><i class="fa-solid fa-trash"></i> Delete</button><button class="btn bo bf" onclick="closeModal()">Cancel</button></div>`);
-setTimeout(()=>{
-document.getElementById('confirm-del')?.addEventListener('click',()=>{
-const us=D.gU().filter(u=>u.id!==id);D.sU(us);closeModal();toast('User deleted.','i');renderNav();renderContent();
-});
-},50);
-}
-
-function editCoins(id){
-openModal(`<h3>Adjust Coins</h3><p class="sub">Add or subtract Glow Cash from this user.</p>
-<div style="margin-bottom:14px;"><label class="label">Amount (use negative to subtract)</label><input type="number" class="input" id="coin-amt" placeholder="e.g. 100 or -50"></div>
-<div style="margin-bottom:14px;"><label class="label">Reason</label><input type="text" class="input" id="coin-reason" placeholder="e.g. Bonus, correction..."></div>
-<button class="btn bp bf" data-action="save-coins" data-id="${id}">Save</button>`);
-bindModal();
-setTimeout(()=>{
-document.querySelector('[data-action="save-coins"]')?.addEventListener('click',()=>{
-const amt=parseInt(document.getElementById('coin-amt')?.value);
-const reason=document.getElementById('coin-reason')?.value.trim()||'Admin adjustment';
-if(isNaN(amt)||amt===0){toast('Enter a valid amount.','e');return}
-const us=D.gU();const i=us.findIndex(u=>u.id===id);if(i===-1)return;
-us[i].coins=(us[i].coins||0)+amt;
-if(!us[i].txns)us[i].txns=[];
-us[i].txns.push({t:amt>0?'earn':'spend',r:reason,a:amt,ts:Date.now()});
-D.sU(us);closeModal();toast((amt>0?'+':'')+amt+' coins.','s');viewUserDetail(id);
-});
-},50);
-}
-
-function editXP(id){
-openModal(`<h3>Adjust XP</h3><p class="sub">Add or subtract XP from this user.</p>
-<div style="margin-bottom:14px;"><label class="label">Amount (use negative to subtract)</label><input type="number" class="input" id="xp-amt" placeholder="e.g. 50 or -30"></div>
-<div style="margin-bottom:14px;"><label class="label">Reason</label><input type="text" class="input" id="xp-reason" placeholder="e.g. Bonus, correction..."></div>
-<button class="btn bp bf" data-action="save-xp" data-id="${id}">Save</button>`);
-bindModal();
-setTimeout(()=>{
-document.querySelector('[data-action="save-xp"]')?.addEventListener('click',()=>{
-const amt=parseInt(document.getElementById('xp-amt')?.value);
-const reason=document.getElementById('xp-reason')?.value.trim()||'Admin adjustment';
-if(isNaN(amt)||amt===0){toast('Enter a valid amount.','e');return}
-const us=D.gU();const i=us.findIndex(u=>u.id===id);if(i===-1)return;
-us[i].xp=(us[i].xp||0)+amt;D.sU(us);closeModal();toast((amt>0?'+':'')+amt+' XP.','s');viewUserDetail(id);
-});
-},50);
-}
-
-/* Message Actions */
-function replyMsg(id){
-const ta=document.getElementById('msg-reply');const r=ta?ta.value.trim():'';
-if(!r){toast('Type a reply.','e');return}
-const ms=D.gM();const i=ms.findIndex(m=>m.id===id);if(i===-1)return;
-ms[i].reply=r;ms[i].st='replied';D.sM(ms);toast('Reply sent.','s');renderNav();renderContent();
-}
-function resolveMsg(id){
-const ms=D.gM();const i=ms.findIndex(m=>m.id===id);if(i===-1)return;
-ms[i].st='resolved';D.sM(ms);toast('Resolved.','s');renderNav();renderContent();
-}
-
-/* Order Actions */
-function shipOrder(id){
-const ords=D.gO();const i=ords.findIndex(o=>o.id===id);if(i===-1)return;
-ords[i].status='shipped';ords[i].shippedAt=Date.now();D.sO(ords);toast('Marked as shipped.','s');renderNav();renderContent();
-}
-
-/* Broadcast */
-function sendBroadcast(){
-const ta=document.getElementById('bc-msg');const msg=ta?ta.value.trim():'';
-if(!msg){toast('Write a message.','e');return}
-const bc=D.gB();bc.push({id:uid(),message:msg,ts:Date.now()});D.sB(bc);
-toast('Broadcast sent to all users.','s');renderContent();
-}
-
-/* ===================== SIDEBAR ===================== */
 function closeSB(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('show')}
-document.getElementById('hamburger').addEventListener('click',()=>{
-document.getElementById('sidebar').classList.toggle('open');
-document.getElementById('sb-overlay').classList.toggle('show');
-});
+document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('show')});
 document.getElementById('sb-overlay').addEventListener('click',closeSB);
+document.getElementById('btn-logout').addEventListener('click',function(){D.cS();location.reload()});
+document.getElementById('btn-refresh').addEventListener('click',function(){renderNav();renderContent();toast('Data refreshed.','s')});
 
-/* ===================== TOPBAR BUTTONS ===================== */
-document.getElementById('btn-logout').addEventListener('click',()=>{D.cS();location.reload()});
-document.getElementById('btn-refresh').addEventListener('click',()=>{renderNav();renderContent();toast('Data refreshed.','s')});
-
-/* ===================== CLOCK ===================== */
-function updateClock(){
-const el=document.getElementById('sb-time');
-if(el)el.textContent=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-}
+function updateClock(){var el=document.getElementById('sb-time');if(el)el.textContent=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}
 setInterval(updateClock,30000);
 
-/* ===================== INIT ===================== */
-if(checkAuth()){
-renderNav();renderContent();updateClock();
-window.addEventListener('resize',()=>{if(tab==='overview')setTimeout(drawChart,80)});
-}
+if(checkAuth()){renderNav();renderContent();updateClock();window.addEventListener('resize',function(){if(tab==='overview')setTimeout(drawChart,80)})}
 </script>
 </body>
 </html>
