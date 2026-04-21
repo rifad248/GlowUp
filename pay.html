@@ -311,26 +311,128 @@ previewRemove.addEventListener('click',function(){fileData=null;fileInput.value=
 document.getElementById('f-name').addEventListener('input',validateForm);
 document.getElementById('f-phone').addEventListener('input',validateForm);
 
-/* SUBMIT */
+/* SUBMIT — creates user account immediately so sign-in works right away */
 submitBtn.addEventListener('click',function(){
-const name=document.getElementById('f-name').value.trim(),phone=document.getElementById('f-phone').value.trim(),
-utr=document.getElementById('f-utr').value.trim(),note=document.getElementById('f-note').value.trim();
-if(!fileData||!name||!phone)return;
-const existing=JSON.parse(localStorage.getItem('g_payments')||'[]');
-if(existing.find(p=>p.phone===phone&&p.status==='pending')){toast('You already have a pending payment with this number.','e');return}
-document.getElementById('loading').classList.add('show');
-setTimeout(()=>{
-const payment={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),userId:null,userName:name,phone:phone,amount:PRICE,utr:utr,note:note,screenshot:fileData,status:'pending',ts:Date.now()};
-const payments=JSON.parse(localStorage.getItem('g_payments')||'[]');payments.push(payment);localStorage.setItem('g_payments',JSON.stringify(payments));
-document.getElementById('loading').classList.remove('show');
-document.getElementById('pay-section').style.display='none';
-document.getElementById('success-state').classList.add('show');
-document.getElementById('s-name').textContent=name;document.getElementById('s-phone').textContent=phone;
-document.getElementById('success-state').scrollIntoView({behavior:'smooth',block:'center'});
-toast('Payment proof submitted!','s');
-},1800);
+    const name=document.getElementById('f-name').value.trim(),
+          phone=document.getElementById('f-phone').value.trim(),
+          utr=document.getElementById('f-utr').value.trim(),
+          note=document.getElementById('f-note').value.trim();
+    if(!fileData||!name||!phone)return;
+    const existing=JSON.parse(localStorage.getItem('g_payments')||'[]');
+    if(existing.find(p=>p.phone===phone&&p.status==='pending')){
+        toast('You already have a pending payment with this number.','e');return;
+    }
+    document.getElementById('loading').classList.add('show');
+
+    setTimeout(()=>{
+        /* 1. Save payment */
+        const payId=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+        const payment={id:payId,userId:null,userName:name,phone:phone,
+            amount:PRICE,utr:utr,note:note,screenshot:fileData,
+            status:'pending',ts:Date.now()};
+        const payments=JSON.parse(localStorage.getItem('g_payments')||'[]');
+        payments.push(payment);
+        localStorage.setItem('g_payments',JSON.stringify(payments));
+
+        /* 2. Create user account immediately so sign-in works */
+        const users=JSON.parse(localStorage.getItem('g_users')||'[]');
+        let user=users.find(u=>u.phone===phone);
+        let password,isNew=false;
+
+        if(user){
+            /* Account already exists (e.g. admin created it, or duplicate submit) */
+            password=user.password;
+        } else {
+            /* Create new account */
+            isNew=true;
+            password='glow'+Math.random().toString(36).slice(2,6);
+            const uid=Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+            const refCode=uid.slice(0,8);
+
+            /* Check for incoming referral */
+            let refBy=null;
+            const incomingRef=sessionStorage.getItem('g_incoming_ref');
+            if(incomingRef){
+                const referrer=users.find(u=>u.refCode===incomingRef);
+                if(referrer){
+                    refBy=referrer.id;
+                    referrer.refC=(referrer.refC||0)+1;
+                    referrer.coins=(referrer.coins||0)+20;
+                    if(!referrer.txns)referrer.txns=[];
+                    referrer.txns.push({t:'earn',r:'Referral: '+name,a:20,ts:Date.now()});
+                }
+                sessionStorage.removeItem('g_incoming_ref');
+            }
+
+            user={id:uid,name:name,phone:phone,password:password,
+                createdAt:Date.now(),habits:{},xp:0,coins:20,
+                progress:0,refCode:refCode,refBy:refBy,refC:0,
+                txns:[{t:'earn',r:'Welcome bonus',a:20,ts:Date.now()}],
+                purch:[],unlocks:{},lastCI:null,banned:false};
+            users.push(user);
+            localStorage.setItem('g_users',JSON.stringify(users));
+
+            /* Update payment with userId */
+            payment.userId=uid;
+            localStorage.setItem('g_payments',JSON.stringify(payments));
+        }
+
+        /* 3. Show success with login credentials */
+        document.getElementById('loading').classList.remove('show');
+        document.getElementById('pay-section').style.display='none';
+        const ss=document.getElementById('success-state');
+        ss.classList.add('show');
+        document.getElementById('s-name').textContent=name;
+        document.getElementById('s-phone').textContent=phone;
+        document.getElementById('s-pass').textContent=password;
+        document.getElementById('s-pass-row').style.display='flex';
+
+        if(isNew){
+            document.getElementById('s-status-text').innerHTML=
+                '<i class="fa-solid fa-check-circle" style="color:var(--success);margin-right:4px;"></i>Account Created';
+        }
+
+        ss.scrollIntoView({behavior:'smooth',block:'center'});
+        toast('Account created! Save your credentials.','s');
+    },1800);
 });
 
+/* FAQ */
+document.querySelectorAll('[data-faq]').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',function(){
+        const wasOpen=item.classList.contains('open');
+        document.querySelectorAll('[data-faq]').forEach(i=>i.classList.remove('open'));
+        if(!wasOpen)item.classList.add('open');
+    });
+});
+
+/* WHATSAPP */
+document.getElementById('wa-contact').addEventListener('click',function(){
+    window.open('https://wa.me/'+WA_NUM+'?text='+
+        encodeURIComponent("Hi! I'm facing an issue with the GLOWUP payment. Can you help?"),'_blank');
+});
+
+/* TOAST */
+function toast(msg,type='i'){
+    const b=document.getElementById('tb'),
+          ic={s:'fa-check-circle',e:'fa-circle-exclamation',i:'fa-coins'};
+    const el=document.createElement('div');
+    el.className='toast t'+type;
+    el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';
+    b.appendChild(el);
+    setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),300)},3500);
+}
+
+/* CHECK PAID */
+(function(){
+    const params=new URLSearchParams(location.search);
+    if(params.get('paid')==='true'){
+        document.getElementById('pay-section').style.display='none';
+        document.getElementById('success-state').classList.add('show');
+        document.getElementById('s-name').textContent=params.get('name')||'User';
+        document.getElementById('s-phone').textContent=params.get('phone')||'';
+    }
+})();
 /* FAQ */
 document.querySelectorAll('[data-faq]').forEach(item=>{
 item.querySelector('.faq-q').addEventListener('click',function(){
