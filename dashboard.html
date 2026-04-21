@@ -579,7 +579,7 @@ return`<div class="dgrid"><div class="card gc fi"><div class="sec-title"><i clas
 <div class="card gc fi f1"><div class="sec-title"><i class="fa-solid fa-user-group"></i> Referral Program</div>
 <p style="font-size:11px;color:var(--muted);margin-bottom:12px;">Share your link. Earn at every milestone.</p>
 <div class="ref-tiers">${tiers.map(t=>'<div class="ref-tier '+(t.earned?'earned':'')+'"><div class="rt-num">'+t.req+'</div><div class="rt-req">referral'+(t.req>1?'s':'')+'</div><div class="rt-reward">'+t.label+'</div></div>').join('')}</div>
-<div class="ref-link-box"><input class="input" value="'+esc(refLink)+'" readonly id="rl"><button class="btn btn-o btn-xs" data-action="cpy-ref"><i class="fa-solid fa-copy"></i></button></div>
+<div class="ref-link-box"><input class="input" value="'+esc(refLink)+'" readonly id="rl"><button class="btn btn-o btn-xs" data-action="cpy-ref"><i class="fa-solid fa-copy"></i></button></div> <a href="referral.html" class="btn btn-o btn-xs" style="margin-top:8px;width:100%;justify-content:center;text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px;"></i> View Full Referral Page</a>
 <div style="font-size:11px;color:var(--dim);margin-top:6px;">Your rank: <strong style="color:var(--accent);">#'+myRank+'</strong> &middot; '+(u.refC||0)+' referrals</div>
  ${lb.length?'<div style="margin-top:14px;"><label class="label">Top Referrers</label>'+lb.map((x,i)=>'<div class="ref-lb-row"><div class="ref-lb-rank">'+(i+1)+'</div><div class="ref-lb-name">'+esc(x.name)+'</div><div class="ref-lb-count">'+(x.refC||0)+'</div></div>').join('')+'</div>':''}
 <div style="margin-top:12px;padding:10px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:10px;">
