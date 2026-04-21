@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOWUP — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#050505;--bg2:#0a0a0a;--card:#0e0e0e;--card2:#111;
+--border:#161616;--border2:#222;--border3:#2a2a2a;
+--fg:#f5f5f5;--fg2:#ccc;--muted:#888;--dim:#555;--dim2:#333;
+--accent:#c9a84c;--accent2:#e0c672;--accent3:#a88a30;
+--abg:rgba(201,168,76,.06);--abg2:rgba(201,168,76,.1);--abg3:rgba(201,168,76,.16);
+--danger:#e74c3c;--success:#2ecc71;--warn:#f39c12;
+--gg:linear-gradient(135deg,#c9a84c,#e0c672,#c9a84c);
+--gt:linear-gradient(135deg,#c9a84c 0%,#f0dfa0 50%,#c9a84c 100%)
+}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+a{color:var(--accent);text-decoration:none}
+.gold-text{background:var(--gt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.container{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* NOTIFICATION BAR */
+.notif-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:rgba(201,168,76,.08);border-bottom:1px solid rgba(201,168,76,.12);font-size:12px;color:var(--accent);position:fixed;top:60px;left:0;right:0;z-index:150;backdrop-filter:blur(12px);transform:translateY(-100%);transition:transform .4s ease}
+.notif-bar.show{transform:translateY(0)}
+.notif-bar i{font-size:14px}
+.notif-bar .close-notif{margin-left:auto;background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px;padding:4px 8px;opacity:.6;transition:opacity .2s}
+.notif-bar .close-notif:hover{opacity:1}
+.notif-action{background:var(--abg2);border:1px solid rgba(201,168,76,.2);color:var(--accent);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .2s}
+.notif-action:hover{background:var(--abg3)}
+
+/* NAV */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;border-bottom:1px solid var(--border);background:rgba(5,5,5,.92);backdrop-filter:blur(16px);position:fixed;top:0;left:0;right:0;z-index:200}
+.nl{font-size:16px;font-weight:900;letter-spacing:2.5px}.nl span{color:var(--accent)}
+.ntabs{display:flex;gap:2px}
+.nt{padding:8px 15px;font-size:11px;font-weight:500;color:var(--dim);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s;margin-bottom:-1px}
+.nt:hover{color:var(--muted)}.nt.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nright{display:flex;align-items:center;gap:8px}
+.coin-badge{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--accent);background:var(--abg2);padding:5px 12px;border-radius:8px}
+.coin-badge i{font-size:11px}
+.nbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px;position:relative}
+.nbtn:hover{border-color:var(--accent);color:var(--accent)}
+.ndot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--danger);border-radius:50%;border:2px solid var(--bg)}
+.bnav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(5,5,5,.95);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:4px 0 env(safe-area-inset-bottom,6px)}
+.bni{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;background:none;border:none;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;font-size:9px;font-weight:500;transition:color .2s}
+.bni.active{color:var(--accent)}.bni i{font-size:17px}
+
+/* DASHBOARD */
+.dash{padding:76px 0 100px}
+.dhero{background:linear-gradient(135deg,rgba(201,168,76,.05) 0%,rgba(201,168,76,.012) 100%);border:1px solid rgba(201,168,76,.1);border-radius:18px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden}
+.dhero::before{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.05),transparent 70%);pointer-events:none}
+.dht{display:flex;align-items:center;gap:16px;margin-bottom:14px;position:relative;z-index:1}
+.avatar-ring{width:58px;height:58px;border-radius:50%;padding:3px;flex-shrink:0}
+.avatar-ring.l1{background:linear-gradient(135deg,#444,#2a2a2a)}.avatar-ring.l2{background:linear-gradient(135deg,#6b5428,#4a3a1a)}.avatar-ring.l3{background:linear-gradient(135deg,#8b6f3a,#6b5428)}.avatar-ring.l4{background:linear-gradient(135deg,#a88a30,#8b6f3a)}.avatar-ring.l5{background:var(--gg)}.avatar-ring.l6{background:var(--gg);box-shadow:0 0 14px rgba(201,168,76,.15)}.avatar-ring.l7{background:var(--gg);box-shadow:0 0 20px rgba(201,168,76,.2)}.avatar-ring.l8{background:var(--gg);box-shadow:0 0 28px rgba(201,168,76,.25)}.avatar-ring.l9{background:var(--gg);box-shadow:0 0 36px rgba(201,168,76,.3)}.avatar-ring.l10{background:var(--gg);box-shadow:0 0 44px rgba(201,168,76,.35);animation:pulse-glow 2s ease infinite}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 44px rgba(201,168,76,.35)}50%{box-shadow:0 0 60px rgba(201,168,76,.5)}}
+.avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:var(--accent)}
+.dhi{flex:1;min-width:0}.dhlabel{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:1px}
+.dhname{font-size:17px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xp-row{margin-top:4px}.xp-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-bottom:4px}
+.xp-bar{height:6px;background:#0a0a0a;border-radius:3px;overflow:hidden}.xp-fill{height:100%;background:var(--gg);border-radius:3px;transition:width .6s ease}
+.dh-coins{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:800;color:var(--accent);background:var(--abg2);padding:7px 16px;border-radius:10px;flex-shrink:0}
+.dh-coins i{font-size:12px}
+.dh-motiv{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 14px;background:var(--abg);border:1px solid rgba(201,168,76,.1);border-radius:10px;font-size:12px;color:var(--accent);position:relative;z-index:1}
+.dh-streak{display:flex;align-items:center;gap:8px;margin-top:8px;padding:9px 14px;background:rgba(231,76,60,.05);border:1px solid rgba(231,76,60,.1);border-radius:10px;font-size:12px;color:#d06050;position:relative;z-index:1}
+
+/* STATS */
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.scard{text-align:center;padding:16px 10px;background:var(--card);border:1px solid var(--border);border-radius:14px;transition:all .3s}
+.scard:hover{border-color:var(--border2)}.sv{font-size:22px;font-weight:800;line-height:1;margin-bottom:3px}.sv.gd{color:var(--accent)}
+.sl{font-size:9px;color:var(--dim);font-weight:600;letter-spacing:.7px;text-transform:uppercase}
+
+/* DGRID */
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.dgrid .full{grid-column:1/-1}
+.sec-title{font-size:12px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.sec-title i{color:var(--accent);font-size:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .3s}
+.card:hover{border-color:var(--border2)}
+.gc{border-color:rgba(201,168,76,.06)}.gc:hover{border-color:rgba(201,168,76,.15);box-shadow:0 0 24px rgba(201,168,76,.03)}
+
+/* ROUTINE CARDS */
+.routine-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;transition:all .35s}
+.routine-card.complete{border-color:rgba(201,168,76,.2);box-shadow:0 0 30px rgba(201,168,76,.04)}
+.rc-header{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--border);position:relative}
+.rc-header::after{content:'';position:absolute;bottom:0;left:20px;right:20px;height:1px;background:var(--border)}
+.rc-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.rc-icon.morning{background:rgba(232,184,76,.1);color:#e8b84c}
+.rc-icon.afternoon{background:rgba(212,168,67,.1);color:#d4a843}
+.rc-icon.evening{background:rgba(139,122,64,.1);color:#b0a060}
+.rc-info{flex:1}.rc-label{font-size:14px;font-weight:700}.rc-time{font-size:11px;color:var(--dim);margin-top:1px}
+.rc-progress{display:flex;align-items:center;gap:8px}
+.rc-pbar{width:60px;height:4px;background:#0a0a0a;border-radius:2px;overflow:hidden}.rc-pfill{height:100%;border-radius:2px;transition:width .4s}
+.rc-pbar .morning-fill{background:#e8b84c}.rc-pbar .afternoon-fill{background:#d4a843}.rc-pbar .evening-fill{background:#b0a060}
+.rc-pct{font-size:10px;font-weight:700;color:var(--dim);min-width:28px;text-align:right}
+.rc-complete{color:var(--success);font-size:14px;animation:popIn .3s ease}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+.rc-body{padding:8px 12px}
+
+/* TASK ROWS */
+.task-row{display:flex;align-items:center;gap:10px;padding:10px 8px;border-radius:10px;transition:background .15s;cursor:pointer}
+.task-row:hover{background:rgba(255,255,255,.015)}
+.task-check{width:20px;height:20px;border:2px solid var(--border2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:9px;color:transparent}
+.task-check.done{background:var(--accent);border-color:var(--accent);color:#0a0a0a}
+.task-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--abg);color:var(--dim);flex-shrink:0;transition:color .2s}
+.task-row.done .task-icon{color:var(--accent)}
+.task-label{flex:1;font-size:13px;transition:all .2s}.task-row.done .task-label{color:var(--dim);text-decoration:line-through}
+.task-xp{font-size:10px;font-weight:700;color:var(--accent);opacity:.4}
+.task-timer-area{width:80px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* TIMER */
+.timer-btn{padding:4px 10px;font-size:10px;font-weight:600;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s;white-space:nowrap}
+.timer-btn:hover{border-color:var(--accent);color:var(--accent)}
+.timer-display{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%}
+.timer-text{font-size:13px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.timer-bar{width:100%;height:3px;background:#0a0a0a;border-radius:2px;overflow:hidden}
+.timer-fill{height:100%;background:var(--gg);border-radius:2px;transition:width .15s linear}
+.timer-done{color:var(--success);font-size:16px;animation:popIn .3s ease}
+
+/* DAY PROGRESS */
+.day-progress{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dp-label{font-size:12px;font-weight:700;display:flex;align-items:center;gap:7px}.dp-label i{color:var(--accent)}
+.dp-count{font-size:11px;color:var(--dim)}
+.dp-bar{height:8px;background:#0a0a0a;border-radius:4px;overflow:hidden;margin-bottom:8px}
+.dp-fill{height:100%;background:var(--gg);border-radius:4px;transition:width .5s ease}
+.dp-bonus{font-size:11px;color:var(--dim);text-align:center}
+.dp-bonus span{color:var(--accent);font-weight:600}
+
+/* PREMIUM LOCK */
+.prem-card{position:relative;border-radius:16px;overflow:hidden}
+.prem-card.locked::after{content:'';position:absolute;inset:0;background:rgba(5,5,5,.8);backdrop-filter:blur(4px);z-index:2;border-radius:16px}
+.prem-card.locked .prem-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3}
+.prem-cat{margin-bottom:16px}.prem-cat:last-child{margin-bottom:0}
+.prem-cat h4{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.prem-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;color:var(--fg2)}
+.prem-item i{color:var(--accent);font-size:9px;width:14px;text-align:center}
+
+/* DIET */
+.diet-meal{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.02)}
+.diet-meal:last-child{border-bottom:none}
+.diet-time{font-size:11px;font-weight:700;color:var(--accent);min-width:72px;padding-top:1px}
+.diet-text{font-size:12px;color:var(--fg2);line-height:1.5}
+
+/* WEEK CHART */
+.wk-row{display:flex;gap:6px;margin-bottom:14px}
+.wk-day{flex:1;text-align:center}.wk-bar{height:40px;background:#0a0a0a;border-radius:6px;overflow:hidden;position:relative}
+.wk-fill{position:absolute;bottom:0;left:0;right:0;background:var(--gg);border-radius:6px;transition:height .4s}
+.wk-lbl{font-size:9px;color:var(--dim);margin-top:4px;font-weight:500}.wk-pct{font-size:9px;color:var(--muted);margin-top:1px}
+
+/* BADGES */
+.badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.badge-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:7px;font-size:10px;font-weight:600;background:var(--abg2);color:var(--accent);border:1px solid rgba(201,168,76,.1)}
+.badge-pill.locked{background:rgba(255,255,255,.02);color:var(--dim);border-color:var(--border)}
+.badge-pill i{font-size:9px}
+
+/* MESSAGES */
+.msg-card{padding:12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,.008)}
+.msg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.msg-date{font-size:9px;color:var(--dim)}
+.msg-bubble{padding:9px 12px;border-radius:10px;font-size:12px;line-height:1.6;max-width:85%;margin-bottom:5px}
+.msg-user{background:var(--abg);color:#bbb;border:1px solid rgba(201,168,76,.06)}
+.msg-admin{background:rgba(46,204,113,.04);color:#aaa;border:1px solid rgba(46,204,113,.06);margin-left:auto}
+.bc-card{padding:12px 14px;border-radius:10px;margin-bottom:8px;background:rgba(201,168,76,.03);border:1px solid rgba(201,168,76,.06)}
+.bc-label{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin-bottom:3px}
+.bc-text{font-size:12px;color:#aaa;line-height:1.6}.bc-meta{font-size:9px;color:var(--dim);margin-top:5px}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:10px;background:#25D366;color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;border:none;cursor:pointer;transition:all .25s}
+.wa-btn:hover{background:#20bd5a;transform:translateY(-1px)}
+.divider{height:1px;background:var(--border);margin:16px 0}
+.input{width:100%;background:#0a0a0a;border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--fg);font-family:'Poppins',sans-serif;font-size:13px;transition:border-color .2s;outline:none}
+.input:focus{border-color:var(--accent)}.input::placeholder{color:var(--dim)}
+textarea.input{resize:vertical;min-height:70px;line-height:1.5}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;padding:13px 26px;border-radius:10px;border:none;cursor:pointer;transition:all .25s;outline:none;white-space:nowrap}
+.btn:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.btn-p{background:var(--gg);color:#0a0a0a}.btn-p:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-o{background:none;color:var(--fg2);border:1px solid var(--border2);font-weight:600}.btn-o:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm{padding:9px 18px;font-size:12px;border-radius:8px}
+.btn-xs{padding:6px 12px;font-size:10px;border-radius:7px}
+.btn-wa{background:#25D366;color:#fff;font-weight:700}.btn-wa:hover{background:#20bd5a;transform:translateY(-1px)}
+.btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;filter:none!important}
+.label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.b-pending{background:rgba(243,156,18,.1);color:var(--warn)}.b-replied{background:var(--abg);color:var(--accent)}.b-resolved{background:rgba(46,204,113,.1);color:var(--success)}
+
+/* STORE */
+.store-cats{display:flex;gap:5px;margin-bottom:16px;flex-wrap:wrap}
+.store-cat{padding:6px 14px;font-size:11px;font-weight:600;border-radius:8px;border:1px solid var(--border);background:none;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
+.store-cat.active{background:var(--abg2);border-color:rgba(201,168,76,.2);color:var(--accent)}
+.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.store-item{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.store-img{width:100%;height:130px;object-fit:cover;display:block}
+.store-placeholder{width:100%;height:6px;background:var(--border)}
+.store-body{padding:14px;flex:1;display:flex;flex-direction:column}
+.store-name{font-size:13px;font-weight:700;margin-bottom:3px}
+.store-desc{font-size:11px;color:var(--muted);line-height:1.5;flex:1;margin-bottom:8px}
+.store-price{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:800;color:var(--accent);margin-bottom:6px}
+.store-price i{font-size:10px}
+.store-tag{display:inline-block;font-size:9px;font-weight:600;color:var(--dim);background:rgba(255,255,255,.03);padding:2px 7px;border-radius:4px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+.store-need{font-size:10px;color:var(--warn);margin-bottom:6px}
+
+/* EARN */
+.earn-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.008);border-radius:10px;border:1px solid var(--border);margin-bottom:6px}
+.earn-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;background:var(--abg2);color:var(--accent);flex-shrink:0}
+.earn-info{flex:1}.earn-info h4{font-size:12px;font-weight:600}.earn-info p{font-size:10px;color:var(--dim)}
+.earn-val{font-size:13px;font-weight:800;color:var(--accent);white-space:nowrap}
+.ref-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.ref-tier{padding:14px 8px;border-radius:11px;text-align:center;border:1px solid var(--border);transition:all .3s}
+.ref-tier.earned{border-color:rgba(201,168,76,.25);background:var(--abg)}
+.ref-tier .rt-num{font-size:20px;font-weight:800;color:var(--accent);margin-bottom:2px}
+.ref-tier .rt-req{font-size:9px;color:var(--dim);margin-bottom:6px}
+.ref-tier .rt-reward{font-size:10px;font-weight:600;color:#bbb;line-height:1.4}
+.ref-tier.earned .rt-reward{color:var(--accent)}
+.ref-link-box{display:flex;gap:6px;margin-bottom:10px}
+.ref-link-box input{flex:1;background:#0a0a0a;border:1px solid var(--border);border-radius:9px;padding:10px 12px;color:var(--accent);font-family:'Poppins',sans-serif;font-size:11px;outline:none}
+.ref-lb-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.02)}
+.ref-lb-row:last-child{border-bottom:none}
+.ref-lb-rank{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:var(--abg);color:var(--accent);flex-shrink:0}
+.ref-lb-name{flex:1;font-size:12px;font-weight:600}
+.ref-lb-count{font-size:12px;font-weight:700;color:var(--accent)}
+
+/* MENTOR */
+.mentor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.mentor-card{padding:0;overflow:hidden}.mentor-img{width:100%;height:150px;object-fit:cover;display:block}
+.mentor-body{padding:16px}.mentor-name{font-size:14px;font-weight:700;margin-bottom:1px}
+.mentor-spec{font-size:11px;color:var(--accent);margin-bottom:8px}
+.mentor-meta{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:12px}
+.mentor-meta span{display:flex;align-items:center;gap:4px}.mentor-meta i{font-size:9px;color:var(--accent)}
+
+/* PHOTOS */
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.photo-slot{aspect-ratio:3/4;border:2px dashed var(--border2);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.photo-slot:hover{border-color:var(--accent);background:var(--abg)}
+.photo-slot i{font-size:20px;color:var(--dim);margin-bottom:4px}
+.photo-slot span{font-size:10px;color:var(--dim);font-weight:500}
+.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px}
+.photo-slot .photo-label{position:absolute;bottom:0;left:0;right:0;padding:6px;background:linear-gradient(transparent,rgba(0,0,0,.7));font-size:9px;color:#fff;font-weight:600;text-align:center;border-radius:0 0 10px 10px;z-index:1}
+.photo-slot .photo-del{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:6px;background:rgba(0,0,0,.6);border:none;color:#fff;font-size:9px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2}
+.photo-slot:hover .photo-del{display:flex}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:400;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-bg.show{opacity:1;pointer-events:all}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;transform:scale(.95);transition:transform .3s}
+.modal-bg.show .modal{transform:scale(1)}
+.modal h3{font-size:17px;font-weight:800;margin-bottom:4px;text-align:center}
+.modal .sub{font-size:12px;color:var(--muted);margin-bottom:18px;text-align:center}
+.fg{margin-bottom:16px;text-align:left}
+
+/* TOAST */
+#toast-box{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px}
+.toast{padding:11px 16px;border-radius:10px;font-size:12px;font-weight:500;max-width:340px;animation:slideIn .3s ease;display:flex;align-items:center;gap:7px;backdrop-filter:blur(8px)}
+.toast.hide{animation:slideOut .3s ease forwards}
+.toast-s{background:rgba(46,204,113,.12);border:1px solid rgba(46,204,113,.25);color:#2ecc71}
+.toast-e{background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.25);color:#e74c3c}
+.toast-i{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--accent)}
+.coin-float{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);color:var(--accent);font-size:20px;font-weight:800;pointer-events:none;z-index:9999;animation:coinUp 1.3s ease-out forwards;text-shadow:0 0 16px rgba(201,168,76,.5)}
+@keyframes coinUp{0%{opacity:1;transform:translate(-50%,-50%) scale(.6)}25%{opacity:1;transform:translate(-50%,-70%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-120%) scale(.9)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(24px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fadeUp .4s ease both}.f1{animation-delay:.05s}.f2{animation-delay:.1s}.f3{animation-delay:.15s}.f4{animation-delay:.2s}.f5{animation-delay:.25s}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:768px){
+.ntabs{display:none}.bnav{display:block}
+.dash{padding:66px 0 100px}.sgrid{grid-template-columns:repeat(2,1fr);gap:8px}.sv{font-size:18px}
+.dgrid{grid-template-columns:1fr}.dhero{padding:20px}
+.photo-grid{grid-template-columns:repeat(2,1fr)}
+.store-grid{grid-template-columns:1fr 1fr}.mentor-grid{grid-template-columns:1fr}
+.ref-tiers{grid-template-columns:repeat(2,1fr)}
+.dh-coins{margin-left:0;margin-top:6px}.dht{flex-wrap:wrap}
+}
+@media(max-width:400px){.card{padding:16px}.scard{padding:12px 8px}.store-grid{grid-template-columns:1fr}.ref-tiers{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast-box"></div>
+<div class="modal-bg" id="modal-bg"></div>
+<script>
+/* ===== CONSTANTS ===== */
+const AE='admin@gmail.com',AP='admin123',WN='919876543210',PRICE=99;
+const LX=[0,100,250,500,800,1200,1700,2300,3000,4000];
+const LB_NAMES=['Basic Access','Custom Colors','Weekly Reports','Analytics','Glow Getter +5% Off','Priority Support','Exclusive Routines','10% Store Off','Free Mentor Session','Elite +20% Off'];
+const BADGES=[
+{id:'first_step',n:'First Step',i:'fa-shoe-prints',d:'Complete first task'},
+{id:'on_fire',n:'On Fire',i:'fa-fire',d:'7-day streak'},
+{id:'unstoppable',n:'Unstoppable',i:'fa-bolt',d:'30-day streak'},
+{id:'glow_getter',n:'Glow Getter',i:'fa-star',d:'Reach Level 5'},
+{id:'elite',n:'Elite',i:'fa-trophy',d:'Reach Level 10'},
+{id:'social',n:'Social Butterfly',i:'fa-users',d:'First referral'},
+{id:'shopper',n:'Smart Spender',i:'fa-bag-shopping',d:'First purchase'},
+{id:'week_warrior',n:'Week Warrior',i:'fa-calendar-week',d:'Perfect 7-day week'}
+];
+const REF_TIERS=[{req:1,coins:20,label:'+20 Glow Coins'},{req:3,coins:50,label:'+50 Bonus Coins'},{req:5,reward:'mentor',label:'Free Mentor Session'},{req:10,reward:'elite',label:'Elite Badge + 200'}];
+const ROUTINES=[
+{id:'morning',label:'Morning Routine',time:'6:30 – 7:30 AM',icon:'fa-sun',css:'morning',tasks:[
+{k:'warmWater',l:'Drink Warm Water + Lemon',t:30,i:'fa-glass-water'},
+{k:'faceWash',l:'Face Wash',t:60,i:'fa-droplet'},
+{k:'moisturizer',l:'Apply Moisturizer',t:30,i:'fa-pump-soap'},
+{k:'sunscreen',l:'Apply Sunscreen',t:30,i:'fa-sun'},
+{k:'noSugar',l:'No Sugar in Morning',t:0,i:'fa-ban'}
+]},
+{id:'afternoon',label:'Afternoon Routine',time:'12:00 – 1:00 PM',icon:'fa-cloud-sun',css:'afternoon',tasks:[
+{k:'touchup',l:'Skincare Touch-up',t:30,i:'fa-hand-sparkles'},
+{k:'proteinLunch',l:'Protein-Rich Lunch',t:0,i:'fa-utensils'},
+{k:'walk10',l:'Walk for 10 Minutes',t:600,i:'fa-person-walking'}
+]},
+{id:'evening',label:'Evening Routine',time:'9:00 – 10:00 PM',icon:'fa-moon',css:'evening',tasks:[
+{k:'eveWash',l:'Face Wash',t:60,i:'fa-droplet'},
+{k:'nightCream',l:'Apply Night Cream',t:30,i:'fa-moon'},
+{k:'read10',l:'Read 10 Pages',t:300,i:'fa-book'},
+{k:'sleepBy11',l:'Sleep by 11 PM',t:0,i:'fa-bed'}
+]}
+];
+const ALL_TASKS=ROUTINES.flatMap(r=>r.tasks);
+const PREM_ROUTINES=[
+{c:'Skin',i:'fa-spa',items:['Morning vitamin C serum protocol','Night retinol routine','Weekly exfoliation schedule','Sunscreen reapplication guide','DIY face mask recipes']},
+{c:'Fitness',i:'fa-fire-flame-curved',items:['4-week strength program','HIIT cardio schedule','Flexibility & mobility routine','Rest day recovery protocol','Progressive overload guide']},
+{c:'Confidence',i:'fa-brain',items:['Daily affirmations practice','Eye contact training drills','Power posture exercises','Social skills framework','Public speaking basics']}
+];
+const DIET=[{t:'Breakfast',d:'Oats + banana + honey + almonds. Green tea.'},{t:'Lunch',d:'Grilled chicken, brown rice, mixed salad.'},{t:'Snack',d:'Mixed nuts, apple, green tea.'},{t:'Dinner',d:'Grilled fish/paneer, steamed vegetables, quinoa.'}];
+const STORE=[
+{id:'wallpack',n:'Glow Wallpaper Pack',d:'15 premium motivational wallpapers.',p:20,i:'fa-image',cat:'digital'},
+{id:'motiv_pdf',n:'Motivation Blueprint',d:'20-page discipline building guide.',p:50,i:'fa-file-lines',cat:'digital'},
+{id:'routine_tpl',n:'Custom Routine Template',d:'Editable routine used by top performers.',p:100,i:'fa-clipboard-list',cat:'digital',unlock:'premiumRoutine'},
+{id:'skin_bible',n:'Skincare Bible PDF',d:'30-page skincare guide for your type.',p:150,i:'fa-book-medical',cat:'digital'},
+{id:'facewash',n:'Glow Face Wash',d:'Gentle foaming cleanser with salicylic acid. 100ml.',p:300,i:'fa-pump-soap',cat:'skincare',img:'https://picsum.photos/seed/fw99/400/280.jpg'},
+{id:'moisturizer',n:'Hydra Boost Moisturizer',d:'Lightweight gel moisturizer with hyaluronic acid. 50ml.',p:400,i:'fa-droplet',cat:'skincare',img:'https://picsum.photos/seed/mo99/400/280.jpg'},
+{id:'sunscreen',n:'Shield SPF 50 Sunscreen',d:'Broad spectrum UV protection. Non-greasy. 60ml.',p:450,i:'fa-sun',cat:'skincare',img:'https://picsum.photos/seed/ss99/400/280.jpg'},
+{id:'serum',n:'Vitamin C Glow Serum',d:'Brightening serum with 15% vitamin C. 30ml.',p:500,i:'fa-flask',cat:'skincare',img:'https://picsum.photos/seed/se99/400/280.jpg'},
+{id:'nightcream',n:'Repair Night Cream',d:'Deep repair formula with retinol. 50ml.',p:380,i:'fa-moon',cat:'skincare',img:'https://picsum.photos/seed/nc99/400/280.jpg'},
+{id:'skit',n:'Complete Glow Kit',d:'Face wash + Moisturizer + Serum + Sunscreen + Night cream.',p:1500,i:'fa-gift',cat:'skincare',img:'https://picsum.photos/seed/kit99/400/280.jpg'},
+{id:'group_ws',n:'Group Workshop Access',d:'Join a live session with a Glow Coach.',p:300,i:'fa-users',cat:'coaching'},
+{id:'mentor_1on1',n:'1-on-1 Mentor Session',d:'30-min private video call with a coach.',p:500,i:'fa-video',cat:'coaching'},
+{id:'discount',n:'Skincare Discount Coupon',d:'20% off on partner skincare brands.',p:200,i:'fa-ticket',cat:'rewards'},
+{id:'conf_audio',n:'Confidence Audio Course',d:'5-day audio program on confidence.',p:100,i:'fa-headphones',cat:'rewards'},
+{id:'pro_ext',n:'PRO Extension (30 Days)',d:'Extend full access by 30 days.',p:800,i:'fa-gem',cat:'rewards'}
+];
+const MENTORS=[
+{id:'arjun',n:'Coach Arjun',s:'Skin & Grooming Expert',img:'https://picsum.photos/seed/ga1/400/300.jpg',r:4.9,ses:340},
+{id:'priya',n:'Coach Priya',s:'Fitness & Nutrition Coach',img:'https://picsum.photos/seed/ga2/400/300.jpg',r:4.8,ses:280},
+{id:'rahul',n:'Coach Rahul',s:'Confidence & Style Mentor',img:'https://picsum.photos/seed/ga3/400/300.jpg',r:4.9,ses:410}
+];
+const PHOTO_MILESTONES=['Week 1','Week 2','Week 4','Week 8'];
+
+/* ===== DATA LAYER ===== */
+const D={
+_g(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch{return null}},
+_s(k,v){try{localStorage.setItem('g_'+k,JSON.stringify(v))}catch(e){console.warn('Storage full',e)}},
+gU(){return this._g('users')||[]},sU(u){this._s('users',u)},
+gM(){return this._g('msgs')||[]},sM(m){this._s('msgs',m)},
+gB(){return this._g('bcasts')||[]},
+gO(){return this._g('orders')||[]},sO(o){this._s('orders',o)},
+gS(){return this._g('sess')},sS(s){this._s('sess',s)},cS(){localStorage.removeItem('g_sess')},
+fP(p){return this.gU().find(u=>u.phone===p)},
+fPI(id){return this.gU().find(u=>u.id===id)},
+cur(){const s=this.gS();return s?this.fP(s.phone):null},
+isA(){const s=this.gS();return s&&s.phone===AE},
+gUM(uid){return this.gM().filter(m=>m.userId===uid).sort((a,b)=>b.ts-a.ts)},
+gUB(){const s=this.gS();if(!s)return[];const bc=this._g('bcasts')||[];return bc.filter(b=>b.ts>=(s.ra||0)).sort((a,b)=>b.ts-a.ts)}
+};
+
+/* ===== UTILITIES ===== */
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const tk=()=>new Date().toISOString().split('T')[0];
+const fD=t=>new Date(t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+const fDT=t=>new Date(t).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+const dS=t=>Math.max(0,Math.floor((Date.now()-t)/864e5));
+const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
+const trn=(s,n)=>s.length>n?s.slice(0,n)+'...':s;
+function gLv(xp){for(let i=LX.length-1;i>=0;i--)if(xp>=LX[i])return i+1;return 1}
+function gXP(xp){const lv=gLv(xp),c=LX[lv-1]||0,n=LX[lv]||(LX[LX.length-1]*1.5);return{cur:xp-c,need:n-c,pct:Math.min(100,Math.round(((xp-c)/(n-c))*100))}}
+function cStreak(h){let s=0,d=new Date(),t=tk();if(h&&h[t]&&ALL_TASKS.some(x=>h[t][x.k])){s=1;d.setDate(d.getDate()-1)}else d.setDate(d.getDate()-1);for(let i=0;i<365;i++){const k=d.toISOString().split('T')[0];if(h&&h[k]&&ALL_TASKS.some(x=>h[k][x.k])){s++;d.setDate(d.getDate()-1)}else break}return s}
+function tProg(h){const t=tk(),d=(h||{})[t]||{};const done=ALL_TASKS.filter(x=>d[x.k]).length;return{done,total:ALL_TASKS.length,pct:Math.round((done/ALL_TASKS.length)*100)}}
+function rProg(h,rid){const t=tk(),d=(h||{})[t]||{};const r=ROUTINES.find(x=>x.id===rid);if(!r)return{done:0,total:0,pct:0};const done=r.tasks.filter(x=>d[x.k]).length;return{done,total:r.tasks.length,pct:Math.round((done/r.tasks.length)*100)}}
+function wProg(h){const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0];const dh=(h||{})[k]||{};const done=ALL_TASKS.filter(x=>dh[x.k]).length;days.push({lbl:d.toLocaleDateString('en-US',{weekday:'short'}),pct:Math.round((done/ALL_TASKS.length)*100)})}return days}
+function eBadges(u){const b=[],s=cStreak(u.habits||{}),any=Object.values(u.habits||{}).some(d=>Object.values(d).some(v=>v));
+if(any)b.push('first_step');if(s>=7)b.push('on_fire');if(s>=30)b.push('unstoppable');if(gLv(u.xp||0)>=5)b.push('glow_getter');if(gLv(u.xp||0)>=10)b.push('elite');if((u.refC||0)>=1)b.push('social');if((u.purch||[]).length>=1)b.push('shopper');
+let wd=0,dd=new Date();dd.setDate(dd.getDate()-1);for(let i=0;i<7;i++){const k=dd.toISOString().split('T')[0];const dh=(u.habits||{})[k]||{};if(ALL_TASKS.every(x=>dh[x.k])){wd++;dd.setDate(dd.getDate()-1)}else break}if(wd>=7)b.push('week_warrior');return b}
+function nLvM(xp){const lv=gLv(xp);if(lv>=10)return{t:'Maximum level reached!',done:true};const nx=LX[lv],need=nx-xp,tasks=Math.ceil(need/5);return{t:`Complete ${tasks} more tasks to reach Level ${lv+1}`,nl:lv+1,ben:LB_NAMES[lv],done:false}}
+function refTS(rc){return REF_TIERS.map(t=>({...t,earned:rc>=t.req}))}
+function addC(uid,amt,reason){const us=D.gU(),i=us.findIndex(u=>u.id===uid);if(i===-1)return;us[i].coins=(us[i].coins||0)+amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:'earn',r:reason,a:amt,ts:Date.now()});D.sU(us)}
+function spendC(uid,amt,reason){const us=D.gU(),i=us.findIndex(u=>u.id===uid);if(i===-1)return false;if((us[i].coins||0)<amt)return false;us[i].coins-=amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:'spend',r:reason,a:-amt,ts:Date.now()});D.sU(us);return true}
+function addXP(uid,amt){const us=D.gU(),i=us.findIndex(u=>u.id===uid);if(i===-1)return 0;const old=gLv(us[i].xp||0);us[i].xp=(us[i].xp||0)+amt;const nv=gLv(us[i].xp);D.sU(us);if(nv>old)toast('Level Up! Now Level '+nv+'.','i');return nv}
+function cFloat(amt){const el=document.createElement('div');el.className='coin-float';el.innerHTML='<i class="fa-solid fa-coins" style="margin-right:5px;font-size:15px;"></i>+'+amt;document.body.appendChild(el);setTimeout(()=>el.remove(),1400)}
+function toast(msg,type='i'){const b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};
+const el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);
+setTimeout(()=>{el.classList.add('hide');setTimeout(()=>el.remove(),300)},3200)}
+function openModal(html){const m=document.getElementById('modal-bg');m.innerHTML='<div class="modal">'+html+'</div>';m.classList.add('show')}
+function closeModal(){document.getElementById('modal-bg').classList.remove('show')}
+document.getElementById('modal-bg').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+/* ===== TIMER SYSTEM ===== */
+const activeTimers=new Map();
+function startTimer(taskKey,duration){
+if(activeTimers.has(taskKey))return;
+const endTime=Date.now()+duration*1000;
+const el=document.querySelector('[data-timer="'+taskKey+'"]');
+if(!el)return;
+el.innerHTML='<div class="timer-display"><span class="timer-text">'+fmtTime(duration)+'</span><div class="timer-bar"><div class="timer-fill" style="width:100%"></div></div></div>';
+const iv=setInterval(()=>{
+const rem=Math.max(0,Math.ceil((endTime-Date.now())/1000));
+const txtEl=el.querySelector('.timer-text'),fillEl=el.querySelector('.timer-fill');
+if(txtEl)txtEl.textContent=fmtTime(rem);
+if(fillEl)fillEl.style.width=((rem/duration)*100)+'%';
+if(rem<=0){clearInterval(iv);activeTimers.delete(taskKey);
+el.innerHTML='<i class="fa-solid fa-check timer-done"></i>';
+toggleTask(taskKey);}
+},200);
+activeTimers.set(taskKey,iv);
+}
+function fmtTime(s){const m=Math.floor(s/60),sec=s%60;return m>0?m+':'+String(sec).padStart(2,'0'):'0:'+String(sec).padStart(2,'0')}
+
+/* ===== TASK TOGGLE ===== */
+function toggleTask(key){
+const u=D.cur();if(!u)return;
+const us=D.gU(),i=us.findIndex(x=>x.id===u.id);if(i===-1)return;
+if(!us[i].habits)us[i].habits={};const t=tk();if(!us[i].habits[t])us[i].habits[t]={};
+const wasAll=ALL_TASKS.every(x=>us[i].habits[t][x.k]);
+us[i].habits[t][key]=!us[i].habits[t][key];
+const nowAll=ALL_TASKS.every(x=>us[i].habits[t][x.k]);
+D.sU(us);
+if(us[i].habits[t][key])addXP(u.id,5);
+if(!wasAll&&nowAll){addC(u.id,10,'All daily tasks completed');cFloat(10);addXP(u.id,20);
+const s=cStreak(us[i].habits);if(s>=7&&(us[i].lastSB||0)<Math.floor(s/7)*7){const bonus=Math.floor(s/7)*50;addC(u.id,bonus,s+'-day streak bonus');cFloat(bonus);us[i].lastSB=Math.floor(s/7)*7;D.sU(D.gU())}
+toast('All tasks done! +10 Glow Cash','s')}
+render();
+}
+
+/* ===== PHOTO RESIZE ===== */
+function resizeImage(file,maxW,callback){
+const reader=new FileReader();reader.onload=function(e){
+const img=new Image();img.onload=function(){
+const canvas=document.createElement('canvas');let w=img.width,h=img.height;
+if(w>maxW){h=Math.round(h*(maxW/w));w=maxW}
+canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);
+callback(canvas.toDataURL('image/jpeg',0.6))};img.src=e.target.value};reader.readAsDataURL(file);
+}
+
+/* ===== STATE ===== */
+let tab='home',sCat='all',buyingItem=null;
+function nav(t){tab=t;render();window.scrollTo({top:0,behavior:'smooth'})}
+function render(){
+const u=D.cur();if(!u){location.href='index.html';return''}
+const a=document.getElementById('app');
+const lv=gLv(u.xp||0),xp=gXP(u.xp||0),st=cStreak(u.habits||{}),pr=tProg(u.habits||{}),wp=wProg(u.habits||{}),da=dS(u.createdAt),badges=eBadges(u),bcasts=D.gUB(),msgs=D.gUM(u.id),pend=msgs.filter(m=>m.st==='pending').length,ini=u.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2),motiv=nLvM(u.xp||0);
+const tabs=[{id:'home',i:'fa-house',l:'Home'},{id:'tracker',i:'fa-check-double',l:'Tracker'},{id:'store',i:'fa-store',l:'Store'},{id:'earn',i:'fa-coins',l:'Earn'},{id:'mentor',i:'fa-headset',l:'Mentor'}];
+let ct='';
+if(tab==='home')ct=vHome(u,lv,xp,st,pr,wp,da,badges,bcasts,msgs,pend,ini,motiv);
+else if(tab==='tracker')ct=vTracker(u,st);
+else if(tab==='store')ct=vStore(u);
+else if(tab==='earn')ct=vEarn(u);
+else if(tab==='mentor')ct=vMentor(u);
+a.innerHTML=`<nav class="topnav"><div class="nl">GLOW<span>UP</span></div>
+<div class="ntabs">${tabs.map(t=>'<button class="nt '+(tab===t.id?'active':'')+'" data-action="tab" data-t="'+t.id+'">'+t.l+'</button>').join('')}</div>
+<div class="nright"><div class="coin-badge"><i class="fa-solid fa-coins"></i>${u.coins||0}</div>
+<button class="nbtn" data-action="tab" data-t="home" aria-label="Messages">${pend?'<span class="ndot"></span>':''}<i class="fa-solid fa-envelope" style="font-size:12px;"></i></button>
+<button class="nbtn" data-action="logout" aria-label="Logout"><i class="fa-solid fa-arrow-right-from-bracket" style="font-size:11px;"></i></button></div></nav>
+<div class="notif-bar" id="notif-bar"><i class="fa-solid fa-bell"></i><span>You have <strong>${ALL_TASKS.length-pr.done}</strong> tasks remaining today</span><button class="notif-action" data-action="tab" data-t="tracker">Go to Tracker</button><button class="close-notif" data-action="dismiss-notif"><i class="fa-solid fa-xmark"></i></button></div>
+<div class="dash"><div class="container">${ct}</div></div>
+<nav class="bnav"><div style="display:flex;justify-content:space-around;">${tabs.map(t=>'<button class="bni '+(tab===t.id?'active':'')+'" data-action="tab" data-t="'+t.id+'"><i class="fa-solid '+t.i+'"></i>'+t.l+'</button>').join('')}</div></nav>`;
+initNotif(pr);
+}
+
+function initNotif(pr){
+const bar=document.getElementById('notif-bar');
+if(!bar)return;if(pr.done>=pr.total){bar.classList.remove('show');return}
+const dismissed=sessionStorage.getItem('g_notif_dismissed');
+if(dismissed===tk())return;
+setTimeout(()=>bar.classList.add('show'),600);
+}
+
+/* ===== HOME VIEW ===== */
+function vHome(u,lv,xp,st,pr,wp,da,badges,bcasts,msgs,pend,ini,motiv){
+const photos=loadPhotos(u.id);
+return`<div class="dhero fi">
+<div class="dht"><div class="avatar-ring l${Math.min(lv,10)}"><div class="avatar-inner">${ini}</div></div>
+<div class="dhi"><div class="dhlabel">Level ${lv}${lv<10?' — '+xp.cur+'/'+xp.need+' XP':''}</div><div class="dhname">${esc(u.name)}</div>
+<div class="xp-row"><div class="xp-labels"><span>XP Progress</span><span>${xp.pct}%</span></div><div class="xp-bar"><div class="xp-fill" style="width:${xp.pct}%"></div></div></div></div>
+<div class="dh-coins"><i class="fa-solid fa-coins"></i>${u.coins||0}</div></div>
+<div style="font-size:13px;font-weight:300;color:#aaa;position:relative;z-index:1;">You're <strong style="color:var(--accent);">${Math.round(u.progress||0)}%</strong> closer to your best version.</div>
+ ${motiv.done?'':'<div class="dh-motiv fi f1"><i class="fa-solid fa-rocket"></i>'+esc(motiv.t)+' — Unlocks: '+esc(motiv.ben)+'</div>'}
+ ${st>0?'<div class="dh-streak fi f2"><i class="fa-solid fa-fire"></i>Don\'t break your <strong>'+st+'-day</strong> streak!</div>':''}
+</div>
+<div class="sgrid">
+<div class="scard gc fi f1"><div class="sv gd">${st}</div><div class="sl">Streak</div></div>
+<div class="scard gc fi f1"><div class="sv">${Math.round(u.progress||0)}%</div><div class="sl">Progress</div></div>
+<div class="scard gc fi f2"><div class="sv gd">${pr.done}/${pr.total}</div><div class="sl">Today</div></div>
+<div class="scard gc fi f3"><div class="sv">${da}</div><div class="sl">Days Active</div></div>
+</div>
+<div class="dgrid">
+<div class="card gc fi f2"><div class="sec-title"><i class="fa-solid fa-calendar-week"></i> This Week</div>
+<div class="wk-row">${wp.map(d=>'<div class="wk-day"><div class="wk-bar"><div class="wk-fill" style="height:'+d.pct+'%"></div></div><div class="wk-lbl">'+d.lbl+'</div><div class="wk-pct">'+d.pct+'%</div></div>').join('')}</div>
+<div class="sec-title" style="margin-top:18px;"><i class="fa-solid fa-award"></i> Badges (${badges.length}/${BADGES.length})</div>
+<div class="badge-row">${badges.map(bid=>{const b=BADGES.find(x=>x.id===bid);return b?'<div class="badge-pill" title="'+esc(b.d)+'"><i class="fa-solid '+b.i+'"></i>'+b.n+'</div>':''}).join('')}${BADGES.filter(b=>!badges.includes(b.id)).map(b=>'<div class="badge-pill locked" title="'+esc(b.d)+'"><i class="fa-solid '+b.i+'"></i>'+b.n+'</div>').join('')}</div>
+</div>
+<div class="card gc fi f3"><div class="sec-title"><i class="fa-solid fa-bolt"></i> Quick Actions</div>
+<div style="display:flex;flex-direction:column;gap:5px;">
+<button class="btn btn-o btn-sm" data-action="tab" data-t="tracker" style="justify-content:flex-start;"><i class="fa-solid fa-check-double" style="width:18px;color:var(--accent);"></i> Complete Today's Tasks</button>
+<button class="btn btn-o btn-sm" data-action="tab" data-t="store" style="justify-content:flex-start;"><i class="fa-solid fa-store" style="width:18px;color:var(--accent);"></i> Redeem Skincare Products</button>
+<button class="btn btn-o btn-sm" data-action="tab" data-t="earn" style="justify-content:flex-start;"><i class="fa-solid fa-coins" style="width:18px;color:var(--accent);"></i> Earn More Coins</button>
+<button class="btn btn-o btn-sm" data-action="tab" data-t="mentor" style="justify-content:flex-start;"><i class="fa-solid fa-headset" style="width:18px;color:var(--accent);"></i> Book Mentor Session</button>
+</div></div>
+<div class="card gc fi f4"><div class="sec-title"><i class="fa-solid fa-camera"></i> Progress Photos</div>
+<p style="font-size:11px;color:var(--dim);margin-bottom:12px;">Track your transformation over time.</p>
+<div class="photo-grid">${PHOTO_MILESTONES.map((m,i)=>'<div class="photo-slot" data-action="upload-photo" data-idx="'+i+'">'+
+(photos[i]?'<img src="'+photos[i]+'" alt="'+m+'"><div class="photo-label">'+m+'</div><button class="photo-del" data-action="del-photo" data-idx="'+i+'"><i class="fa-solid fa-trash"></i></button>'
+:'<i class="fa-solid fa-camera"></i><span>'+m+'</span>')+'</div>').join('')}</div>
+<input type="file" accept="image/*" id="photo-input" hidden>
+</div>
+<div class="card full gc fi f5"><div class="sec-title"><i class="fa-solid fa-envelope"></i> Support ${pend?'<span class="badge b-pending" style="margin-left:auto;">'+pend+' pending</span>':''}</div>
+ ${bcasts.length?bcasts.slice(0,2).map(b=>'<div class="bc-card"><div class="bc-label">Announcement</div><div class="bc-text">'+esc(b.message)+'</div><div class="bc-meta">'+fDT(b.ts)+'</div></div>').join('')+'<div class="divider"></div>':''}
+<div style="margin-bottom:12px"><label class="label">Send message to support</label>
+<textarea class="input" id="sm" placeholder="Describe your question..."></textarea>
+<button class="btn btn-p btn-sm mt-8" data-action="send-msg">Send</button></div>
+ ${msgs.length?msgs.slice(0,3).map(m=>'<div class="msg-card"><div class="msg-header"><span class="badge b-'+m.st+'">'+m.st+'</span><span class="msg-date">'+fDT(m.ts)+'</span></div><div class="msg-bubble msg-user">'+esc(m.message)+'</div>'+(m.reply?'<div class="msg-bubble msg-admin"><strong style="font-size:9px;color:var(--accent);display:block;margin-bottom:2px;">SUPPORT</strong>'+esc(m.reply)+'</div>':'')+'</div>').join(''):'<p style="font-size:12px;color:var(--dim);">No messages yet.</p>'}
+<div class="divider"></div>
+<button class="wa-btn" data-action="mwa"><i class="fa-brands fa-whatsapp" style="font-size:15px;"></i> Talk to Mentor on WhatsApp</button>
+</div></div>`}
+
+/* ===== TRACKER VIEW ===== */
+function vTracker(u){
+const today=tk(),dh=(u.habits||{})[today]||{};
+const hasPR=u.unlocks&&u.unlocks.premiumRoutine;
+return`<div class="day-progress fi"><div class="dp-header"><div class="dp-label"><i class="fa-solid fa-circle-check"></i> Today's Progress</div><div class="dp-count">${rProg(u.habits,'morning').done+rProg(u.habits,'afternoon').done+rProg(u.habits,'evening').done} / ${ALL_TASKS.length} tasks</div></div>
+<div class="dp-bar"><div class="dp-fill" style="width:${tProg(u.habits).pct}%"></div></div>
+<div class="dp-bonus">Complete all tasks to earn <span>+10 Glow Cash</span> and <span>+20 XP</span></div></div>
+ ${ROUTINES.map(r=>{const rp=rProg(u.habits,r.id);const isComplete=rp.done>=rp.total;
+return'<div class="routine-card fi '+(isComplete?'complete':'')+'"><div class="rc-header"><div class="rc-icon '+r.css+'"><i class="fa-solid '+r.icon+'"></i></div><div class="rc-info"><div class="rc-label">'+r.label+'</div><div class="rc-time">'+r.time+'</div></div><div class="rc-progress"><div class="rc-pbar"><div class="rc-pfill '+r.css+'-fill" style="width:'+rp.pct+'%"></div></div><div class="rc-pct">'+(isComplete?'<i class="fa-solid fa-check rc-complete"></i>':rp.pct+'%')+'</div></div></div><div class="rc-body">'+
+r.tasks.map(task=>{const done=dh[task.k];return'<div class="task-row '+(done?'done':'')+'" data-action="toggle" data-k="'+task.k+'"><div class="task-check '+(done?'done':'')+'">'+(done?'<i class="fa-solid fa-check"></i>':'')+'</div><div class="task-icon"><i class="fa-solid '+task.i+'"></i></div><span class="task-label">'+task.l+'</span><span class="task-xp">+2 XP</span><div class="task-timer-area" data-timer="'+task.k+'">'+
+(done?'<i class="fa-solid fa-check" style="color:var(--success);font-size:12px;"></i>'
+:task.t>0?'<button class="timer-btn" data-action="start-timer" data-k="'+task.k+'" data-d="'+task.t+'"><i class="fa-solid fa-play" style="font-size:8px;margin-right:3px;"></i>'+fmtTime(task.t)+'</button>'
+:'')+'</div></div>'}).join('')+'</div></div>'}).join('')}
+<div class="dgrid" style="margin-top:14px;">
+<div class="card gc prem-card fi f1 ${hasPR?'':'locked'}"><div class="sec-title"><i class="fa-solid fa-crown"></i> Premium Routines</div>
+ ${PREM_ROUTINES.map(r=>'<div class="prem-cat"><h4><i class="fa-solid '+r.i+'"></i>'+r.c+'</h4>'+r.items.map(i=>'<div class="prem-item"><i class="fa-solid fa-check"></i>'+i+'</div>').join('')+'</div>').join('')}
+ ${hasPR?'':'<button class="btn btn-p btn-sm prem-btn" data-action="tab" data-t="store">Unlock in Store</button>'}</div>
+<div class="card gc fi f2"><div class="sec-title"><i class="fa-solid fa-utensils"></i> Diet Plan</div>
+ ${DIET.map(d=>'<div class="diet-meal"><span class="diet-time">'+d.t+'</span><span class="diet-text">'+d.d+'</span></div>').join('')}</div>
+</div>`}
+
+/* ===== STORE VIEW ===== */
+function vStore(u){
+const coins=u.coins||0,purch=u.purch||[];
+const cats=[{id:'all',l:'All'},{id:'skincare',l:'Skincare'},{id:'digital',l:'Digital'},{id:'coaching',l:'Coaching'},{id:'rewards',l:'Rewards'}];
+const items=sCat==='all'?STORE:STORE.filter(x=>x.cat===sCat);
+return`<div style="margin-bottom:18px;" class="fi"><h2 style="font-size:18px;font-weight:800;margin-bottom:2px;">Reward Store</h2>
+<p style="font-size:12px;color:var(--muted);">Redeem Glow Cash for products, guides, and sessions.</p>
+<div style="display:inline-flex;align-items:center;gap:6px;background:var(--abg2);padding:7px 16px;border-radius:10px;margin-top:6px;"><i class="fa-solid fa-coins" style="color:var(--accent);font-size:15px;"></i><span style="font-size:18px;font-weight:800;color:var(--accent);">${coins}</span><span style="font-size:11px;color:var(--muted);">Glow Cash</span></div></div>
+<div class="store-cats">${cats.map(c=>'<button class="store-cat '+(sCat===c.id?'active':'')+'" data-action="scat" data-c="'+c.id+'">'+c.l+'</button>').join('')}</div>
+<div class="store-grid">${items.map(item=>{const owned=purch.includes(item.id);const canBuy=coins>=item.p&&!owned;const diff=item.p-coins;const isSkin=item.cat==='skincare';
+return'<div class="card gc store-item fi f'+(STORE.indexOf(item)%5)+'">'+
+(item.img?'<img src="'+item.img+'" alt="'+esc(item.n)+'" class="store-img" loading="lazy">':'<div class="store-placeholder"></div>')+
+'<div class="store-body">'+(isSkin?'<span class="store-tag"><i class="fa-solid fa-truck" style="margin-right:3px;"></i> Physical</span>':'')+
+'<div class="store-name">'+item.n+'</div><div class="store-desc">'+item.d+'</div>'+
+(owned?'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><button class="btn btn-sm" style="background:rgba(46,204,113,.1);color:#2ecc71;border:1px solid rgba(46,204,113,.2);font-weight:700;" disabled><i class="fa-solid fa-check"></i> Owned</button>'
+:canBuy?'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><button class="btn btn-p btn-sm" data-action="buy" data-id="'+item.id+'" style="margin-top:auto;">'+(isSkin?'Order Now':'Redeem')+'</button>'
+:'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><div class="store-need">Need '+diff+' more coins</div><button class="btn btn-p btn-sm" disabled style="margin-top:auto;">Not enough</button>')+
+'</div></div>'}).join('')}</div>`}
+
+/* ===== EARN VIEW ===== */
+function vEarn(u){
+const canCI=!u.lastCI||u.lastCI!==tk();const tiers=refTS(u.refC||0);
+const refLink=location.origin+location.pathname+'?ref='+(u.refCode||'');
+const users=D.gU();const lb=users.filter(x=>x.id!==u.id&&(x.refC||0)>0).sort((a,b)=>(b.refC||0)-(a.refC||0)).slice(0,5);
+const myRank=[...users].sort((a,b)=>(b.refC||0)-(a.refC||0)).findIndex(x=>x.id===u.id)+1;
+return`<div class="dgrid"><div class="card gc fi"><div class="sec-title"><i class="fa-solid fa-coins"></i> Ways to Earn</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-check-double"></i></div><div class="earn-info"><h4>Complete All Daily Tasks</h4><p>Finish all 12 routine tasks</p></div><div class="earn-val">+10</div></div>
+<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-fire"></i></div><div class="earn-info"><h4>7-Day Streak Bonus</h4><p>Every 7 days streaked</p></div><div class="earn-val">+50</div></div>
+<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-calendar-check"></i></div><div class="earn-info"><h4>Daily Check-In</h4><p>Tap once per day</p></div><div class="earn-val">+5</div></div>
+<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-user-plus"></i></div><div class="earn-info"><h4>Refer a Friend</h4><p>Friend joins & pays</p></div><div class="earn-val">+20</div></div>
+</div>
+<button class="btn btn-p btn-sm mt-16" data-action="checkin" ${canCI?'':'disabled'} style="margin-top:16px;">${canCI?'<i class="fa-solid fa-calendar-check"></i> Daily Check-In (+5)':'<i class="fa-solid fa-check"></i> Checked in today'}</button></div>
+<div class="card gc fi f1"><div class="sec-title"><i class="fa-solid fa-user-group"></i> Referral Program</div>
+<p style="font-size:11px;color:var(--muted);margin-bottom:12px;">Share your link. Earn at every milestone.</p>
+<div class="ref-tiers">${tiers.map(t=>'<div class="ref-tier '+(t.earned?'earned':'')+'"><div class="rt-num">'+t.req+'</div><div class="rt-req">referral'+(t.req>1?'s':'')+'</div><div class="rt-reward">'+t.label+'</div></div>').join('')}</div>
+<div class="ref-link-box"><input class="input" value="'+esc(refLink)+'" readonly id="rl"><button class="btn btn-o btn-xs" data-action="cpy-ref"><i class="fa-solid fa-copy"></i></button></div>
+<div style="font-size:11px;color:var(--dim);margin-top:6px;">Your rank: <strong style="color:var(--accent);">#'+myRank+'</strong> &middot; '+(u.refC||0)+' referrals</div>
+ ${lb.length?'<div style="margin-top:14px;"><label class="label">Top Referrers</label>'+lb.map((x,i)=>'<div class="ref-lb-row"><div class="ref-lb-rank">'+(i+1)+'</div><div class="ref-lb-name">'+esc(x.name)+'</div><div class="ref-lb-count">'+(x.refC||0)+'</div></div>').join('')+'</div>':''}
+<div style="margin-top:12px;padding:10px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:10px;">
+<p style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:2px;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> Top Referrer Reward</p>
+<p style="font-size:10px;color:var(--muted);">#1 referrer each month gets 500 bonus coins + free mentor session.</p></div></div></div>`}
+
+/* ===== MENTOR VIEW ===== */
+function vMentor(u){
+return`<div style="margin-bottom:18px;" class="fi"><h2 style="font-size:18px;font-weight:800;margin-bottom:2px;">Talk to a Glow Coach</h2>
+<p style="font-size:12px;color:var(--muted);">Book a session or reach out on WhatsApp. 500 Glow Cash per session.</p></div>
+<div class="mentor-grid">${MENTORS.map(m=>'<div class="card gc mentor-card fi f'+(MENTORS.indexOf(m)%5)+'"><img src="'+m.img+'" alt="'+esc(m.n)+'" class="mentor-img" loading="lazy"><div class="mentor-body"><div class="mentor-name">'+m.n+'</div><div class="mentor-spec">'+m.s+'</div>
+<div class="mentor-meta"><span><i class="fa-solid fa-star"></i>'+m.r+'</span><span><i class="fa-solid fa-video"></i>'+m.ses+' sessions</span></div>
+<button class="btn btn-p btn-sm" data-action="book-m" data-id="'+m.id+'" style="width:100%;">Book Session (500 Coins)</button></div></div>').join('')}</div>
+<div class="divider"></div><button class="wa-btn" data-action="mwa"><i class="fa-brands fa-whatsapp" style="font-size:15px;"></i> Quick Chat on WhatsApp</button>`}
+
+/* ===== PHOTO FUNCTIONS ===== */
+function loadPhotos(uid){return(D._g('photos_'+uid)||[])}
+function savePhotos(uid,photos){D._s('photos_'+uid,photos)}
+
+/* ===== EVENT HANDLING ===== */
+document.getElementById('app').addEventListener('click',function(e){
+/* Handle photo delete separately */
+const delBtn=e.target.closest('[data-action="del-photo"]');
+if(delBtn){e.stopPropagation();const idx=parseInt(delBtn.dataset.idx);const u=D.cur();if(!u)return;
+const photos=loadPhotos(u.id);photos[idx]=null;savePhotos(u.id,photos);render();return}
+
+const b=e.target.closest('[data-action]');if(!b)return;
+const a=b.dataset.action;
+switch(a){
+case'tab':tab=b.dataset.t;render();break;
+case'logout':D.cS();location.href='index.html';break;
+case'dismiss-notif':sessionStorage.setItem('g_notif_dismissed',tk());document.getElementById('notif-bar').classList.remove('show');break;
+case'toggle':toggleTask(b.dataset.k);break;
+case'start-timer':e.stopPropagation();startTimer(b.dataset.k,parseInt(b.dataset.d));break;
+case'upload-photo':{const idx=parseInt(b.dataset.idx);document.getElementById('photo-input').dataset.idx=idx;document.getElementById('photo-input').click();break}
+case'send-msg':hSendMsg();break;
+case'mwa':{const u=D.cur();window.open('https://wa.me/'+WN+'?text='+encodeURIComponent("Hi! I'm "+(u?u.name:'User')+" from GLOWUP. I'd like to book a mentor session."),'_blank');break}
+case'buy':hBuy(b.dataset.id);break;
+case'scat':sCat=b.dataset.c;render();break;
+case'checkin':hCheckin();break;
+case'cpy-ref':{const inp=document.getElementById('rl');if(inp)navigator.clipboard.writeText(inp.value).then(()=>toast('Link copied!','s')).catch(()=>{inp.select();document.execCommand('copy');toast('Link copied!','s')});break}
+case'book-m':hBookM(b.dataset.id);break;
+case'confirm-ship':hConfirmShip();break;
+}
+});
+
+document.getElementById('photo-input').addEventListener('change',function(){
+const idx=parseInt(this.dataset.idx);const file=this.files[0];if(!file)return;
+const u=D.cur();if(!u)return;
+resizeImage(file,400,function(data){
+const photos=loadPhotos(u.id);photos[idx]=data;savePhotos(u.id,photos);toast('Progress photo saved!','s');render()});
+this.value='';
+});
+
+function hSendMsg(){const u=D.cur();if(!u)return;const ta=document.getElementById('sm');const msg=ta?ta.value.trim():'';if(!msg){toast('Type a message.','e');return}
+const ms=D.gM();ms.push({id:uid(),userId:u.id,userName:u.name,userPhone:u.phone,message:msg,reply:'',st:'pending',ts:Date.now()});D.sM(ms);addXP(u.id,2);toast('Message sent.','s');render()}
+
+function hBuy(id){
+const u=D.cur();if(!u)return;const item=STORE.find(x=>x.id===id);if(!item)return;
+if((u.purch||[]).includes(id)){toast('Already owned.','i');return}
+if(!spendC(u.id,item.p,'Purchased: '+item.n)){toast('Not enough Glow Cash.','e');return}
+if(item.cat==='skincare'){buyingItem=id;
+openModal('<h3>Shipping Address</h3><p class="sub">Enter your delivery address for '+esc(item.n)+'</p>'+
+'<div class="fg"><label class="label">Full Name</label><input type="text" class="input" id="ship-name" value="'+esc(u.name)+'"></div>'+
+'<div class="fg"><label class="label">Phone</label><input type="tel" class="input" id="ship-phone" value="'+esc(u.phone)+'"></div>'+
+'<div class="fg"><label class="label">Address Line 1</label><input type="text" class="input" id="ship-a1" placeholder="House/Flat No., Street"></div>'+
+'<div class="fg"><label class="label">Address Line 2</label><input type="text" class="input" id="ship-a2" placeholder="Landmark, Area"></div>'+
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div class="fg"><label class="label">City</label><input type="text" class="input" id="ship-city" placeholder="Mumbai"></div><div class="fg"><label class="label">PIN Code</label><input type="text" class="input" id="ship-pin" placeholder="400001"></div></div>'+
+'<div class="fg"><label class="label">State</label><input type="text" class="input" id="ship-state" placeholder="Maharashtra"></div>'+
+'<button class="btn btn-p btn-sm mt-8" data-action="confirm-ship" style="margin-top:12px;">Confirm Order</button>');return}
+const us=D.gU();const i=us.findIndex(x=>x.id===u.id);
+if(i!==-1){if(!us[i].purch)us[i].purch=[];us[i].purch.push(id);if(item.unlock)us[i].unlocks[item.unlock]=true;D.sU(us)}
+const msgs={wallpack:'Wallpaper pack downloaded!',motiv_pdf:'Motivation Blueprint downloaded!',routine_tpl:'Premium routines unlocked!',skin_bible:'Skincare Bible downloaded!',group_ws:'Workshop access granted!',mentor_1on1:'Mentor session unlocked!',discount:'Code: GLOW20',conf_audio:'Audio course downloaded!',pro_ext:'Access extended 30 days!'};
+toast(msgs[id]||'Purchase complete!','s');addXP(u.id,10);render();
+}
+
+function hConfirmShip(){
+const n=document.getElementById('ship-name').value.trim(),ph=document.getElementById('ship-phone').value.trim(),a1=document.getElementById('ship-a1').value.trim(),ci=document.getElementById('ship-city').value.trim(),pi=document.getElementById('ship-pin').value.trim(),st=document.getElementById('ship-state').value.trim();
+if(!n||!ph||!a1||!ci||!pi||!st){toast('Fill all address fields.','e');return}
+const u=D.cur();if(!u)return;const item=STORE.find(x=>x.id===buyingItem);if(!item)return;
+const us=D.gU();const i=us.findIndex(x=>x.id===u.id);if(i!==-1){if(!us[i].purch)us[i].purch=[];us[i].purch.push(buyingItem);D.sU(us)}
+const a2=document.getElementById('ship-a2').value.trim();
+const addr=n+', '+a1+(a2?', '+a2:'')+', '+ci+', '+st+' - '+pi;
+const ords=D.gO();ords.push({id:uid(),userId:u.id,userName:u.name,userPhone:u.phone,itemId:item.id,itemName:item.n,img:item.img||'',coins:item.p,address:addr,status:'pending',ts:Date.now()});D.sO(ords);
+closeModal();toast(item.n+' ordered!','s');addXP(u.id,15);render();
+}
+
+function hCheckin(){const u=D.cur();if(!u)return;if(u.lastCI===tk())return;const us=D.gU();const i=us.findIndex(x=>x.id===u.id);if(i===-1)return;us[i].lastCI=tk();D.sU(us);addC(u.id,5,'Daily check-in');cFloat(5);addXP(u.id,3);toast('+5 Glow Cash!','s');render()}
+function hBookM(id){const u=D.cur();if(!u)return;if(!spendC(u.id,500,'Mentor session')){toast('Need 500 coins.','e');return}const m=MENTORS.find(x=>x.id===id);toast('Session booked with '+(m?m.n:'Coach')+'!','s');addXP(u.id,15);render()}
+
+/* ===== INIT ===== */
+(function(){
+const s=D.gS();if(!s){location.href='index.html';return}
+if(s.phone===AE){location.href='admin.html';return}
+const u=D.fP(s.phone);if(!u){D.cS();location.href='index.html';return}
+render();
+})();
+</script>
+</body>
+</html>
