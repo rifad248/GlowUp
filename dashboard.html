@@ -324,7 +324,13 @@ function hCheckin(){var u=DB.cur();if(!u)return;if(u.lastCI===tk())return;var us
 function hBookM(id){var u=DB.cur();if(!u)return;if(!spendC(u.id,500,'Mentor session')){toast('Need 500 coins.','e');return}var m=null;for(var i=0;i<MENTORS.length;i++){if(MENTORS[i].id===id){m=MENTORS[i];break}}toast('Session booked with '+(m?m.n:'Coach')+'!','s');addXP(u.id,15);render()}
 
 /* INIT */
-(function(){var s=DB.gS();if(!s){location.href='index.html';return}if(s.phone===AE){location.href='admin.html';return}var u=DB.fP(s.phone);if(!u){DB.cS();location.href='index.html';return}render()})();
+(function(){
+var s=DB.gS();if(!s){location.href='index.html';return}
+if(s.phone===AE){location.href='admin.html';return}
+var u=DB.fP(s.phone);
+if(!u){DB.cS();location.href='index.html';return}
+render();
+})();
 </script>
 </body>
 </html>
