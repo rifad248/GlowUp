@@ -8,33 +8,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
---bg:#050505;--bg2:#0a0a0a;--card:#0e0e0e;--card2:#111;
---border:#161616;--border2:#222;--border3:#2a2a2a;
---fg:#f5f5f5;--fg2:#ccc;--muted:#888;--dim:#555;--dim2:#333;
---accent:#c9a84c;--accent2:#e0c672;--accent3:#a88a30;
---abg:rgba(201,168,76,.06);--abg2:rgba(201,168,76,.1);--abg3:rgba(201,168,76,.16);
---danger:#e74c3c;--success:#2ecc71;--warn:#f39c12;
---gg:linear-gradient(135deg,#c9a84c,#e0c672,#c9a84c);
---gt:linear-gradient(135deg,#c9a84c 0%,#f0dfa0 50%,#c9a84c 100%)
-}
-html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;line-height:1.6}
+:root{--bg:#050505;--bg2:#0a0a0a;--card:#0e0e0e;--border:#161616;--border2:#222;--fg:#f5f5f5;--fg2:#ccc;--muted:#888;--dim:#555;--accent:#c9a84c;--accent2:#e0c672;--abg:rgba(201,168,76,.06);--abg2:rgba(201,168,76,.1);--abg3:rgba(201,168,76,.16);--danger:#e74c3c;--success:#2ecc71;--warn:#f39c12;--gg:linear-gradient(135deg,#c9a84c,#e0c672,#c9a84c);--gt:linear-gradient(135deg,#c9a84c 0%,#f0dfa0 50%,#c9a84c 100%)}
+html{scroll-behavior:smooth}body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;line-height:1.6}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 a{color:var(--accent);text-decoration:none}
 .gold-text{background:var(--gt);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .container{max-width:1060px;margin:0 auto;padding:0 20px}
-
-/* NOTIFICATION BAR */
 .notif-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:rgba(201,168,76,.08);border-bottom:1px solid rgba(201,168,76,.12);font-size:12px;color:var(--accent);position:fixed;top:60px;left:0;right:0;z-index:150;backdrop-filter:blur(12px);transform:translateY(-100%);transition:transform .4s ease}
 .notif-bar.show{transform:translateY(0)}
-.notif-bar i{font-size:14px}
-.notif-bar .close-notif{margin-left:auto;background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px;padding:4px 8px;opacity:.6;transition:opacity .2s}
+.notif-bar .close-notif{margin-left:auto;background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px;padding:4px 8px;opacity:.6}
 .notif-bar .close-notif:hover{opacity:1}
 .notif-action{background:var(--abg2);border:1px solid rgba(201,168,76,.2);color:var(--accent);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .2s}
 .notif-action:hover{background:var(--abg3)}
-
-/* NAV */
 .topnav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;border-bottom:1px solid var(--border);background:rgba(5,5,5,.92);backdrop-filter:blur(16px);position:fixed;top:0;left:0;right:0;z-index:200}
 .nl{font-size:16px;font-weight:900;letter-spacing:2.5px}.nl span{color:var(--accent)}
 .ntabs{display:flex;gap:2px}
@@ -49,8 +34,6 @@ a{color:var(--accent);text-decoration:none}
 .bnav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(5,5,5,.95);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:4px 0 env(safe-area-inset-bottom,6px)}
 .bni{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;background:none;border:none;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;font-size:9px;font-weight:500;transition:color .2s}
 .bni.active{color:var(--accent)}.bni i{font-size:17px}
-
-/* DASHBOARD */
 .dash{padding:76px 0 100px}
 .dhero{background:linear-gradient(135deg,rgba(201,168,76,.05) 0%,rgba(201,168,76,.012) 100%);border:1px solid rgba(201,168,76,.1);border-radius:18px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden}
 .dhero::before{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.05),transparent 70%);pointer-events:none}
@@ -67,22 +50,15 @@ a{color:var(--accent);text-decoration:none}
 .dh-coins i{font-size:12px}
 .dh-motiv{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 14px;background:var(--abg);border:1px solid rgba(201,168,76,.1);border-radius:10px;font-size:12px;color:var(--accent);position:relative;z-index:1}
 .dh-streak{display:flex;align-items:center;gap:8px;margin-top:8px;padding:9px 14px;background:rgba(231,76,60,.05);border:1px solid rgba(231,76,60,.1);border-radius:10px;font-size:12px;color:#d06050;position:relative;z-index:1}
-
-/* STATS */
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .scard{text-align:center;padding:16px 10px;background:var(--card);border:1px solid var(--border);border-radius:14px;transition:all .3s}
 .scard:hover{border-color:var(--border2)}.sv{font-size:22px;font-weight:800;line-height:1;margin-bottom:3px}.sv.gd{color:var(--accent)}
 .sl{font-size:9px;color:var(--dim);font-weight:600;letter-spacing:.7px;text-transform:uppercase}
-
-/* DGRID */
 .dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.dgrid .full{grid-column:1/-1}
-.sec-title{font-size:12px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px}
-.sec-title i{color:var(--accent);font-size:12px}
+.sec-title{font-size:12px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px}.sec-title i{color:var(--accent);font-size:12px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .3s}
 .card:hover{border-color:var(--border2)}
 .gc{border-color:rgba(201,168,76,.06)}.gc:hover{border-color:rgba(201,168,76,.15);box-shadow:0 0 24px rgba(201,168,76,.03)}
-
-/* ROUTINE CARDS */
 .routine-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;transition:all .35s}
 .routine-card.complete{border-color:rgba(201,168,76,.2);box-shadow:0 0 30px rgba(201,168,76,.04)}
 .rc-header{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--border);position:relative}
@@ -99,19 +75,15 @@ a{color:var(--accent);text-decoration:none}
 .rc-complete{color:var(--success);font-size:14px;animation:popIn .3s ease}
 @keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
 .rc-body{padding:8px 12px}
-
-/* TASK ROWS */
 .task-row{display:flex;align-items:center;gap:10px;padding:10px 8px;border-radius:10px;transition:background .15s;cursor:pointer}
 .task-row:hover{background:rgba(255,255,255,.015)}
 .task-check{width:20px;height:20px;border:2px solid var(--border2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:9px;color:transparent}
 .task-check.done{background:var(--accent);border-color:var(--accent);color:#0a0a0a}
-.task-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--abg);color:var(--dim);flex-shrink:0;transition:color .2s}
+.task-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--abg);color:var(--dim);flex-shrink:0}
 .task-row.done .task-icon{color:var(--accent)}
 .task-label{flex:1;font-size:13px;transition:all .2s}.task-row.done .task-label{color:var(--dim);text-decoration:line-through}
 .task-xp{font-size:10px;font-weight:700;color:var(--accent);opacity:.4}
 .task-timer-area{width:80px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-/* TIMER */
 .timer-btn{padding:4px 10px;font-size:10px;font-weight:600;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s;white-space:nowrap}
 .timer-btn:hover{border-color:var(--accent);color:var(--accent)}
 .timer-display{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%}
@@ -119,18 +91,13 @@ a{color:var(--accent);text-decoration:none}
 .timer-bar{width:100%;height:3px;background:#0a0a0a;border-radius:2px;overflow:hidden}
 .timer-fill{height:100%;background:var(--gg);border-radius:2px;transition:width .15s linear}
 .timer-done{color:var(--success);font-size:16px;animation:popIn .3s ease}
-
-/* DAY PROGRESS */
 .day-progress{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px}
 .dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .dp-label{font-size:12px;font-weight:700;display:flex;align-items:center;gap:7px}.dp-label i{color:var(--accent)}
 .dp-count{font-size:11px;color:var(--dim)}
 .dp-bar{height:8px;background:#0a0a0a;border-radius:4px;overflow:hidden;margin-bottom:8px}
 .dp-fill{height:100%;background:var(--gg);border-radius:4px;transition:width .5s ease}
-.dp-bonus{font-size:11px;color:var(--dim);text-align:center}
-.dp-bonus span{color:var(--accent);font-weight:600}
-
-/* PREMIUM LOCK */
+.dp-bonus{font-size:11px;color:var(--dim);text-align:center}.dp-bonus span{color:var(--accent);font-weight:600}
 .prem-card{position:relative;border-radius:16px;overflow:hidden}
 .prem-card.locked::after{content:'';position:absolute;inset:0;background:rgba(5,5,5,.8);backdrop-filter:blur(4px);z-index:2;border-radius:16px}
 .prem-card.locked .prem-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3}
@@ -138,26 +105,18 @@ a{color:var(--accent);text-decoration:none}
 .prem-cat h4{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .prem-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;color:var(--fg2)}
 .prem-item i{color:var(--accent);font-size:9px;width:14px;text-align:center}
-
-/* DIET */
 .diet-meal{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.02)}
 .diet-meal:last-child{border-bottom:none}
 .diet-time{font-size:11px;font-weight:700;color:var(--accent);min-width:72px;padding-top:1px}
 .diet-text{font-size:12px;color:var(--fg2);line-height:1.5}
-
-/* WEEK CHART */
 .wk-row{display:flex;gap:6px;margin-bottom:14px}
 .wk-day{flex:1;text-align:center}.wk-bar{height:40px;background:#0a0a0a;border-radius:6px;overflow:hidden;position:relative}
 .wk-fill{position:absolute;bottom:0;left:0;right:0;background:var(--gg);border-radius:6px;transition:height .4s}
 .wk-lbl{font-size:9px;color:var(--dim);margin-top:4px;font-weight:500}.wk-pct{font-size:9px;color:var(--muted);margin-top:1px}
-
-/* BADGES */
 .badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
 .badge-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:7px;font-size:10px;font-weight:600;background:var(--abg2);color:var(--accent);border:1px solid rgba(201,168,76,.1)}
 .badge-pill.locked{background:rgba(255,255,255,.02);color:var(--dim);border-color:var(--border)}
 .badge-pill i{font-size:9px}
-
-/* MESSAGES */
 .msg-card{padding:12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,.008)}
 .msg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .msg-date{font-size:9px;color:var(--dim)}
@@ -181,11 +140,9 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 .btn-xs{padding:6px 12px;font-size:10px;border-radius:7px}
 .btn-wa{background:#25D366;color:#fff;font-weight:700}.btn-wa:hover{background:#20bd5a;transform:translateY(-1px)}
 .btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;filter:none!important}
-.label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
+.label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px}
 .badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
 .b-pending{background:rgba(243,156,18,.1);color:var(--warn)}.b-replied{background:var(--abg);color:var(--accent)}.b-resolved{background:rgba(46,204,113,.1);color:var(--success)}
-
-/* STORE */
 .store-cats{display:flex;gap:5px;margin-bottom:16px;flex-wrap:wrap}
 .store-cat{padding:6px 14px;font-size:11px;font-weight:600;border-radius:8px;border:1px solid var(--border);background:none;color:var(--dim);cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s}
 .store-cat.active{background:var(--abg2);border-color:rgba(201,168,76,.2);color:var(--accent)}
@@ -200,8 +157,6 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 .store-price i{font-size:10px}
 .store-tag{display:inline-block;font-size:9px;font-weight:600;color:var(--dim);background:rgba(255,255,255,.03);padding:2px 7px;border-radius:4px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
 .store-need{font-size:10px;color:var(--warn);margin-bottom:6px}
-
-/* EARN */
 .earn-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.008);border-radius:10px;border:1px solid var(--border);margin-bottom:6px}
 .earn-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;background:var(--abg2);color:var(--accent);flex-shrink:0}
 .earn-info{flex:1}.earn-info h4{font-size:12px;font-weight:600}.earn-info p{font-size:10px;color:var(--dim)}
@@ -220,16 +175,12 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 .ref-lb-rank{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:var(--abg);color:var(--accent);flex-shrink:0}
 .ref-lb-name{flex:1;font-size:12px;font-weight:600}
 .ref-lb-count{font-size:12px;font-weight:700;color:var(--accent)}
-
-/* MENTOR */
 .mentor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .mentor-card{padding:0;overflow:hidden}.mentor-img{width:100%;height:150px;object-fit:cover;display:block}
 .mentor-body{padding:16px}.mentor-name{font-size:14px;font-weight:700;margin-bottom:1px}
 .mentor-spec{font-size:11px;color:var(--accent);margin-bottom:8px}
 .mentor-meta{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:12px}
 .mentor-meta span{display:flex;align-items:center;gap:4px}.mentor-meta i{font-size:9px;color:var(--accent)}
-
-/* PHOTOS */
 .photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .photo-slot{aspect-ratio:3/4;border:2px dashed var(--border2);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
 .photo-slot:hover{border-color:var(--accent);background:var(--abg)}
@@ -239,8 +190,6 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 .photo-slot .photo-label{position:absolute;bottom:0;left:0;right:0;padding:6px;background:linear-gradient(transparent,rgba(0,0,0,.7));font-size:9px;color:#fff;font-weight:600;text-align:center;border-radius:0 0 10px 10px;z-index:1}
 .photo-slot .photo-del{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:6px;background:rgba(0,0,0,.6);border:none;color:#fff;font-size:9px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2}
 .photo-slot:hover .photo-del{display:flex}
-
-/* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:400;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-bg.show{opacity:1;pointer-events:all}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;transform:scale(.95);transition:transform .3s}
@@ -248,8 +197,6 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 .modal h3{font-size:17px;font-weight:800;margin-bottom:4px;text-align:center}
 .modal .sub{font-size:12px;color:var(--muted);margin-bottom:18px;text-align:center}
 .fg{margin-bottom:16px;text-align:left}
-
-/* TOAST */
 #toast-box{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px}
 .toast{padding:11px 16px;border-radius:10px;font-size:12px;font-weight:500;max-width:340px;animation:slideIn .3s ease;display:flex;align-items:center;gap:7px;backdrop-filter:blur(8px)}
 .toast.hide{animation:slideOut .3s ease forwards}
@@ -262,17 +209,8 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 @keyframes slideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(24px)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fi{animation:fadeUp .4s ease both}.f1{animation-delay:.05s}.f2{animation-delay:.1s}.f3{animation-delay:.15s}.f4{animation-delay:.2s}.f5{animation-delay:.25s}
-
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-@media(max-width:768px){
-.ntabs{display:none}.bnav{display:block}
-.dash{padding:66px 0 100px}.sgrid{grid-template-columns:repeat(2,1fr);gap:8px}.sv{font-size:18px}
-.dgrid{grid-template-columns:1fr}.dhero{padding:20px}
-.photo-grid{grid-template-columns:repeat(2,1fr)}
-.store-grid{grid-template-columns:1fr 1fr}.mentor-grid{grid-template-columns:1fr}
-.ref-tiers{grid-template-columns:repeat(2,1fr)}
-.dh-coins{margin-left:0;margin-top:6px}.dht{flex-wrap:wrap}
-}
+@media(max-width:768px){.ntabs{display:none}.bnav{display:block}.dash{padding:66px 0 100px}.sgrid{grid-template-columns:repeat(2,1fr);gap:8px}.sv{font-size:18px}.dgrid{grid-template-columns:1fr}.dhero{padding:20px}.photo-grid{grid-template-columns:repeat(2,1fr)}.store-grid{grid-template-columns:1fr 1fr}.mentor-grid{grid-template-columns:1fr}.ref-tiers{grid-template-columns:repeat(2,1fr)}.dh-coins{margin-left:0;margin-top:6px}.dht{flex-wrap:wrap}}
 @media(max-width:400px){.card{padding:16px}.scard{padding:12px 8px}.store-grid{grid-template-columns:1fr}.ref-tiers{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -280,405 +218,113 @@ textarea.input{resize:vertical;min-height:70px;line-height:1.5}
 <div id="app"></div>
 <div id="toast-box"></div>
 <div class="modal-bg" id="modal-bg"></div>
+<input type="file" accept="image/*" id="photo-input" hidden>
 <script>
-/* ===== CONSTANTS ===== */
-const AE='admin@gmail.com',AP='admin123',WN='919876543210',PRICE=99;
-const LX=[0,100,250,500,800,1200,1700,2300,3000,4000];
-const LB_NAMES=['Basic Access','Custom Colors','Weekly Reports','Analytics','Glow Getter +5% Off','Priority Support','Exclusive Routines','10% Store Off','Free Mentor Session','Elite +20% Off'];
-const BADGES=[
-{id:'first_step',n:'First Step',i:'fa-shoe-prints',d:'Complete first task'},
-{id:'on_fire',n:'On Fire',i:'fa-fire',d:'7-day streak'},
-{id:'unstoppable',n:'Unstoppable',i:'fa-bolt',d:'30-day streak'},
-{id:'glow_getter',n:'Glow Getter',i:'fa-star',d:'Reach Level 5'},
-{id:'elite',n:'Elite',i:'fa-trophy',d:'Reach Level 10'},
-{id:'social',n:'Social Butterfly',i:'fa-users',d:'First referral'},
-{id:'shopper',n:'Smart Spender',i:'fa-bag-shopping',d:'First purchase'},
-{id:'week_warrior',n:'Week Warrior',i:'fa-calendar-week',d:'Perfect 7-day week'}
-];
-const REF_TIERS=[{req:1,coins:20,label:'+20 Glow Coins'},{req:3,coins:50,label:'+50 Bonus Coins'},{req:5,reward:'mentor',label:'Free Mentor Session'},{req:10,reward:'elite',label:'Elite Badge + 200'}];
-const ROUTINES=[
-{id:'morning',label:'Morning Routine',time:'6:30 – 7:30 AM',icon:'fa-sun',css:'morning',tasks:[
-{k:'warmWater',l:'Drink Warm Water + Lemon',t:30,i:'fa-glass-water'},
-{k:'faceWash',l:'Face Wash',t:60,i:'fa-droplet'},
-{k:'moisturizer',l:'Apply Moisturizer',t:30,i:'fa-pump-soap'},
-{k:'sunscreen',l:'Apply Sunscreen',t:30,i:'fa-sun'},
-{k:'noSugar',l:'No Sugar in Morning',t:0,i:'fa-ban'}
-]},
-{id:'afternoon',label:'Afternoon Routine',time:'12:00 – 1:00 PM',icon:'fa-cloud-sun',css:'afternoon',tasks:[
-{k:'touchup',l:'Skincare Touch-up',t:30,i:'fa-hand-sparkles'},
-{k:'proteinLunch',l:'Protein-Rich Lunch',t:0,i:'fa-utensils'},
-{k:'walk10',l:'Walk for 10 Minutes',t:600,i:'fa-person-walking'}
-]},
-{id:'evening',label:'Evening Routine',time:'9:00 – 10:00 PM',icon:'fa-moon',css:'evening',tasks:[
-{k:'eveWash',l:'Face Wash',t:60,i:'fa-droplet'},
-{k:'nightCream',l:'Apply Night Cream',t:30,i:'fa-moon'},
-{k:'read10',l:'Read 10 Pages',t:300,i:'fa-book'},
-{k:'sleepBy11',l:'Sleep by 11 PM',t:0,i:'fa-bed'}
-]}
-];
-const ALL_TASKS=ROUTINES.flatMap(r=>r.tasks);
-const PREM_ROUTINES=[
-{c:'Skin',i:'fa-spa',items:['Morning vitamin C serum protocol','Night retinol routine','Weekly exfoliation schedule','Sunscreen reapplication guide','DIY face mask recipes']},
-{c:'Fitness',i:'fa-fire-flame-curved',items:['4-week strength program','HIIT cardio schedule','Flexibility & mobility routine','Rest day recovery protocol','Progressive overload guide']},
-{c:'Confidence',i:'fa-brain',items:['Daily affirmations practice','Eye contact training drills','Power posture exercises','Social skills framework','Public speaking basics']}
-];
-const DIET=[{t:'Breakfast',d:'Oats + banana + honey + almonds. Green tea.'},{t:'Lunch',d:'Grilled chicken, brown rice, mixed salad.'},{t:'Snack',d:'Mixed nuts, apple, green tea.'},{t:'Dinner',d:'Grilled fish/paneer, steamed vegetables, quinoa.'}];
-const STORE=[
-{id:'wallpack',n:'Glow Wallpaper Pack',d:'15 premium motivational wallpapers.',p:20,i:'fa-image',cat:'digital'},
-{id:'motiv_pdf',n:'Motivation Blueprint',d:'20-page discipline building guide.',p:50,i:'fa-file-lines',cat:'digital'},
-{id:'routine_tpl',n:'Custom Routine Template',d:'Editable routine used by top performers.',p:100,i:'fa-clipboard-list',cat:'digital',unlock:'premiumRoutine'},
-{id:'skin_bible',n:'Skincare Bible PDF',d:'30-page skincare guide for your type.',p:150,i:'fa-book-medical',cat:'digital'},
-{id:'facewash',n:'Glow Face Wash',d:'Gentle foaming cleanser with salicylic acid. 100ml.',p:300,i:'fa-pump-soap',cat:'skincare',img:'https://picsum.photos/seed/fw99/400/280.jpg'},
-{id:'moisturizer',n:'Hydra Boost Moisturizer',d:'Lightweight gel moisturizer with hyaluronic acid. 50ml.',p:400,i:'fa-droplet',cat:'skincare',img:'https://picsum.photos/seed/mo99/400/280.jpg'},
-{id:'sunscreen',n:'Shield SPF 50 Sunscreen',d:'Broad spectrum UV protection. Non-greasy. 60ml.',p:450,i:'fa-sun',cat:'skincare',img:'https://picsum.photos/seed/ss99/400/280.jpg'},
-{id:'serum',n:'Vitamin C Glow Serum',d:'Brightening serum with 15% vitamin C. 30ml.',p:500,i:'fa-flask',cat:'skincare',img:'https://picsum.photos/seed/se99/400/280.jpg'},
-{id:'nightcream',n:'Repair Night Cream',d:'Deep repair formula with retinol. 50ml.',p:380,i:'fa-moon',cat:'skincare',img:'https://picsum.photos/seed/nc99/400/280.jpg'},
-{id:'skit',n:'Complete Glow Kit',d:'Face wash + Moisturizer + Serum + Sunscreen + Night cream.',p:1500,i:'fa-gift',cat:'skincare',img:'https://picsum.photos/seed/kit99/400/280.jpg'},
-{id:'group_ws',n:'Group Workshop Access',d:'Join a live session with a Glow Coach.',p:300,i:'fa-users',cat:'coaching'},
-{id:'mentor_1on1',n:'1-on-1 Mentor Session',d:'30-min private video call with a coach.',p:500,i:'fa-video',cat:'coaching'},
-{id:'discount',n:'Skincare Discount Coupon',d:'20% off on partner skincare brands.',p:200,i:'fa-ticket',cat:'rewards'},
-{id:'conf_audio',n:'Confidence Audio Course',d:'5-day audio program on confidence.',p:100,i:'fa-headphones',cat:'rewards'},
-{id:'pro_ext',n:'PRO Extension (30 Days)',d:'Extend full access by 30 days.',p:800,i:'fa-gem',cat:'rewards'}
-];
-const MENTORS=[
-{id:'arjun',n:'Coach Arjun',s:'Skin & Grooming Expert',img:'https://picsum.photos/seed/ga1/400/300.jpg',r:4.9,ses:340},
-{id:'priya',n:'Coach Priya',s:'Fitness & Nutrition Coach',img:'https://picsum.photos/seed/ga2/400/300.jpg',r:4.8,ses:280},
-{id:'rahul',n:'Coach Rahul',s:'Confidence & Style Mentor',img:'https://picsum.photos/seed/ga3/400/300.jpg',r:4.9,ses:410}
-];
-const PHOTO_MILESTONES=['Week 1','Week 2','Week 4','Week 8'];
+var AE='admin@gmail.com',WN='919876543210',PRICE=99;
+var LX=[0,100,250,500,800,1200,1700,2300,3000,4000];
+var LB_NAMES=['Basic Access','Custom Colors','Weekly Reports','Analytics','Glow Getter +5% Off','Priority Support','Exclusive Routines','10% Store Off','Free Mentor Session','Elite +20% Off'];
+var BADGES=[{id:'first_step',n:'First Step',i:'fa-shoe-prints',d:'Complete first task'},{id:'on_fire',n:'On Fire',i:'fa-fire',d:'7-day streak'},{id:'unstoppable',n:'Unstoppable',i:'fa-bolt',d:'30-day streak'},{id:'glow_getter',n:'Glow Getter',i:'fa-star',d:'Reach Level 5'},{id:'elite',n:'Elite',i:'fa-trophy',d:'Reach Level 10'},{id:'social',n:'Social Butterfly',i:'fa-users',d:'First referral'},{id:'shopper',n:'Smart Spender',i:'fa-bag-shopping',d:'First purchase'},{id:'week_warrior',n:'Week Warrior',i:'fa-calendar-week',d:'Perfect 7-day week'}];
+var REF_TIERS=[{req:1,coins:20,label:'+20 Glow Coins'},{req:3,coins:50,label:'+50 Bonus Coins'},{req:5,reward:'mentor',label:'Free Mentor Session'},{req:10,reward:'elite',label:'Elite Badge + 200'}];
+var ROUTINES=[{id:'morning',label:'Morning Routine',time:'6:30 – 7:30 AM',icon:'fa-sun',css:'morning',tasks:[{k:'warmWater',l:'Drink Warm Water + Lemon',t:30,i:'fa-glass-water'},{k:'faceWash',l:'Face Wash',t:60,i:'fa-droplet'},{k:'moisturizer',l:'Apply Moisturizer',t:30,i:'fa-pump-soap'},{k:'sunscreen',l:'Apply Sunscreen',t:30,i:'fa-sun'},{k:'noSugar',l:'No Sugar in Morning',t:0,i:'fa-ban'}]},{id:'afternoon',label:'Afternoon Routine',time:'12:00 – 1:00 PM',icon:'fa-cloud-sun',css:'afternoon',tasks:[{k:'touchup',l:'Skincare Touch-up',t:30,i:'fa-hand-sparkles'},{k:'proteinLunch',l:'Protein-Rich Lunch',t:0,i:'fa-utensils'},{k:'walk10',l:'Walk for 10 Minutes',t:600,i:'fa-person-walking'}]},{id:'evening',label:'Evening Routine',time:'9:00 – 10:00 PM',icon:'fa-moon',css:'evening',tasks:[{k:'eveWash',l:'Face Wash',t:60,i:'fa-droplet'},{k:'nightCream',l:'Apply Night Cream',t:30,i:'fa-moon'},{k:'read10',l:'Read 10 Pages',t:300,i:'fa-book'},{k:'sleepBy11',l:'Sleep by 11 PM',t:0,i:'fa-bed'}]}];
+var ALL_TASKS=[];for(var ri=0;ri<ROUTINES.length;ri++){for(var ti=0;ti<ROUTINES[ri].tasks.length;ti++)ALL_TASKS.push(ROUTINES[ri].tasks[ti])}
+var PREM_ROUTINES=[{c:'Skin',i:'fa-spa',items:['Morning vitamin C serum protocol','Night retinol routine','Weekly exfoliation schedule','Sunscreen reapplication guide','DIY face mask recipes']},{c:'Fitness',i:'fa-fire-flame-curved',items:['4-week strength program','HIIT cardio schedule','Flexibility & mobility routine','Rest day recovery protocol','Progressive overload guide']},{c:'Confidence',i:'fa-brain',items:['Daily affirmations practice','Eye contact training drills','Power posture exercises','Social skills framework','Public speaking basics']}];
+var DIET=[{t:'Breakfast',d:'Oats + banana + honey + almonds. Green tea.'},{t:'Lunch',d:'Grilled chicken, brown rice, mixed salad.'},{t:'Snack',d:'Mixed nuts, apple, green tea.'},{t:'Dinner',d:'Grilled fish/paneer, steamed vegetables, quinoa.'}];
+var STORE=[{id:'wallpack',n:'Glow Wallpaper Pack',d:'15 premium motivational wallpapers.',p:20,i:'fa-image',cat:'digital'},{id:'motiv_pdf',n:'Motivation Blueprint',d:'20-page discipline building guide.',p:50,i:'fa-file-lines',cat:'digital'},{id:'routine_tpl',n:'Custom Routine Template',d:'Editable routine used by top performers.',p:100,i:'fa-clipboard-list',cat:'digital',unlock:'premiumRoutine'},{id:'skin_bible',n:'Skincare Bible PDF',d:'30-page skincare guide for your type.',p:150,i:'fa-book-medical',cat:'digital'},{id:'facewash',n:'Glow Face Wash',d:'Gentle foaming cleanser with salicylic acid. 100ml.',p:300,i:'fa-pump-soap',cat:'skincare',img:'https://picsum.photos/seed/fw99/400/280.jpg'},{id:'moisturizer',n:'Hydra Boost Moisturizer',d:'Lightweight gel moisturizer with hyaluronic acid. 50ml.',p:400,i:'fa-droplet',cat:'skincare',img:'https://picsum.photos/seed/mo99/400/280.jpg'},{id:'sunscreen',n:'Shield SPF 50 Sunscreen',d:'Broad spectrum UV protection. Non-greasy. 60ml.',p:450,i:'fa-sun',cat:'skincare',img:'https://picsum.photos/seed/ss99/400/280.jpg'},{id:'serum',n:'Vitamin C Glow Serum',d:'Brightening serum with 15% vitamin C. 30ml.',p:500,i:'fa-flask',cat:'skincare',img:'https://picsum.photos/seed/se99/400/280.jpg'},{id:'nightcream',n:'Repair Night Cream',d:'Deep repair formula with retinol. 50ml.',p:380,i:'fa-moon',cat:'skincare',img:'https://picsum.photos/seed/nc99/400/280.jpg'},{id:'skit',n:'Complete Glow Kit',d:'Face wash + Moisturizer + Serum + Sunscreen + Night cream.',p:1500,i:'fa-gift',cat:'skincare',img:'https://picsum.photos/seed/kit99/400/280.jpg'},{id:'group_ws',n:'Group Workshop Access',d:'Join a live session with a Glow Coach.',p:300,i:'fa-users',cat:'coaching'},{id:'mentor_1on1',n:'1-on-1 Mentor Session',d:'30-min private video call with a coach.',p:500,i:'fa-video',cat:'coaching'},{id:'discount',n:'Skincare Discount Coupon',d:'20% off on partner skincare brands.',p:200,i:'fa-ticket',cat:'rewards'},{id:'conf_audio',n:'Confidence Audio Course',d:'5-day audio program on confidence.',p:100,i:'fa-headphones',cat:'rewards'},{id:'pro_ext',n:'PRO Extension (30 Days)',d:'Extend full access by 30 days.',p:800,i:'fa-gem',cat:'rewards'}];
+var MENTORS=[{id:'arjun',n:'Coach Arjun',s:'Skin & Grooming Expert',img:'https://picsum.photos/seed/ga1/400/300.jpg',r:4.9,ses:340},{id:'priya',n:'Coach Priya',s:'Fitness & Nutrition Coach',img:'https://picsum.photos/seed/ga2/400/300.jpg',r:4.8,ses:280},{id:'rahul',n:'Coach Rahul',s:'Confidence & Style Mentor',img:'https://picsum.photos/seed/ga3/400/300.jpg',r:4.9,ses:410}];
+var PHOTO_MILESTONES=['Week 1','Week 2','Week 4','Week 8'];
 
-/* ===== DATA LAYER ===== */
-const D={
-_g(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch{return null}},
-_s(k,v){try{localStorage.setItem('g_'+k,JSON.stringify(v))}catch(e){console.warn('Storage full',e)}},
-gU(){return this._g('users')||[]},sU(u){this._s('users',u)},
-gM(){return this._g('msgs')||[]},sM(m){this._s('msgs',m)},
-gB(){return this._g('bcasts')||[]},
-gO(){return this._g('orders')||[]},sO(o){this._s('orders',o)},
-gS(){return this._g('sess')},sS(s){this._s('sess',s)},cS(){localStorage.removeItem('g_sess')},
-fP(p){return this.gU().find(u=>u.phone===p)},
-fPI(id){return this.gU().find(u=>u.id===id)}
-fP(p){return this.gU().find(u=>u.phone===p)}
-gS(){return this._g('sess')},cS(){localStorage.removeItem('g_sess')},
-cur(){const s=this.gS();return s?this.fP(s.phone):null},
-isA(){const s=this.gS();return s&&s.phone===AE},
-gUM(uid){return this.gM().filter(m=>m.userId===uid).sort((a,b)=>b.ts-a.ts)},
-gUB(){const s=this.gS();if(!s)return[];const bc=this._g('bcasts')||[];return bc.filter(b=>b.ts>=(s.ra||0)).sort((a,b)=>b.ts-a.ts)}
-};
+/* DATA LAYER */
+var DB={};
+DB._g=function(k){try{return JSON.parse(localStorage.getItem('g_'+k))||null}catch(e){return null}};
+DB._s=function(k,v){try{localStorage.setItem('g_'+k,JSON.stringify(v))}catch(e){}};
+DB.gU=function(){return this._g('users')||[]};
+DB.sU=function(u){this._s('users',u)};
+DB.gM=function(){return this._g('msgs')||[]};
+DB.sM=function(m){this._s('msgs',m)};
+DB.gB=function(){try{return JSON.parse(localStorage.getItem('g_bcasts'))||[]}catch(e){return[]}};
+DB.gO=function(){return this._g('orders')||[]};
+DB.sO=function(o){this._s('orders',o)};
+DB.gS=function(){return this._g('sess')};
+DB.sS=function(s){this._s('sess',s)};
+DB.cS=function(){localStorage.removeItem('g_sess')};
+DB.cur=function(){var s=this.gS();if(!s)return null;return this.fP(s.phone)};
+DB.fP=function(p){var us=this.gU();for(var i=0;i<us.length;i++){if(us[i].phone===p)return us[i]}return null};
+DB.fPI=function(id){var us=this.gU();for(var i=0;i<us.length;i++){if(us[i].id===id)return us[i]}return null};
+DB.gUM=function(uid){var ms=this.gM();var r=[];for(var i=0;i<ms.length;i++){if(ms[i].userId===uid)r.push(ms[i])}r.sort(function(a,b){return b.ts-a.ts});return r};
+DB.gUB=function(){var s=this.gS();if(!s)return[];var bc=this.gB();var ra=s.ra||0;var r=[];for(var i=0;i<bc.length;i++){if(bc[i].ts>=ra)r.push(bc[i])}r.sort(function(a,b){return b.ts-a.ts});return r};
 
-/* ===== UTILITIES ===== */
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-const tk=()=>new Date().toISOString().split('T')[0];
-const fD=t=>new Date(t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-const fDT=t=>new Date(t).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-const dS=t=>Math.max(0,Math.floor((Date.now()-t)/864e5));
-const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
-const trn=(s,n)=>s.length>n?s.slice(0,n)+'...':s;
-function gLv(xp){for(let i=LX.length-1;i>=0;i--)if(xp>=LX[i])return i+1;return 1}
-function gXP(xp){const lv=gLv(xp),c=LX[lv-1]||0,n=LX[lv]||(LX[LX.length-1]*1.5);return{cur:xp-c,need:n-c,pct:Math.min(100,Math.round(((xp-c)/(n-c))*100))}}
-function cStreak(h){let s=0,d=new Date(),t=tk();if(h&&h[t]&&ALL_TASKS.some(x=>h[t][x.k])){s=1;d.setDate(d.getDate()-1)}else d.setDate(d.getDate()-1);for(let i=0;i<365;i++){const k=d.toISOString().split('T')[0];if(h&&h[k]&&ALL_TASKS.some(x=>h[k][x.k])){s++;d.setDate(d.getDate()-1)}else break}return s}
-function tProg(h){const t=tk(),d=(h||{})[t]||{};const done=ALL_TASKS.filter(x=>d[x.k]).length;return{done,total:ALL_TASKS.length,pct:Math.round((done/ALL_TASKS.length)*100)}}
-function rProg(h,rid){const t=tk(),d=(h||{})[t]||{};const r=ROUTINES.find(x=>x.id===rid);if(!r)return{done:0,total:0,pct:0};const done=r.tasks.filter(x=>d[x.k]).length;return{done,total:r.tasks.length,pct:Math.round((done/r.tasks.length)*100)}}
-function wProg(h){const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0];const dh=(h||{})[k]||{};const done=ALL_TASKS.filter(x=>dh[x.k]).length;days.push({lbl:d.toLocaleDateString('en-US',{weekday:'short'}),pct:Math.round((done/ALL_TASKS.length)*100)})}return days}
-function eBadges(u){const b=[],s=cStreak(u.habits||{}),any=Object.values(u.habits||{}).some(d=>Object.values(d).some(v=>v));
-if(any)b.push('first_step');if(s>=7)b.push('on_fire');if(s>=30)b.push('unstoppable');if(gLv(u.xp||0)>=5)b.push('glow_getter');if(gLv(u.xp||0)>=10)b.push('elite');if((u.refC||0)>=1)b.push('social');if((u.purch||[]).length>=1)b.push('shopper');
-let wd=0,dd=new Date();dd.setDate(dd.getDate()-1);for(let i=0;i<7;i++){const k=dd.toISOString().split('T')[0];const dh=(u.habits||{})[k]||{};if(ALL_TASKS.every(x=>dh[x.k])){wd++;dd.setDate(dd.getDate()-1)}else break}if(wd>=7)b.push('week_warrior');return b}
-function nLvM(xp){const lv=gLv(xp);if(lv>=10)return{t:'Maximum level reached!',done:true};const nx=LX[lv],need=nx-xp,tasks=Math.ceil(need/5);return{t:`Complete ${tasks} more tasks to reach Level ${lv+1}`,nl:lv+1,ben:LB_NAMES[lv],done:false}}
-function refTS(rc){return REF_TIERS.map(t=>({...t,earned:rc>=t.req}))}
-function addC(uid,amt,reason){const us=D.gU(),i=us.findIndex(u=>u.id===uid);if(i===-1)return;us[i].coins=(us[i].coins||0)+amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:'earn',r:reason,a:amt,ts:Date.now()});D.sU(us)}
-function spendC(uid,amt,reason){const us=D.gU(),i=us.findIndex(u=>u.id===uid);if(i===-1)return false;if((us[i].coins||0)<amt)return false;us[i].coins-=amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:'spend',r:reason,a:-amt,ts:Date.now()});D.sU(us);return true}
-function addXP(uid,amt){const us=D.gU(),i=us.findIndex(u=>u.id===uid);if(i===-1)return 0;const old=gLv(us[i].xp||0);us[i].xp=(us[i].xp||0)+amt;const nv=gLv(us[i].xp);D.sU(us);if(nv>old)toast('Level Up! Now Level '+nv+'.','i');return nv}
-function cFloat(amt){const el=document.createElement('div');el.className='coin-float';el.innerHTML='<i class="fa-solid fa-coins" style="margin-right:5px;font-size:15px;"></i>+'+amt;document.body.appendChild(el);setTimeout(()=>el.remove(),1400)}
-function toast(msg,type='i'){const b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};
-const el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);
-setTimeout(()=>{el.classList.add('hide');setTimeout(()=>el.remove(),300)},3200)}
-function openModal(html){const m=document.getElementById('modal-bg');m.innerHTML='<div class="modal">'+html+'</div>';m.classList.add('show')}
+/* UTILITIES */
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function tk(){return new Date().toISOString().split('T')[0]}
+function fD(t){return new Date(t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+function fDT(t){return new Date(t).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}
+function dS(t){return Math.max(0,Math.floor((Date.now()-t)/864e5))}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function trn(s,n){return s.length>n?s.slice(0,n)+'...':s}
+function gLv(xp){for(var i=LX.length-1;i>=0;i--)if(xp>=LX[i])return i+1;return 1}
+function gXP(xp){var lv=gLv(xp),c=LX[lv-1]||0,n=LX[lv]||(LX[LX.length-1]*1.5);return{cur:xp-c,need:n-c,pct:Math.min(100,Math.round(((xp-c)/(n-c))*100))}}
+function cStreak(h){if(!h)return 0;var s=0,d=new Date(),t=tk();if(h[t]&&taskAnyDone(h[t])){s=1;d.setDate(d.getDate()-1)}else{d.setDate(d.getDate()-1)}for(var i=0;i<365;i++){var k=d.toISOString().split('T')[0];if(h[k]&&taskAnyDone(h[k])){s++;d.setDate(d.getDate()-1)}else break}return s}
+function taskAnyDone(d){for(var i=0;i<ALL_TASKS.length;i++){if(d[ALL_TASKS[i].k])return true}return false}
+function tProg(h){var t=tk(),d=(h||{})[t]||{};var done=0;for(var i=0;i<ALL_TASKS.length;i++){if(d[ALL_TASKS[i].k])done++}return{done:done,total:ALL_TASKS.length,pct:Math.round((done/ALL_TASKS.length)*100)}}
+function rProg(h,rid){var t=tk(),d=(h||{})[t]||{};var r=null;for(var i=0;i<ROUTINES.length;i++){if(ROUTINES[i].id===rid){r=ROUTINES[i];break}}if(!r)return{done:0,total:0,pct:0};var done=0;for(var i=0;i<r.tasks.length;i++){if(d[r.tasks[i].k])done++}return{done:done,total:r.tasks.length,pct:Math.round((done/r.tasks.length)*100)}}
+function wProg(h){var days=[];for(var i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);var k=d.toISOString().split('T')[0];var dh=(h||{})[k]||{};var done=0;for(var j=0;j<ALL_TASKS.length;j++){if(dh[ALL_TASKS[j].k])done++}days.push({lbl:d.toLocaleDateString('en-US',{weekday:'short'}),pct:Math.round((done/ALL_TASKS.length)*100)})}return days}
+function eBadges(u){var b=[],s=cStreak(u.habits||{}),any=false;if(u.habits){var keys=Object.keys(u.habits);for(var i=0;i<keys.length;i++){var d=u.habits[keys[i]];if(d&&taskAnyDone(d)){any=true;break}}}if(any)b.push('first_step');if(s>=7)b.push('on_fire');if(s>=30)b.push('unstoppable');if(gLv(u.xp||0)>=5)b.push('glow_getter');if(gLv(u.xp||0)>=10)b.push('elite');if((u.refC||0)>=1)b.push('social');if((u.purch||[]).length>=1)b.push('shopper');var wd=0,dd=new Date();dd.setDate(dd.getDate()-1);for(var i=0;i<7;i++){var k=dd.toISOString().split('T')[0];var dh=(u.habits||{})[k]||{};if(taskAllDone(dh)){wd++;dd.setDate(dd.getDate()-1)}else break}if(wd>=7)b.push('week_warrior');return b}
+function taskAllDone(d){for(var i=0;i<ALL_TASKS.length;i++){if(!d[ALL_TASKS[i].k])return false}return true}
+function nLvM(xp){var lv=gLv(xp);if(lv>=10)return{t:'Maximum level reached!',done:true};var nx=LX[lv],need=nx-xp,tasks=Math.ceil(need/5);return{t:'Complete '+tasks+' more tasks to reach Level '+(lv+1),nl:lv+1,ben:LB_NAMES[lv],done:false}}
+function addC(uid,amt,reason){var us=DB.gU();for(var i=0;i<us.length;i++){if(us[i].id===uid){us[i].coins=(us[i].coins||0)+amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:'earn',r:reason,a:amt,ts:Date.now()});break}}DB.sU(us)}
+function spendC(uid,amt,reason){var us=DB.gU();for(var i=0;i<us.length;i++){if(us[i].id===uid){if((us[i].coins||0)<amt)return false;us[i].coins-=amt;if(!us[i].txns)us[i].txns=[];us[i].txns.push({t:'spend',r:reason,a:-amt,ts:Date.now()});break}}DB.sU(us);return true}
+function addXP(uid,amt){var us=DB.gU();var old=0,nv=0;for(var i=0;i<us.length;i++){if(us[i].id===uid){old=gLv(us[i].xp||0);us[i].xp=(us[i].xp||0)+amt;nv=gLv(us[i].xp);break}}DB.sU(us);if(nv>old)toast('Level Up! Now Level '+nv+'.','i');return nv}
+function cFloat(amt){var el=document.createElement('div');el.className='coin-float';el.innerHTML='<i class="fa-solid fa-coins" style="margin-right:5px;font-size:15px;"></i>+'+amt;document.body.appendChild(el);setTimeout(function(){el.remove()},1400)}
+function toast(msg,type){type=type||'i';var b=document.getElementById('toast-box'),ic={s:'fa-circle-check',e:'fa-circle-exclamation',i:'fa-coins'};var el=document.createElement('div');el.className='toast toast-'+type;el.innerHTML='<i class="fa-solid '+ic[type]+'"></i><span>'+esc(msg)+'</span>';b.appendChild(el);setTimeout(function(){el.classList.add('hide');setTimeout(function(){el.remove()},300)},3200)}
+function openModal(html){var m=document.getElementById('modal-bg');m.innerHTML='<div class="modal">'+html+'</div>';m.classList.add('show')}
 function closeModal(){document.getElementById('modal-bg').classList.remove('show')}
 document.getElementById('modal-bg').addEventListener('click',function(e){if(e.target===this)closeModal()});
 
-/* ===== TIMER SYSTEM ===== */
-const activeTimers=new Map();
-function startTimer(taskKey,duration){
-if(activeTimers.has(taskKey))return;
-const endTime=Date.now()+duration*1000;
-const el=document.querySelector('[data-timer="'+taskKey+'"]');
-if(!el)return;
-el.innerHTML='<div class="timer-display"><span class="timer-text">'+fmtTime(duration)+'</span><div class="timer-bar"><div class="timer-fill" style="width:100%"></div></div></div>';
-const iv=setInterval(()=>{
-const rem=Math.max(0,Math.ceil((endTime-Date.now())/1000));
-const txtEl=el.querySelector('.timer-text'),fillEl=el.querySelector('.timer-fill');
-if(txtEl)txtEl.textContent=fmtTime(rem);
-if(fillEl)fillEl.style.width=((rem/duration)*100)+'%';
-if(rem<=0){clearInterval(iv);activeTimers.delete(taskKey);
-el.innerHTML='<i class="fa-solid fa-check timer-done"></i>';
-toggleTask(taskKey);}
-},200);
-activeTimers.set(taskKey,iv);
-}
-function fmtTime(s){const m=Math.floor(s/60),sec=s%60;return m>0?m+':'+String(sec).padStart(2,'0'):'0:'+String(sec).padStart(2,'0')}
+/* TIMER SYSTEM */
+var activeTimers={};
+function clearAllTimers(){for(var k in activeTimers){clearInterval(activeTimers[k])}activeTimers={}}
+function startTimer(taskKey,duration){if(activeTimers[taskKey])return;var endTime=Date.now()+duration*1000;var el=document.querySelector('[data-timer="'+taskKey+'"]');if(!el)return;el.innerHTML='<div class="timer-display"><span class="timer-text">'+fmtTime(duration)+'</span><div class="timer-bar"><div class="timer-fill" style="width:100%"></div></div></div>';activeTimers[taskKey]=setInterval(function(){var rem=Math.max(0,Math.ceil((endTime-Date.now())/1000));var txtEl=el.querySelector('.timer-text'),fillEl=el.querySelector('.timer-fill');if(!txtEl||!fillEl){clearInterval(activeTimers[taskKey]);delete activeTimers[taskKey];return}txtEl.textContent=fmtTime(rem);fillEl.style.width=((rem/duration)*100)+'%';if(rem<=0){clearInterval(activeTimers[taskKey]);delete activeTimers[taskKey];el.innerHTML='<i class="fa-solid fa-check timer-done"></i>';toggleTask(taskKey)}},200)}
+function fmtTime(s){var m=Math.floor(s/60),sec=s%60;return m>0?m+':'+String(sec).padStart(2,'0'):'0:'+String(sec).padStart(2,'0')}
 
-/* ===== TASK TOGGLE ===== */
-function toggleTask(key){
-const u=D.cur();if(!u)return;
-const us=D.gU(),i=us.findIndex(x=>x.id===u.id);if(i===-1)return;
-if(!us[i].habits)us[i].habits={};const t=tk();if(!us[i].habits[t])us[i].habits[t]={};
-const wasAll=ALL_TASKS.every(x=>us[i].habits[t][x.k]);
-us[i].habits[t][key]=!us[i].habits[t][key];
-const nowAll=ALL_TASKS.every(x=>us[i].habits[t][x.k]);
-D.sU(us);
-if(us[i].habits[t][key])addXP(u.id,5);
-if(!wasAll&&nowAll){addC(u.id,10,'All daily tasks completed');cFloat(10);addXP(u.id,20);
-const s=cStreak(us[i].habits);if(s>=7&&(us[i].lastSB||0)<Math.floor(s/7)*7){const bonus=Math.floor(s/7)*50;addC(u.id,bonus,s+'-day streak bonus');cFloat(bonus);us[i].lastSB=Math.floor(s/7)*7;D.sU(D.gU())}
-toast('All tasks done! +10 Glow Cash','s')}
-render();
-}
+/* TASK TOGGLE */
+function toggleTask(key){var u=DB.cur();if(!u)return;var us=DB.gU(),idx=-1;for(var i=0;i<us.length;i++){if(us[i].id===u.id){idx=i;break}}if(idx===-1)return;if(!us[idx].habits)us[idx].habits={};var t=tk();if(!us[idx].habits[t])us[idx].habits[t]={};var wasAll=taskAllDone(us[idx].habits[t]);us[idx].habits[t][key]=!us[idx].habits[t][key];var nowAll=taskAllDone(us[idx].habits[t]);DB.sU(us);if(us[idx].habits[t][key])addXP(u.id,5);if(!wasAll&&nowAll){addC(u.id,10,'All daily tasks completed');cFloat(10);addXP(u.id,20);var s=cStreak(us[idx].habits);if(s>=7&&(us[idx].lastSB||0)<Math.floor(s/7)*7){var bonus=Math.floor(s/7)*50;addC(u.id,bonus,s+'-day streak bonus');cFloat(bonus);us[idx].lastSB=Math.floor(s/7)*7;DB.sU(DB.gU())}toast('All tasks done! +10 Glow Cash','s')}render()}
 
-/* ===== PHOTO RESIZE ===== */
-function resizeImage(file,maxW,callback){
-const reader=new FileReader();reader.onload=function(e){
-const img=new Image();img.onload=function(){
-const canvas=document.createElement('canvas');let w=img.width,h=img.height;
-if(w>maxW){h=Math.round(h*(maxW/w));w=maxW}
-canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);
-callback(canvas.toDataURL('image/jpeg',0.6))};img.src=e.target.value};reader.readAsDataURL(file);
-}
+/* PHOTO */
+function loadPhotos(uid){return DB._g('photos_'+uid)||[]}
+function savePhotos(uid,photos){DB._s('photos_'+uid,photos)}
+function resizeImage(file,maxW,cb){var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){var canvas=document.createElement('canvas');var w=img.width,h=img.height;if(w>maxW){h=Math.round(h*(maxW/w));w=maxW}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);cb(canvas.toDataURL('image/jpeg',0.6))};img.src=e.target.value};reader.readAsDataURL(file)}
 
-/* ===== STATE ===== */
-let tab='home',sCat='all',buyingItem=null;
-function nav(t){tab=t;render();window.scrollTo({top:0,behavior:'smooth'})}
-function render(){
-const u=D.cur();if(!u){location.href='index.html';return''}
-const a=document.getElementById('app');
-const lv=gLv(u.xp||0),xp=gXP(u.xp||0),st=cStreak(u.habits||{}),pr=tProg(u.habits||{}),wp=wProg(u.habits||{}),da=dS(u.createdAt),badges=eBadges(u),bcasts=D.gUB(),msgs=D.gUM(u.id),pend=msgs.filter(m=>m.st==='pending').length,ini=u.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2),motiv=nLvM(u.xp||0);
-const tabs=[{id:'home',i:'fa-house',l:'Home'},{id:'tracker',i:'fa-check-double',l:'Tracker'},{id:'store',i:'fa-store',l:'Store'},{id:'earn',i:'fa-coins',l:'Earn'},{id:'mentor',i:'fa-headset',l:'Mentor'}];
-let ct='';
-if(tab==='home')ct=vHome(u,lv,xp,st,pr,wp,da,badges,bcasts,msgs,pend,ini,motiv);
-else if(tab==='tracker')ct=vTracker(u,st);
-else if(tab==='store')ct=vStore(u);
-else if(tab==='earn')ct=vEarn(u);
-else if(tab==='mentor')ct=vMentor(u);
-a.innerHTML=`<nav class="topnav"><div class="nl">GLOW<span>UP</span></div>
-<div class="ntabs">${tabs.map(t=>'<button class="nt '+(tab===t.id?'active':'')+'" data-action="tab" data-t="'+t.id+'">'+t.l+'</button>').join('')}</div>
-<div class="nright"><div class="coin-badge"><i class="fa-solid fa-coins"></i>${u.coins||0}</div>
-<button class="nbtn" data-action="tab" data-t="home" aria-label="Messages">${pend?'<span class="ndot"></span>':''}<i class="fa-solid fa-envelope" style="font-size:12px;"></i></button>
-<button class="nbtn" data-action="logout" aria-label="Logout"><i class="fa-solid fa-arrow-right-from-bracket" style="font-size:11px;"></i></button></div></nav>
-<div class="notif-bar" id="notif-bar"><i class="fa-solid fa-bell"></i><span>You have <strong>${ALL_TASKS.length-pr.done}</strong> tasks remaining today</span><button class="notif-action" data-action="tab" data-t="tracker">Go to Tracker</button><button class="close-notif" data-action="dismiss-notif"><i class="fa-solid fa-xmark"></i></button></div>
-<div class="dash"><div class="container">${ct}</div></div>
-<nav class="bnav"><div style="display:flex;justify-content:space-around;">${tabs.map(t=>'<button class="bni '+(tab===t.id?'active':'')+'" data-action="tab" data-t="'+t.id+'"><i class="fa-solid '+t.i+'"></i>'+t.l+'</button>').join('')}</div></nav>`;
-initNotif(pr);
-}
+/* STATE */
+var tab='home',sCat='all',buyingItem=null;
+function nav(t){clearAllTimers();tab=t;render();window.scrollTo({top:0,behavior:'smooth'})}
+function render(){var u=DB.cur();if(!u){location.href='index.html';return}var a=document.getElementById('app');var lv=gLv(u.xp||0),xp=gXP(u.xp||0),st=cStreak(u.habits||{}),pr=tProg(u.habits||{}),wp=wProg(u.habits||{}),da=dS(u.createdAt),badges=eBadges(u),bcasts=DB.gUB(),msgs=DB.gUM(u.id),pend=0;for(var i=0;i<msgs.length;i++){if(msgs[i].st==='pending')pend++}var ini=u.name.split(' ').map(function(w){return w[0]}).join('').toUpperCase().slice(0,2),motiv=nLvM(u.xp||0);var tabs=[{id:'home',i:'fa-house',l:'Home'},{id:'tracker',i:'fa-check-double',l:'Tracker'},{id:'store',i:'fa-store',l:'Store'},{id:'earn',i:'fa-coins',l:'Earn'},{id:'mentor',i:'fa-headset',l:'Mentor'}];var ct='';if(tab==='home')ct=vHome(u,lv,xp,st,pr,wp,da,badges,bcasts,msgs,pend,ini,motiv);else if(tab==='tracker')ct=vTracker(u,st);else if(tab==='store')ct=vStore(u);else if(tab==='earn')ct=vEarn(u);else if(tab==='mentor')ct=vMentor(u);a.innerHTML='<nav class="topnav"><div class="nl">GLOW<span>UP</span></div><div class="ntabs">'+tabs.map(function(t){return'<button class="nt '+(tab===t.id?'active':'')+'" data-action="tab" data-t="'+t.id+'">'+t.l+'</button>'}).join('')+'</div><div class="nright"><div class="coin-badge"><i class="fa-solid fa-coins"></i>'+(u.coins||0)+'</div><button class="nbtn" data-action="tab" data-t="home" aria-label="Messages">'+(pend?'<span class="ndot"></span>':'')+'<i class="fa-solid fa-envelope" style="font-size:12px;"></i></button><button class="nbtn" data-action="logout" aria-label="Logout"><i class="fa-solid fa-arrow-right-from-bracket" style="font-size:11px;"></i></button></div></nav><div class="notif-bar" id="notif-bar"><i class="fa-solid fa-bell"></i><span>You have <strong>'+(ALL_TASKS.length-pr.done)+'</strong> tasks remaining today</span><button class="notif-action" data-action="tab" data-t="tracker">Go to Tracker</button><button class="close-notif" data-action="dismiss-notif"><i class="fa-solid fa-xmark"></i></button></div><div class="dash"><div class="container">'+ct+'</div></div><nav class="bnav"><div style="display:flex;justify-content:space-around;">'+tabs.map(function(t){return'<button class="bni '+(tab===t.id?'active':'')+'" data-action="tab" data-t="'+t.id+'"><i class="fa-solid '+t.i+'"></i>'+t.l+'</button>'}).join('')+'</div></nav>';initNotif(pr)}
 
-function initNotif(pr){
-const bar=document.getElementById('notif-bar');
-if(!bar)return;if(pr.done>=pr.total){bar.classList.remove('show');return}
-const dismissed=sessionStorage.getItem('g_notif_dismissed');
-if(dismissed===tk())return;
-setTimeout(()=>bar.classList.add('show'),600);
-}
+function initNotif(pr){var bar=document.getElementById('notif-bar');if(!bar)return;if(pr.done>=pr.total){bar.classList.remove('show');return}var dismissed=sessionStorage.getItem('g_notif_dismissed');if(dismissed===tk())return;setTimeout(function(){bar.classList.add('show')},600)}
 
-/* ===== HOME VIEW ===== */
-function vHome(u,lv,xp,st,pr,wp,da,badges,bcasts,msgs,pend,ini,motiv){
-const photos=loadPhotos(u.id);
-return`<div class="dhero fi">
-<div class="dht"><div class="avatar-ring l${Math.min(lv,10)}"><div class="avatar-inner">${ini}</div></div>
-<div class="dhi"><div class="dhlabel">Level ${lv}${lv<10?' — '+xp.cur+'/'+xp.need+' XP':''}</div><div class="dhname">${esc(u.name)}</div>
-<div class="xp-row"><div class="xp-labels"><span>XP Progress</span><span>${xp.pct}%</span></div><div class="xp-bar"><div class="xp-fill" style="width:${xp.pct}%"></div></div></div></div>
-<div class="dh-coins"><i class="fa-solid fa-coins"></i>${u.coins||0}</div></div>
-<div style="font-size:13px;font-weight:300;color:#aaa;position:relative;z-index:1;">You're <strong style="color:var(--accent);">${Math.round(u.progress||0)}%</strong> closer to your best version.</div>
- ${motiv.done?'':'<div class="dh-motiv fi f1"><i class="fa-solid fa-rocket"></i>'+esc(motiv.t)+' — Unlocks: '+esc(motiv.ben)+'</div>'}
- ${st>0?'<div class="dh-streak fi f2"><i class="fa-solid fa-fire"></i>Don\'t break your <strong>'+st+'-day</strong> streak!</div>':''}
-</div>
-<div class="sgrid">
-<div class="scard gc fi f1"><div class="sv gd">${st}</div><div class="sl">Streak</div></div>
-<div class="scard gc fi f1"><div class="sv">${Math.round(u.progress||0)}%</div><div class="sl">Progress</div></div>
-<div class="scard gc fi f2"><div class="sv gd">${pr.done}/${pr.total}</div><div class="sl">Today</div></div>
-<div class="scard gc fi f3"><div class="sv">${da}</div><div class="sl">Days Active</div></div>
-</div>
-<div class="dgrid">
-<div class="card gc fi f2"><div class="sec-title"><i class="fa-solid fa-calendar-week"></i> This Week</div>
-<div class="wk-row">${wp.map(d=>'<div class="wk-day"><div class="wk-bar"><div class="wk-fill" style="height:'+d.pct+'%"></div></div><div class="wk-lbl">'+d.lbl+'</div><div class="wk-pct">'+d.pct+'%</div></div>').join('')}</div>
-<div class="sec-title" style="margin-top:18px;"><i class="fa-solid fa-award"></i> Badges (${badges.length}/${BADGES.length})</div>
-<div class="badge-row">${badges.map(bid=>{const b=BADGES.find(x=>x.id===bid);return b?'<div class="badge-pill" title="'+esc(b.d)+'"><i class="fa-solid '+b.i+'"></i>'+b.n+'</div>':''}).join('')}${BADGES.filter(b=>!badges.includes(b.id)).map(b=>'<div class="badge-pill locked" title="'+esc(b.d)+'"><i class="fa-solid '+b.i+'"></i>'+b.n+'</div>').join('')}</div>
-</div>
-<div class="card gc fi f3"><div class="sec-title"><i class="fa-solid fa-bolt"></i> Quick Actions</div>
-<div style="display:flex;flex-direction:column;gap:5px;">
-<button class="btn btn-o btn-sm" data-action="tab" data-t="tracker" style="justify-content:flex-start;"><i class="fa-solid fa-check-double" style="width:18px;color:var(--accent);"></i> Complete Today's Tasks</button>
-<button class="btn btn-o btn-sm" data-action="tab" data-t="store" style="justify-content:flex-start;"><i class="fa-solid fa-store" style="width:18px;color:var(--accent);"></i> Redeem Skincare Products</button>
-<button class="btn btn-o btn-sm" data-action="tab" data-t="earn" style="justify-content:flex-start;"><i class="fa-solid fa-coins" style="width:18px;color:var(--accent);"></i> Earn More Coins</button>
-<button class="btn btn-o btn-sm" data-action="tab" data-t="mentor" style="justify-content:flex-start;"><i class="fa-solid fa-headset" style="width:18px;color:var(--accent);"></i> Book Mentor Session</button>
-</div></div>
-<div class="card gc fi f4"><div class="sec-title"><i class="fa-solid fa-camera"></i> Progress Photos</div>
-<p style="font-size:11px;color:var(--dim);margin-bottom:12px;">Track your transformation over time.</p>
-<div class="photo-grid">${PHOTO_MILESTONES.map((m,i)=>'<div class="photo-slot" data-action="upload-photo" data-idx="'+i+'">'+
-(photos[i]?'<img src="'+photos[i]+'" alt="'+m+'"><div class="photo-label">'+m+'</div><button class="photo-del" data-action="del-photo" data-idx="'+i+'"><i class="fa-solid fa-trash"></i></button>'
-:'<i class="fa-solid fa-camera"></i><span>'+m+'</span>')+'</div>').join('')}</div>
-<input type="file" accept="image/*" id="photo-input" hidden>
-</div>
-<div class="card full gc fi f5"><div class="sec-title"><i class="fa-solid fa-envelope"></i> Support ${pend?'<span class="badge b-pending" style="margin-left:auto;">'+pend+' pending</span>':''}</div>
- ${bcasts.length?bcasts.slice(0,2).map(b=>'<div class="bc-card"><div class="bc-label">Announcement</div><div class="bc-text">'+esc(b.message)+'</div><div class="bc-meta">'+fDT(b.ts)+'</div></div>').join('')+'<div class="divider"></div>':''}
-<div style="margin-bottom:12px"><label class="label">Send message to support</label>
-<textarea class="input" id="sm" placeholder="Describe your question..."></textarea>
-<button class="btn btn-p btn-sm mt-8" data-action="send-msg">Send</button></div>
- ${msgs.length?msgs.slice(0,3).map(m=>'<div class="msg-card"><div class="msg-header"><span class="badge b-'+m.st+'">'+m.st+'</span><span class="msg-date">'+fDT(m.ts)+'</span></div><div class="msg-bubble msg-user">'+esc(m.message)+'</div>'+(m.reply?'<div class="msg-bubble msg-admin"><strong style="font-size:9px;color:var(--accent);display:block;margin-bottom:2px;">SUPPORT</strong>'+esc(m.reply)+'</div>':'')+'</div>').join(''):'<p style="font-size:12px;color:var(--dim);">No messages yet.</p>'}
-<div class="divider"></div>
-<button class="wa-btn" data-action="mwa"><i class="fa-brands fa-whatsapp" style="font-size:15px;"></i> Talk to Mentor on WhatsApp</button>
-</div></div>`}
+function vHome(u,lv,xp,st,pr,wp,da,badges,bcasts,msgs,pend,ini,motiv){var photos=loadPhotos(u.id);var wkHtml=wp.map(function(d){return'<div class="wk-day"><div class="wk-bar"><div class="wk-fill" style="height:'+d.pct+'%"></div></div><div class="wk-lbl">'+d.lbl+'</div><div class="wk-pct">'+d.pct+'%</div></div>'}).join('');var badgeHtml='';for(var i=0;i<badges.length;i++){var b=null;for(var j=0;j<BADGES.length;j++){if(BADGES[j].id===badges[i]){b=BADGES[j];break}}if(b)badgeHtml+='<div class="badge-pill" title="'+esc(b.d)+'"><i class="fa-solid '+b.i+'"></i>'+b.n+'</div>'}var lockedBadges='';for(var i=0;i<BADGES.length;i++){if(badges.indexOf(BADGES[i].id)===-1)lockedBadges+='<div class="badge-pill locked" title="'+esc(BADGES[i].d)+'"><i class="fa-solid '+BADGES[i].i+'"></i>'+BADGES[i].n+'</div>'}var bcHtml='';for(var i=0;i<Math.min(2,bcasts.length);i++){bcHtml+='<div class="bc-card"><div class="bc-label">Announcement</div><div class="bc-text">'+esc(bcasts[i].message)+'</div><div class="bc-meta">'+fDT(bcasts[i].ts)+'</div></div>'}if(bcasts.length>0)bcHtml+='<div class="divider"></div>';var msgHtml='';for(var i=0;i<Math.min(3,msgs.length);i++){var m=msgs[i];msgHtml+='<div class="msg-card"><div class="msg-header"><span class="badge b-'+m.st+'">'+m.st+'</span><span class="msg-date">'+fDT(m.ts)+'</span></div><div class="msg-bubble msg-user">'+esc(m.message)+'</div>';if(m.reply)msgHtml+='<div class="msg-bubble msg-admin"><strong style="font-size:9px;color:var(--accent);display:block;margin-bottom:2px;">SUPPORT</strong>'+esc(m.reply)+'</div>';msgHtml+='</div>'}var photoHtml='';for(var i=0;i<PHOTO_MILESTONES.length;i++){var m=PHOTO_MILESTONES[i];if(photos[i])photoHtml+='<div class="photo-slot" data-action="upload-photo" data-idx="'+i+'"><img src="'+photos[i]+'" alt="'+m+'"><div class="photo-label">'+m+'</div><button class="photo-del" data-action="del-photo" data-idx="'+i+'"><i class="fa-solid fa-trash"></i></button></div>';else photoHtml+='<div class="photo-slot" data-action="upload-photo" data-idx="'+i+'"><i class="fa-solid fa-camera"></i><span>'+m+'</span></div>'}
+return'<div class="dhero fi"><div class="dht"><div class="avatar-ring l'+Math.min(lv,10)+'"><div class="avatar-inner">'+ini+'</div></div><div class="dhi"><div class="dhlabel">Level '+lv+(lv<10?' — '+xp.cur+'/'+xp.need+' XP':'')+'</div><div class="dhname">'+esc(u.name)+'</div><div class="xp-row"><div class="xp-labels"><span>XP Progress</span><span>'+xp.pct+'%</span></div><div class="xp-bar"><div class="xp-fill" style="width:'+xp.pct+'%"></div></div></div></div><div class="dh-coins"><i class="fa-solid fa-coins"></i>'+(u.coins||0)+'</div></div><div style="font-size:13px;font-weight:300;color:#aaa;position:relative;z-index:1;">You\'re <strong style="color:var(--accent);">'+Math.round(u.progress||0)+'%</strong> closer to your best version.</div>'+(motiv.done?'':'<div class="dh-motiv fi f1"><i class="fa-solid fa-rocket"></i>'+esc(motiv.t)+' — Unlocks: '+esc(motiv.ben)+'</div>')+(st>0?'<div class="dh-streak fi f2"><i class="fa-solid fa-fire"></i>Don\'t break your <strong>'+st+'-day</strong> streak!</div>':'')+'</div><div class="sgrid"><div class="scard gc fi f1"><div class="sv gd">'+st+'</div><div class="sl">Streak</div></div><div class="scard gc fi f1"><div class="sv">'+Math.round(u.progress||0)+'%</div><div class="sl">Progress</div></div><div class="scard gc fi f2"><div class="sv gd">'+pr.done+'/'+pr.total+'</div><div class="sl">Today</div></div><div class="scard gc fi f3"><div class="sv">'+da+'</div><div class="sl">Days Active</div></div></div><div class="dgrid"><div class="card gc fi f2"><div class="sec-title"><i class="fa-solid fa-calendar-week"></i> This Week</div><div class="wk-row">'+wkHtml+'</div><div class="sec-title" style="margin-top:18px;"><i class="fa-solid fa-award"></i> Badges ('+badges.length+'/'+BADGES.length+')</div><div class="badge-row">'+badgeHtml+lockedBadges+'</div></div><div class="card gc fi f3"><div class="sec-title"><i class="fa-solid fa-bolt"></i> Quick Actions</div><div style="display:flex;flex-direction:column;gap:5px;"><button class="btn btn-o btn-sm" data-action="tab" data-t="tracker" style="justify-content:flex-start;"><i class="fa-solid fa-check-double" style="width:18px;color:var(--accent);"></i> Complete Today\'s Tasks</button><button class="btn btn-o btn-sm" data-action="tab" data-t="store" style="justify-content:flex-start;"><i class="fa-solid fa-store" style="width:18px;color:var(--accent);"></i> Redeem Skincare Products</button><button class="btn btn-o btn-sm" data-action="tab" data-t="earn" style="justify-content:flex-start;"><i class="fa-solid fa-coins" style="width:18px;color:var(--accent);"></i> Earn More Coins</button><button class="btn btn-o btn-sm" data-action="tab" data-t="mentor" style="justify-content:flex-start;"><i class="fa-solid fa-headset" style="width:18px;color:var(--accent);"></i> Book Mentor Session</button></div></div><div class="card gc fi f4"><div class="sec-title"><i class="fa-solid fa-camera"></i> Progress Photos</div><p style="font-size:11px;color:var(--dim);margin-bottom:12px;">Track your transformation over time.</p><div class="photo-grid">'+photoHtml+'</div></div><div class="card full gc fi f5"><div class="sec-title"><i class="fa-solid fa-envelope"></i> Support '+(pend?'<span class="badge b-pending" style="margin-left:auto;">'+pend+' pending</span>':'')+'</div>'+bcHtml+'<div style="margin-bottom:12px"><label class="label">Send message to support</label><textarea class="input" id="sm" placeholder="Describe your question..."></textarea><button class="btn btn-p btn-sm" data-action="send-msg" style="margin-top:8px;">Send</button></div>'+(msgs.length?msgHtml:'<p style="font-size:12px;color:var(--dim);">No messages yet.</p>')+'<div class="divider"></div><button class="wa-btn" data-action="mwa"><i class="fa-brands fa-whatsapp" style="font-size:15px;"></i> Talk to Mentor on WhatsApp</button></div></div>'}
 
-/* ===== TRACKER VIEW ===== */
-function vTracker(u){
-const today=tk(),dh=(u.habits||{})[today]||{};
-const hasPR=u.unlocks&&u.unlocks.premiumRoutine;
-return`<div class="day-progress fi"><div class="dp-header"><div class="dp-label"><i class="fa-solid fa-circle-check"></i> Today's Progress</div><div class="dp-count">${rProg(u.habits,'morning').done+rProg(u.habits,'afternoon').done+rProg(u.habits,'evening').done} / ${ALL_TASKS.length} tasks</div></div>
-<div class="dp-bar"><div class="dp-fill" style="width:${tProg(u.habits).pct}%"></div></div>
-<div class="dp-bonus">Complete all tasks to earn <span>+10 Glow Cash</span> and <span>+20 XP</span></div></div>
- ${ROUTINES.map(r=>{const rp=rProg(u.habits,r.id);const isComplete=rp.done>=rp.total;
-return'<div class="routine-card fi '+(isComplete?'complete':'')+'"><div class="rc-header"><div class="rc-icon '+r.css+'"><i class="fa-solid '+r.icon+'"></i></div><div class="rc-info"><div class="rc-label">'+r.label+'</div><div class="rc-time">'+r.time+'</div></div><div class="rc-progress"><div class="rc-pbar"><div class="rc-pfill '+r.css+'-fill" style="width:'+rp.pct+'%"></div></div><div class="rc-pct">'+(isComplete?'<i class="fa-solid fa-check rc-complete"></i>':rp.pct+'%')+'</div></div></div><div class="rc-body">'+
-r.tasks.map(task=>{const done=dh[task.k];return'<div class="task-row '+(done?'done':'')+'" data-action="toggle" data-k="'+task.k+'"><div class="task-check '+(done?'done':'')+'">'+(done?'<i class="fa-solid fa-check"></i>':'')+'</div><div class="task-icon"><i class="fa-solid '+task.i+'"></i></div><span class="task-label">'+task.l+'</span><span class="task-xp">+2 XP</span><div class="task-timer-area" data-timer="'+task.k+'">'+
-(done?'<i class="fa-solid fa-check" style="color:var(--success);font-size:12px;"></i>'
-:task.t>0?'<button class="timer-btn" data-action="start-timer" data-k="'+task.k+'" data-d="'+task.t+'"><i class="fa-solid fa-play" style="font-size:8px;margin-right:3px;"></i>'+fmtTime(task.t)+'</button>'
-:'')+'</div></div>'}).join('')+'</div></div>'}).join('')}
-<div class="dgrid" style="margin-top:14px;">
-<div class="card gc prem-card fi f1 ${hasPR?'':'locked'}"><div class="sec-title"><i class="fa-solid fa-crown"></i> Premium Routines</div>
- ${PREM_ROUTINES.map(r=>'<div class="prem-cat"><h4><i class="fa-solid '+r.i+'"></i>'+r.c+'</h4>'+r.items.map(i=>'<div class="prem-item"><i class="fa-solid fa-check"></i>'+i+'</div>').join('')+'</div>').join('')}
- ${hasPR?'':'<button class="btn btn-p btn-sm prem-btn" data-action="tab" data-t="store">Unlock in Store</button>'}</div>
-<div class="card gc fi f2"><div class="sec-title"><i class="fa-solid fa-utensils"></i> Diet Plan</div>
- ${DIET.map(d=>'<div class="diet-meal"><span class="diet-time">'+d.t+'</span><span class="diet-text">'+d.d+'</span></div>').join('')}</div>
-</div>`}
+function vTracker(u){var today=tk(),dh=(u.habits||{})[today]||{};var hasPR=u.unlocks&&u.unlocks.premiumRoutine;var totalDone=rProg(u.habits,'morning').done+rProg(u.habits,'afternoon').done+rProg(u.habits,'evening').done;var rHtml='';for(var ri=0;ri<ROUTINES.length;ri++){var r=ROUTINES[ri],rp=rProg(u.habits,r.id),isComp=rp.done>=rp.total;rHtml+='<div class="routine-card fi '+(isComp?'complete':'')+'"><div class="rc-header"><div class="rc-icon '+r.css+'"><i class="fa-solid '+r.icon+'"></i></div><div class="rc-info"><div class="rc-label">'+r.label+'</div><div class="rc-time">'+r.time+'</div></div><div class="rc-progress"><div class="rc-pbar"><div class="rc-pfill '+r.css+'-fill" style="width:'+rp.pct+'%"></div></div><div class="rc-pct">'+(isComp?'<i class="fa-solid fa-check rc-complete"></i>':rp.pct+'%')+'</div></div></div><div class="rc-body">';for(var ti=0;ti<r.tasks.length;ti++){var task=r.tasks[ti],done=dh[task.k];rHtml+='<div class="task-row '+(done?'done':'')+'" data-action="toggle" data-k="'+task.k+'"><div class="task-check '+(done?'done':'')+'">'+(done?'<i class="fa-solid fa-check"></i>':'')+'</div><div class="task-icon"><i class="fa-solid '+task.i+'"></i></div><span class="task-label">'+task.l+'</span><span class="task-xp">+5 XP</span><div class="task-timer-area" data-timer="'+task.k+'">'+(done?'<i class="fa-solid fa-check" style="color:var(--success);font-size:12px;"></i>':task.t>0?'<button class="timer-btn" data-action="start-timer" data-k="'+task.k+'" data-d="'+task.t+'"><i class="fa-solid fa-play" style="font-size:8px;margin-right:3px;"></i>'+fmtTime(task.t)+'</button>':'')+'</div></div>'}rHtml+='</div></div>'}var premHtml='';for(var i=0;i<PREM_ROUTINES.length;i++){var r=PREM_ROUTINES[i];premHtml+='<div class="prem-cat"><h4><i class="fa-solid '+r.i+'"></i>'+r.c+'</h4>';for(var j=0;j<r.items.length;j++)premHtml+='<div class="prem-item"><i class="fa-solid fa-check"></i>'+r.items[j]+'</div>';premHtml+='</div>'}var dietHtml='';for(var i=0;i<DIET.length;i++)dietHtml+='<div class="diet-meal"><span class="diet-time">'+DIET[i].t+'</span><span class="diet-text">'+DIET[i].d+'</span></div>';return'<div class="day-progress fi"><div class="dp-header"><div class="dp-label"><i class="fa-solid fa-circle-check"></i> Today\'s Progress</div><div class="dp-count">'+totalDone+' / '+ALL_TASKS.length+' tasks</div></div><div class="dp-bar"><div class="dp-fill" style="width:'+tProg(u.habits).pct+'%"></div></div><div class="dp-bonus">Complete all tasks to earn <span>+10 Glow Cash</span> and <span>+20 XP</span></div></div>'+rHtml+'<div class="dgrid" style="margin-top:14px;"><div class="card gc prem-card fi f1 '+(hasPR?'':'locked')+'"><div class="sec-title"><i class="fa-solid fa-crown"></i> Premium Routines</div>'+premHtml+(hasPR?'':'<button class="btn btn-p btn-sm prem-btn" data-action="tab" data-t="store">Unlock in Store</button>')+'</div><div class="card gc fi f2"><div class="sec-title"><i class="fa-solid fa-utensils"></i> Diet Plan</div>'+dietHtml+'</div></div>'}
 
-/* ===== STORE VIEW ===== */
-function vStore(u){
-const coins=u.coins||0,purch=u.purch||[];
-const cats=[{id:'all',l:'All'},{id:'skincare',l:'Skincare'},{id:'digital',l:'Digital'},{id:'coaching',l:'Coaching'},{id:'rewards',l:'Rewards'}];
-const items=sCat==='all'?STORE:STORE.filter(x=>x.cat===sCat);
-return`<div style="margin-bottom:18px;" class="fi"><h2 style="font-size:18px;font-weight:800;margin-bottom:2px;">Reward Store</h2>
-<p style="font-size:12px;color:var(--muted);">Redeem Glow Cash for products, guides, and sessions.</p>
-<div style="display:inline-flex;align-items:center;gap:6px;background:var(--abg2);padding:7px 16px;border-radius:10px;margin-top:6px;"><i class="fa-solid fa-coins" style="color:var(--accent);font-size:15px;"></i><span style="font-size:18px;font-weight:800;color:var(--accent);">${coins}</span><span style="font-size:11px;color:var(--muted);">Glow Cash</span></div></div>
-<div class="store-cats">${cats.map(c=>'<button class="store-cat '+(sCat===c.id?'active':'')+'" data-action="scat" data-c="'+c.id+'">'+c.l+'</button>').join('')}</div>
-<div class="store-grid">${items.map(item=>{const owned=purch.includes(item.id);const canBuy=coins>=item.p&&!owned;const diff=item.p-coins;const isSkin=item.cat==='skincare';
-return'<div class="card gc store-item fi f'+(STORE.indexOf(item)%5)+'">'+
-(item.img?'<img src="'+item.img+'" alt="'+esc(item.n)+'" class="store-img" loading="lazy">':'<div class="store-placeholder"></div>')+
-'<div class="store-body">'+(isSkin?'<span class="store-tag"><i class="fa-solid fa-truck" style="margin-right:3px;"></i> Physical</span>':'')+
-'<div class="store-name">'+item.n+'</div><div class="store-desc">'+item.d+'</div>'+
-(owned?'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><button class="btn btn-sm" style="background:rgba(46,204,113,.1);color:#2ecc71;border:1px solid rgba(46,204,113,.2);font-weight:700;" disabled><i class="fa-solid fa-check"></i> Owned</button>'
-:canBuy?'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><button class="btn btn-p btn-sm" data-action="buy" data-id="'+item.id+'" style="margin-top:auto;">'+(isSkin?'Order Now':'Redeem')+'</button>'
-:'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><div class="store-need">Need '+diff+' more coins</div><button class="btn btn-p btn-sm" disabled style="margin-top:auto;">Not enough</button>')+
-'</div></div>'}).join('')}</div>`}
+function vStore(u){var coins=u.coins||0,purch=u.purch||[];var cats=[{id:'all',l:'All'},{id:'skincare',l:'Skincare'},{id:'digital',l:'Digital'},{id:'coaching',l:'Coaching'},{id:'rewards',l:'Rewards'}];var items=sCat==='all'?STORE:STORE.filter(function(x){return x.cat===sCat});var sHtml='';for(var i=0;i<cats.length;i++)sHtml+='<button class="store-cat '+(sCat===cats[i].id?'active':'')+'" data-action="scat" data-c="'+cats[i].id+'">'+cats[i].l+'</button>';var iHtml='';for(var i=0;i<items.length;i++){var item=items[i],owned=purch.indexOf(item.id)!==-1,canBuy=coins>=item.p&&!owned,diff=item.p-coins,isSkin=item.cat==='skincare';iHtml+='<div class="card gc store-item fi f'+(i%5)+'">'+(item.img?'<img src="'+item.img+'" alt="'+esc(item.n)+'" class="store-img" loading="lazy">':'<div class="store-placeholder"></div>')+'<div class="store-body">'+(isSkin?'<span class="store-tag"><i class="fa-solid fa-truck" style="margin-right:3px;"></i> Physical</span>':'')+'<div class="store-name">'+item.n+'</div><div class="store-desc">'+item.d+'</div>'+(owned?'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><button class="btn btn-sm" style="background:rgba(46,204,113,.1);color:#2ecc71;border:1px solid rgba(46,204,113,.2);font-weight:700;" disabled><i class="fa-solid fa-check"></i> Owned</button>':canBuy?'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><button class="btn btn-p btn-sm" data-action="buy" data-id="'+item.id+'" style="margin-top:auto;">'+(isSkin?'Order Now':'Redeem')+'</button>':'<div class="store-price"><i class="fa-solid fa-coins"></i>'+item.p+'</div><div class="store-need">Need '+diff+' more coins</div><button class="btn btn-p btn-sm" disabled style="margin-top:auto;">Not enough</button>')+'</div></div>'}return'<div style="margin-bottom:18px;" class="fi"><h2 style="font-size:18px;font-weight:800;margin-bottom:2px;">Reward Store</h2><p style="font-size:12px;color:var(--muted);">Redeem Glow Cash for products, guides, and sessions.</p><div style="display:inline-flex;align-items:center;gap:6px;background:var(--abg2);padding:7px 16px;border-radius:10px;margin-top:6px;"><i class="fa-solid fa-coins" style="color:var(--accent);font-size:15px;"></i><span style="font-size:18px;font-weight:800;color:var(--accent);">'+coins+'</span><span style="font-size:11px;color:var(--muted);">Glow Cash</span></div></div><div class="store-cats">'+sHtml+'</div><div class="store-grid">'+iHtml+'</div>'}
 
-/* ===== EARN VIEW ===== */
-function vEarn(u){
-const canCI=!u.lastCI||u.lastCI!==tk();const tiers=refTS(u.refC||0);
-const refLink=location.origin+location.pathname+'?ref='+(u.refCode||'');
-const users=D.gU();const lb=users.filter(x=>x.id!==u.id&&(x.refC||0)>0).sort((a,b)=>(b.refC||0)-(a.refC||0)).slice(0,5);
-const myRank=[...users].sort((a,b)=>(b.refC||0)-(a.refC||0)).findIndex(x=>x.id===u.id)+1;
-return`<div class="dgrid"><div class="card gc fi"><div class="sec-title"><i class="fa-solid fa-coins"></i> Ways to Earn</div>
-<div style="display:flex;flex-direction:column;gap:6px;">
-<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-check-double"></i></div><div class="earn-info"><h4>Complete All Daily Tasks</h4><p>Finish all 12 routine tasks</p></div><div class="earn-val">+10</div></div>
-<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-fire"></i></div><div class="earn-info"><h4>7-Day Streak Bonus</h4><p>Every 7 days streaked</p></div><div class="earn-val">+50</div></div>
-<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-calendar-check"></i></div><div class="earn-info"><h4>Daily Check-In</h4><p>Tap once per day</p></div><div class="earn-val">+5</div></div>
-<div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-user-plus"></i></div><div class="earn-info"><h4>Refer a Friend</h4><p>Friend joins & pays</p></div><div class="earn-val">+20</div></div>
-</div>
-<button class="btn btn-p btn-sm mt-16" data-action="checkin" ${canCI?'':'disabled'} style="margin-top:16px;">${canCI?'<i class="fa-solid fa-calendar-check"></i> Daily Check-In (+5)':'<i class="fa-solid fa-check"></i> Checked in today'}</button></div>
-<div class="card gc fi f1"><div class="sec-title"><i class="fa-solid fa-user-group"></i> Referral Program</div>
-<p style="font-size:11px;color:var(--muted);margin-bottom:12px;">Share your link. Earn at every milestone.</p>
-<div class="ref-tiers">${tiers.map(t=>'<div class="ref-tier '+(t.earned?'earned':'')+'"><div class="rt-num">'+t.req+'</div><div class="rt-req">referral'+(t.req>1?'s':'')+'</div><div class="rt-reward">'+t.label+'</div></div>').join('')}</div>
-<div class="ref-link-box"><input class="input" value="'+esc(refLink)+'" readonly id="rl"><button class="btn btn-o btn-xs" data-action="cpy-ref"><i class="fa-solid fa-copy"></i></button></div> <a href="referral.html" class="btn btn-o btn-xs" style="margin-top:8px;width:100%;justify-content:center;text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px;"></i> View Full Referral Page</a>
-<div style="font-size:11px;color:var(--dim);margin-top:6px;">Your rank: <strong style="color:var(--accent);">#'+myRank+'</strong> &middot; '+(u.refC||0)+' referrals</div>
- ${lb.length?'<div style="margin-top:14px;"><label class="label">Top Referrers</label>'+lb.map((x,i)=>'<div class="ref-lb-row"><div class="ref-lb-rank">'+(i+1)+'</div><div class="ref-lb-name">'+esc(x.name)+'</div><div class="ref-lb-count">'+(x.refC||0)+'</div></div>').join('')+'</div>':''}
-<div style="margin-top:12px;padding:10px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:10px;">
-<p style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:2px;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> Top Referrer Reward</p>
-<p style="font-size:10px;color:var(--muted);">#1 referrer each month gets 500 bonus coins + free mentor session.</p></div></div></div>`}
+function vEarn(u){var canCI=!u.lastCI||u.lastCI!==tk();var refCode=u.refCode||'';var refLink=location.origin+location.pathname+'?ref='+refCode;var users=DB.gU(),lb=[];for(var i=0;i<users.length;i++){if(users[i].id!==u.id&&(users[i].refC||0)>0)lb.push(users[i])}lb.sort(function(a,b){return(b.refC||0)-(a.refC||0)});lb=lb.slice(0,5);var myRank=0;var sorted=[].concat(users).sort(function(a,b){return(b.refC||0)-(a.refC||0)});for(var i=0;i<sorted.length;i++){if(sorted[i].id===u.id){myRank=i+1;break}}var tiersHtml='';for(var i=0;i<REF_TIERS.length;i++){var t=REF_TIERS[i],isE=(u.refC||0)>=t.req;tiersHtml+='<div class="ref-tier '+(isE?'earned':'')+'"><div class="rt-num">'+t.req+'</div><div class="rt-req">ref'+(t.req>1?'s':'')+'</div><div class="rt-reward">'+t.label+'</div></div>'}var lbHtml='';for(var i=0;i<lb.length;i++){lbHtml+='<div class="ref-lb-row"><div class="ref-lb-rank">'+(i+1)+'</div><div class="ref-lb-name">'+esc(lb[i].name)+'</div><div class="ref-lb-count">'+(lb[i].refC||0)+'</div></div>'}return'<div class="dgrid"><div class="card gc fi"><div class="sec-title"><i class="fa-solid fa-coins"></i> Ways to Earn</div><div style="display:flex;flex-direction:column;gap:6px;"><div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-check-double"></i></div><div class="earn-info"><h4>Complete All Daily Tasks</h4><p>Finish all 12 routine tasks</p></div><div class="earn-val">+10</div></div><div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-fire"></i></div><div class="earn-info"><h4>7-Day Streak Bonus</h4><p>Every 7 days streaked</p></div><div class="earn-val">+50</div></div><div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-calendar-check"></i></div><div class="earn-info"><h4>Daily Check-In</h4><p>Tap once per day</p></div><div class="earn-val">+5</div></div><div class="earn-item"><div class="earn-icon"><i class="fa-solid fa-user-plus"></i></div><div class="earn-info"><h4>Refer a Friend</h4><p>Friend joins & pays</p></div><div class="earn-val">+20</div></div></div><button class="btn btn-p btn-sm" data-action="checkin" '+(canCI?'':'disabled')+' style="margin-top:16px;width:100%;">'+(canCI?'<i class="fa-solid fa-calendar-check"></i> Daily Check-In (+5)':'<i class="fa-solid fa-check"></i> Checked in today')+'</button></div><div class="card gc fi f1"><div class="sec-title"><i class="fa-solid fa-user-group"></i> Referral Program</div><p style="font-size:11px;color:var(--muted);margin-bottom:12px;">Share your link. Earn at every milestone.</p><div class="ref-tiers">'+tiersHtml+'</div><div class="ref-link-box"><input class="input" value="'+esc(refLink)+'" readonly id="rl"><button class="btn btn-o btn-xs" data-action="cpy-ref"><i class="fa-solid fa-copy"></i></button></div><a href="referral.html" class="btn btn-o btn-xs" style="margin-top:8px;width:100%;justify-content:center;text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px;"></i> View Full Referral Page</a><div style="font-size:11px;color:var(--dim);margin-top:6px;">Your rank: <strong style="color:var(--accent);">#'+myRank+'</strong> &middot; '+(u.refC||0)+' referrals</div>'+(lb.length?'<div style="margin-top:14px;"><label class="label">Top Referrers</label>'+lbHtml+'</div>':'')+'<div style="margin-top:12px;padding:10px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:10px;"><p style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:2px;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> Top Referrer Reward</p><p style="font-size:10px;color:var(--muted);">#1 referrer each month gets 500 bonus coins + free mentor session.</p></div></div></div>'}
 
-/* ===== MENTOR VIEW ===== */
-function vMentor(u){
-return`<div style="margin-bottom:18px;" class="fi"><h2 style="font-size:18px;font-weight:800;margin-bottom:2px;">Talk to a Glow Coach</h2>
-<p style="font-size:12px;color:var(--muted);">Book a session or reach out on WhatsApp. 500 Glow Cash per session.</p></div>
-<div class="mentor-grid">${MENTORS.map(m=>'<div class="card gc mentor-card fi f'+(MENTORS.indexOf(m)%5)+'"><img src="'+m.img+'" alt="'+esc(m.n)+'" class="mentor-img" loading="lazy"><div class="mentor-body"><div class="mentor-name">'+m.n+'</div><div class="mentor-spec">'+m.s+'</div>
-<div class="mentor-meta"><span><i class="fa-solid fa-star"></i>'+m.r+'</span><span><i class="fa-solid fa-video"></i>'+m.ses+' sessions</span></div>
-<button class="btn btn-p btn-sm" data-action="book-m" data-id="'+m.id+'" style="width:100%;">Book Session (500 Coins)</button></div></div>').join('')}</div>
-<div class="divider"></div><button class="wa-btn" data-action="mwa"><i class="fa-brands fa-whatsapp" style="font-size:15px;"></i> Quick Chat on WhatsApp</button>`}
+function vMentor(u){var mHtml='';for(var i=0;i<MENTORS.length;i++){var m=MENTORS[i];mHtml+='<div class="card gc mentor-card fi f'+(i%5)+'"><img src="'+m.img+'" alt="'+esc(m.n)+'" class="mentor-img" loading="lazy"><div class="mentor-body"><div class="mentor-name">'+m.n+'</div><div class="mentor-spec">'+m.s+'</div><div class="mentor-meta"><span><i class="fa-solid fa-star"></i>'+m.r+'</span><span><i class="fa-solid fa-video"></i>'+m.ses+' sessions</span></div><button class="btn btn-p btn-sm" data-action="book-m" data-id="'+m.id+'" style="width:100%;">Book Session (500 Coins)</button></div></div>'}return'<div style="margin-bottom:18px;" class="fi"><h2 style="font-size:18px;font-weight:800;margin-bottom:2px;">Talk to a Glow Coach</h2><p style="font-size:12px;color:var(--muted);">Book a session or reach out on WhatsApp. 500 Glow Cash per session.</p></div><div class="mentor-grid">'+mHtml+'</div><div class="divider"></div><button class="wa-btn" data-action="mwa"><i class="fa-brands fa-whatsapp" style="font-size:15px;"></i> Quick Chat on WhatsApp</button>'}
 
-/* ===== PHOTO FUNCTIONS ===== */
-function loadPhotos(uid){return(D._g('photos_'+uid)||[])}
-function savePhotos(uid,photos){D._s('photos_'+uid,photos)}
+/* EVENT HANDLING */
+document.getElementById('app').addEventListener('click',function(e){var delBtn=e.target.closest('[data-action="del-photo"]');if(delBtn){e.stopPropagation();var idx=parseInt(delBtn.dataset.idx);var u=DB.cur();if(!u)return;var photos=loadPhotos(u.id);photos[idx]=null;savePhotos(u.id,photos);render();return}var b=e.target.closest('[data-action]');if(!b)return;var a=b.dataset.action;switch(a){case'tab':nav(b.dataset.t);break;case'logout':DB.cS();location.href='index.html';break;case'dismiss-notif':sessionStorage.setItem('g_notif_dismissed',tk());var bar=document.getElementById('notif-bar');if(bar)bar.classList.remove('show');break;case'toggle':toggleTask(b.dataset.k);break;case'start-timer':e.stopPropagation();startTimer(b.dataset.k,parseInt(b.dataset.d));break;case'upload-photo':var idx=parseInt(b.dataset.idx);document.getElementById('photo-input').dataset.idx=idx;document.getElementById('photo-input').click();break;case'send-msg':hSendMsg();break;case'mwa':var u2=DB.cur();window.open('https://wa.me/'+WN+'?text='+encodeURIComponent("Hi! I'm "+(u2?u2.name:'User')+" from GLOWUP. I'd like to book a mentor session."),'_blank');break;case'buy':hBuy(b.dataset.id);break;case'scat':sCat=b.dataset.c;render();break;case'checkin':hCheckin();break;case'cpy-ref':var inp=document.getElementById('rl');if(inp)navigator.clipboard.writeText(inp.value).then(function(){toast('Link copied!','s')}).catch(function(){inp.select();document.execCommand('copy');toast('Link copied!','s')});break;case'book-m':hBookM(b.dataset.id);break;case'confirm-ship':hConfirmShip();break}});
 
-/* ===== EVENT HANDLING ===== */
-document.getElementById('app').addEventListener('click',function(e){
-/* Handle photo delete separately */
-const delBtn=e.target.closest('[data-action="del-photo"]');
-if(delBtn){e.stopPropagation();const idx=parseInt(delBtn.dataset.idx);const u=D.cur();if(!u)return;
-const photos=loadPhotos(u.id);photos[idx]=null;savePhotos(u.id,photos);render();return}
+document.getElementById('photo-input').addEventListener('change',function(){var idx=parseInt(this.dataset.idx);var file=this.files[0];if(!file)return;var u=DB.cur();if(!u)return;resizeImage(file,400,function(data){var photos=loadPhotos(u.id);photos[idx]=data;savePhotos(u.id,photos);toast('Progress photo saved!','s');render()});this.value=''});
 
-const b=e.target.closest('[data-action]');if(!b)return;
-const a=b.dataset.action;
-switch(a){
-case'tab':tab=b.dataset.t;render();break;
-case'logout':D.cS();location.href='index.html';break;
-case'dismiss-notif':sessionStorage.setItem('g_notif_dismissed',tk());document.getElementById('notif-bar').classList.remove('show');break;
-case'toggle':toggleTask(b.dataset.k);break;
-case'start-timer':e.stopPropagation();startTimer(b.dataset.k,parseInt(b.dataset.d));break;
-case'upload-photo':{const idx=parseInt(b.dataset.idx);document.getElementById('photo-input').dataset.idx=idx;document.getElementById('photo-input').click();break}
-case'send-msg':hSendMsg();break;
-case'mwa':{const u=D.cur();window.open('https://wa.me/'+WN+'?text='+encodeURIComponent("Hi! I'm "+(u?u.name:'User')+" from GLOWUP. I'd like to book a mentor session."),'_blank');break}
-case'buy':hBuy(b.dataset.id);break;
-case'scat':sCat=b.dataset.c;render();break;
-case'checkin':hCheckin();break;
-case'cpy-ref':{const inp=document.getElementById('rl');if(inp)navigator.clipboard.writeText(inp.value).then(()=>toast('Link copied!','s')).catch(()=>{inp.select();document.execCommand('copy');toast('Link copied!','s')});break}
-case'book-m':hBookM(b.dataset.id);break;
-case'confirm-ship':hConfirmShip();break;
-}
-});
+function hSendMsg(){var u=DB.cur();if(!u)return;var ta=document.getElementById('sm');var msg=ta?ta.value.trim():'';if(!msg){toast('Type a message.','e');return}var ms=DB.gM();ms.push({id:uid(),userId:u.id,userName:u.name,userPhone:u.phone,message:msg,reply:'',st:'pending',ts:Date.now()});DB.sM(ms);addXP(u.id,2);toast('Message sent.','s');render()}
+function hBuy(id){var u=DB.cur();if(!u)return;var item=null;for(var i=0;i<STORE.length;i++){if(STORE[i].id===id){item=STORE[i];break}}if(!item)return;if((u.purch||[]).indexOf(id)!==-1){toast('Already owned.','i');return}if(!spendC(u.id,item.p,'Purchased: '+item.n)){toast('Not enough Glow Cash.','e');return}if(item.cat==='skincare'){buyingItem=id;openModal('<h3>Shipping Address</h3><p class="sub">Enter your delivery address for '+esc(item.n)+'</p><div class="fg"><label class="label">Full Name</label><input type="text" class="input" id="ship-name" value="'+esc(u.name)+'"></div><div class="fg"><label class="label">Phone</label><input type="tel" class="input" id="ship-phone" value="'+esc(u.phone)+'"></div><div class="fg"><label class="label">Address Line 1</label><input type="text" class="input" id="ship-a1" placeholder="House/Flat No., Street"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div class="fg"><label class="label">City</label><input type="text" class="input" id="ship-city" placeholder="Mumbai"></div><div class="fg"><label class="label">PIN Code</label><input type="text" class="input" id="ship-pin" placeholder="400001"></div></div><div class="fg"><label class="label">State</label><input type="text" class="input" id="ship-state" placeholder="Maharashtra"></div><button class="btn btn-p btn-sm" data-action="confirm-ship" style="margin-top:12px;">Confirm Order</button>');return}var us=DB.gU();for(var i=0;i<us.length;i++){if(us[i].id===u.id){if(!us[i].purch)us[i].purch=[];us[i].purch.push(id);if(item.unlock)us[i].unlocks[item.unlock]=true;break}}DB.sU(us);var msgs={wallpack:'Wallpaper pack downloaded!',motiv_pdf:'Motivation Blueprint downloaded!',routine_tpl:'Premium routines unlocked!',skin_bible:'Skincare Bible downloaded!',group_ws:'Workshop access granted!',mentor_1on1:'Mentor session unlocked!',discount:'Code: GLOW20',conf_audio:'Audio course downloaded!',pro_ext:'Access extended 30 days!'};toast(msgs[id]||'Purchase complete!','s');addXP(u.id,10);render()}
+function hConfirmShip(){var n=document.getElementById('ship-name').value.trim(),ph=document.getElementById('ship-phone').value.trim(),a1=document.getElementById('ship-a1').value.trim(),ci=document.getElementById('ship-city').value.trim(),pi=document.getElementById('ship-pin').value.trim(),st=document.getElementById('ship-state').value.trim();if(!n||!ph||!a1||!ci||!pi||!st){toast('Fill all address fields.','e');return}var u=DB.cur();if(!u)return;var item=null;for(var i=0;i<STORE.length;i++){if(STORE[i].id===buyingItem){item=STORE[i];break}}if(!item)return;var us=DB.gU();for(var i=0;i<us.length;i++){if(us[i].id===u.id){if(!us[i].purch)us[i].purch=[];us[i].purch.push(buyingItem);break}}DB.sU(us);var addr=n+', '+a1+', '+ci+', '+st+' - '+pi;var ords=DB.gO();ords.push({id:uid(),userId:u.id,userName:u.name,userPhone:u.phone,itemId:item.id,itemName:item.n,img:item.img||'',coins:item.p,address:addr,status:'pending',ts:Date.now()});DB.sO(ords);closeModal();toast(item.n+' ordered!','s');addXP(u.id,15);render()}
+function hCheckin(){var u=DB.cur();if(!u)return;if(u.lastCI===tk())return;var us=DB.gU();for(var i=0;i<us.length;i++){if(us[i].id===u.id){us[i].lastCI=tk();break}}DB.sU(us);addC(u.id,5,'Daily check-in');cFloat(5);addXP(u.id,3);toast('+5 Glow Cash!','s');render()}
+function hBookM(id){var u=DB.cur();if(!u)return;if(!spendC(u.id,500,'Mentor session')){toast('Need 500 coins.','e');return}var m=null;for(var i=0;i<MENTORS.length;i++){if(MENTORS[i].id===id){m=MENTORS[i];break}}toast('Session booked with '+(m?m.n:'Coach')+'!','s');addXP(u.id,15);render()}
 
-document.getElementById('photo-input').addEventListener('change',function(){
-const idx=parseInt(this.dataset.idx);const file=this.files[0];if(!file)return;
-const u=D.cur();if(!u)return;
-resizeImage(file,400,function(data){
-const photos=loadPhotos(u.id);photos[idx]=data;savePhotos(u.id,photos);toast('Progress photo saved!','s');render()});
-this.value='';
-});
-
-function hSendMsg(){const u=D.cur();if(!u)return;const ta=document.getElementById('sm');const msg=ta?ta.value.trim():'';if(!msg){toast('Type a message.','e');return}
-const ms=D.gM();ms.push({id:uid(),userId:u.id,userName:u.name,userPhone:u.phone,message:msg,reply:'',st:'pending',ts:Date.now()});D.sM(ms);addXP(u.id,2);toast('Message sent.','s');render()}
-
-function hBuy(id){
-const u=D.cur();if(!u)return;const item=STORE.find(x=>x.id===id);if(!item)return;
-if((u.purch||[]).includes(id)){toast('Already owned.','i');return}
-if(!spendC(u.id,item.p,'Purchased: '+item.n)){toast('Not enough Glow Cash.','e');return}
-if(item.cat==='skincare'){buyingItem=id;
-openModal('<h3>Shipping Address</h3><p class="sub">Enter your delivery address for '+esc(item.n)+'</p>'+
-'<div class="fg"><label class="label">Full Name</label><input type="text" class="input" id="ship-name" value="'+esc(u.name)+'"></div>'+
-'<div class="fg"><label class="label">Phone</label><input type="tel" class="input" id="ship-phone" value="'+esc(u.phone)+'"></div>'+
-'<div class="fg"><label class="label">Address Line 1</label><input type="text" class="input" id="ship-a1" placeholder="House/Flat No., Street"></div>'+
-'<div class="fg"><label class="label">Address Line 2</label><input type="text" class="input" id="ship-a2" placeholder="Landmark, Area"></div>'+
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div class="fg"><label class="label">City</label><input type="text" class="input" id="ship-city" placeholder="Mumbai"></div><div class="fg"><label class="label">PIN Code</label><input type="text" class="input" id="ship-pin" placeholder="400001"></div></div>'+
-'<div class="fg"><label class="label">State</label><input type="text" class="input" id="ship-state" placeholder="Maharashtra"></div>'+
-'<button class="btn btn-p btn-sm mt-8" data-action="confirm-ship" style="margin-top:12px;">Confirm Order</button>');return}
-const us=D.gU();const i=us.findIndex(x=>x.id===u.id);
-if(i!==-1){if(!us[i].purch)us[i].purch=[];us[i].purch.push(id);if(item.unlock)us[i].unlocks[item.unlock]=true;D.sU(us)}
-const msgs={wallpack:'Wallpaper pack downloaded!',motiv_pdf:'Motivation Blueprint downloaded!',routine_tpl:'Premium routines unlocked!',skin_bible:'Skincare Bible downloaded!',group_ws:'Workshop access granted!',mentor_1on1:'Mentor session unlocked!',discount:'Code: GLOW20',conf_audio:'Audio course downloaded!',pro_ext:'Access extended 30 days!'};
-toast(msgs[id]||'Purchase complete!','s');addXP(u.id,10);render();
-}
-
-function hConfirmShip(){
-const n=document.getElementById('ship-name').value.trim(),ph=document.getElementById('ship-phone').value.trim(),a1=document.getElementById('ship-a1').value.trim(),ci=document.getElementById('ship-city').value.trim(),pi=document.getElementById('ship-pin').value.trim(),st=document.getElementById('ship-state').value.trim();
-if(!n||!ph||!a1||!ci||!pi||!st){toast('Fill all address fields.','e');return}
-const u=D.cur();if(!u)return;const item=STORE.find(x=>x.id===buyingItem);if(!item)return;
-const us=D.gU();const i=us.findIndex(x=>x.id===u.id);if(i!==-1){if(!us[i].purch)us[i].purch=[];us[i].purch.push(buyingItem);D.sU(us)}
-const a2=document.getElementById('ship-a2').value.trim();
-const addr=n+', '+a1+(a2?', '+a2:'')+', '+ci+', '+st+' - '+pi;
-const ords=D.gO();ords.push({id:uid(),userId:u.id,userName:u.name,userPhone:u.phone,itemId:item.id,itemName:item.n,img:item.img||'',coins:item.p,address:addr,status:'pending',ts:Date.now()});D.sO(ords);
-closeModal();toast(item.n+' ordered!','s');addXP(u.id,15);render();
-}
-
-function hCheckin(){const u=D.cur();if(!u)return;if(u.lastCI===tk())return;const us=D.gU();const i=us.findIndex(x=>x.id===u.id);if(i===-1)return;us[i].lastCI=tk();D.sU(us);addC(u.id,5,'Daily check-in');cFloat(5);addXP(u.id,3);toast('+5 Glow Cash!','s');render()}
-function hBookM(id){const u=D.cur();if(!u)return;if(!spendC(u.id,500,'Mentor session')){toast('Need 500 coins.','e');return}const m=MENTORS.find(x=>x.id===id);toast('Session booked with '+(m?m.n:'Coach')+'!','s');addXP(u.id,15);render()}
-
-/* ===== INIT ===== */
-(function(){
-const s=D.gS();if(!s){location.href='index.html';return}
-if(s.phone===AE){location.href='admin.html';return}
-const u=D.fP(s.phone);if(!u){D.cS();location.href='index.html';return}
-render();
-})();
+/* INIT */
+(function(){var s=DB.gS();if(!s){location.href='index.html';return}if(s.phone===AE){location.href='admin.html';return}var u=DB.fP(s.phone);if(!u){DB.cS();location.href='index.html';return}render()})();
 </script>
 </body>
 </html>
